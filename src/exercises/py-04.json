@@ -1,0 +1,37 @@
+{
+  "id": "py-04",
+  "module": "python",
+  "title": "Diccionarios: acceso seguro con .get()",
+  "difficulty": 1,
+  "concepts": [
+    "diccionarios",
+    "get",
+    "valores por defecto",
+    "missing data"
+  ],
+  "session": 1,
+  "tag": "dicts",
+  "estimatedMinutes": 5,
+  "dataset": "inline",
+  "theory_md": "### Acceso seguro a Diccionarios\nAcceder a una clave inexistente con `d[k]` lanza un error `KeyError`.\nEl método `.get(key, default)` devuelve el valor asociado o un valor de respaldo sin lanzar excepciones:\n```python\nprecios = {\"leche\": 32.0, \"arroz\": 18.5}\ncosto = precios.get(\"frijoles\", 0.0) # Devuelve 0.0 en vez de KeyError\n```",
+  "prompt_md": "Dado el catálogo de precios `precios` y la lista de compras solicitada `pedidos`, calcula el costo total de la compra en la variable `result` (tipo float). Si un artículo no existe en el catálogo, su precio debe asumirse en `0.0`.",
+  "setup_code": "precios = {\"arroz\": 20.0, \"frijoles\": 35.0, \"aceite\": 65.0, \"azucar\": 18.0}\npedidos = [\"arroz\", \"carne\", \"frijoles\", \"aceite\", \"pan\", \"arroz\"]",
+  "starter_code": "precios = {\"arroz\": 20.0, \"frijoles\": 35.0, \"aceite\": 65.0, \"azucar\": 18.0}\npedidos = [\"arroz\", \"carne\", \"frijoles\", \"aceite\", \"pan\", \"arroz\"]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Calcula el total de pedidos usando precios.get()\nresult = 0.0\n",
+  "solution_code": "result = sum(precios.get(item, 0.0) for item in pedidos)",
+  "tests": [
+    {
+      "name": "result es de tipo numérico",
+      "check": "isinstance(result, (int, float))",
+      "hint": "result debe ser un número."
+    },
+    {
+      "name": "Total acumulado correcto",
+      "check": "abs(result - 140.0) < 1e-5",
+      "hint": "Esperaba 140.0 (arroz 20 + 0 + frijoles 35 + aceite 65 + 0 + arroz 20)."
+    }
+  ],
+  "hints": [
+    "Puedes iterar con un for sobre `pedidos` o usar `sum(...)`.",
+    "Para cada `item` en `pedidos`, suma `precios.get(item, 0.0)`."
+  ]
+}

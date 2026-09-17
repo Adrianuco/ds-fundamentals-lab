@@ -1,0 +1,37 @@
+{
+  "id": "py-03",
+  "module": "python",
+  "title": "Comprensión de listas con filtro",
+  "difficulty": 2,
+  "concepts": [
+    "list comprehension",
+    "filtrado",
+    "transformación"
+  ],
+  "session": 1,
+  "tag": "warmup",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### List Comprehensions en Data Science\nUna comprensión de lista transforma y filtra datos en una sola línea concisa:\n```python\n[expresion for elemento in iterable if condicion]\n```\nEjemplo:\n```python\nvalores = [-5, 12, 0, 45, -2, 30]\npositivos_al_cuadrado = [x**2 for x in valores if x > 0]\n```",
+  "prompt_md": "Dada una lista de salarios brutos en dólares `salarios`, crea en la variable `result` una lista con los salarios que sean **estrictamente mayores a 500**, aplicándoles un incremento del 10% (multiplicar por 1.10 y redondear a 2 decimales con `round(..., 2)`).",
+  "setup_code": "salarios = [420.0, 600.0, 750.5, 380.0, 1200.0, 500.0, 890.0]",
+  "starter_code": "salarios = [420.0, 600.0, 750.5, 380.0, 1200.0, 500.0, 890.0]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Genera la lista en result usando list comprehension\nresult = []\n",
+  "solution_code": "result = [round(s * 1.10, 2) for s in salarios if s > 500]",
+  "tests": [
+    {
+      "name": "result es una lista",
+      "check": "isinstance(result, list)",
+      "hint": "result debe ser una lista."
+    },
+    {
+      "name": "Elementos filtrados y aumentados correctamente",
+      "check": "result == [660.0, 825.55, 1320.0, 979.0]",
+      "hint": "Verifica que solo incluyas salarios > 500 y apliques round(s * 1.10, 2)."
+    }
+  ],
+  "hints": [
+    "La condición `if s > 500` debe ir al final de la comprensión.",
+    "Aplica `round(s * 1.10, 2)` a la expresión inicial.",
+    "El valor 500 exacto no entra porque la condición es estrictamente mayor."
+  ]
+}

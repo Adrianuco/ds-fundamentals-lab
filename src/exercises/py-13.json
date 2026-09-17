@@ -1,0 +1,37 @@
+{
+  "id": "py-13",
+  "module": "python",
+  "title": "CSV mental 2: Agrupación manual (Group By con dict)",
+  "difficulty": 3,
+  "concepts": [
+    "groupby manual",
+    "diccionarios",
+    "agregacion",
+    "csv mental"
+  ],
+  "session": 2,
+  "tag": "dicts",
+  "estimatedMinutes": 8,
+  "dataset": "inline",
+  "theory_md": "### Group By manual con defaultdict o dict\nPara agrupar elementos bajo una misma clave en Python estándar:\n```python\ngrupos = {}\nfor item in registros:\n    clave = item[\"departamento\"]\n    if clave not in grupos:\n        grupos[clave] = []\n    grupos[clave].append(item[\"valor\"])\n```",
+  "prompt_md": "Dada la lista de consultas médicas `consultas`, calcula en la variable `result` un diccionario con el **gasto promedio por municipio**, redondeado a 1 decimal:\nFormato: `{\"Municipio\": promedio_gasto}`.",
+  "setup_code": "consultas = [\n    {\"municipio\": \"Managua\", \"costo\": 500.0},\n    {\"municipio\": \"Leon\", \"costo\": 350.0},\n    {\"municipio\": \"Managua\", \"costo\": 650.0},\n    {\"municipio\": \"Granada\", \"costo\": 400.0},\n    {\"municipio\": \"Leon\", \"costo\": 450.0},\n    {\"municipio\": \"Managua\", \"costo\": 575.0}\n]",
+  "starter_code": "consultas = [\n    {\"municipio\": \"Managua\", \"costo\": 500.0},\n    {\"municipio\": \"Leon\", \"costo\": 350.0},\n    {\"municipio\": \"Managua\", \"costo\": 650.0},\n    {\"municipio\": \"Granada\", \"costo\": 400.0},\n    {\"municipio\": \"Leon\", \"costo\": 450.0},\n    {\"municipio\": \"Managua\", \"costo\": 575.0}\n]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Agrupa por municipio y calcula el promedio en result\nresult = {}\n",
+  "solution_code": "acum = {}\nfor c in consultas:\n    m = c[\"municipio\"]\n    if m not in acum:\n        acum[m] = []\n    acum[m].append(c[\"costo\"])\n\nresult = {m: round(sum(v) / len(v), 1) for m, v in acum.items()}",
+  "tests": [
+    {
+      "name": "result es un diccionario con 3 municipios",
+      "check": "isinstance(result, dict) and len(result) == 3",
+      "hint": "Debe contener los 3 municipios únicos: Managua, Leon y Granada."
+    },
+    {
+      "name": "Promedios correctos calculados",
+      "check": "result == {'Managua': 575.0, 'Leon': 400.0, 'Granada': 400.0}",
+      "hint": "Managua=(500+650+575)/3=575.0; Leon=(350+450)/2=400.0; Granada=400.0."
+    }
+  ],
+  "hints": [
+    "Acumula las listas de costos en un diccionario temporal `{m: [costos...]}`.",
+    "Luego crea `result` con una comprensión: `{m: round(sum(vals)/len(vals), 1) for m, vals in acum.items()}`."
+  ]
+}

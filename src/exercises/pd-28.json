@@ -1,0 +1,35 @@
+{
+  "id": "pd-28",
+  "module": "pandas",
+  "title": "Manejo de sufijos en columnas homónimas (suffixes)",
+  "difficulty": 2,
+  "concepts": [
+    "suffixes",
+    "merge",
+    "homonimas"
+  ],
+  "session": 8,
+  "tag": "join",
+  "estimatedMinutes": 5,
+  "dataset": "inline",
+  "theory_md": "### El parámetro suffixes en pd.merge\nCuando ambas tablas comparten nombres de columnas que no forman parte de la clave de join, pandas agrega sufijos por defecto `_x` y `_y`.\nEs buena práctica definir sufijos explícitos y legibles:\n```python\npd.merge(A, B, on=\"id\", suffixes=(\"_actual\", \"_historico\"))\n```",
+  "prompt_md": "Une `evaluaciones_2022` y `evaluaciones_2023` por la columna `\"empleado_id\"` usando `how=\"inner\"`.\nDefine sufijos explícitos: `(\"_2022\", \"_2023\")` para distinguir la columna `\"puntaje\"`.\nGuarda el resultado en la variable `result`.",
+  "setup_code": "import pandas as pd\nevaluaciones_2022 = pd.DataFrame({\n    \"empleado_id\": [\"E1\", \"E2\", \"E3\"],\n    \"puntaje\": [80, 85, 90]\n})\nevaluaciones_2023 = pd.DataFrame({\n    \"empleado_id\": [\"E1\", \"E2\", \"E3\"],\n    \"puntaje\": [88, 85, 95]\n})",
+  "starter_code": "import pandas as pd\nevaluaciones_2022 = pd.DataFrame({\n    \"empleado_id\": [\"E1\", \"E2\", \"E3\"],\n    \"puntaje\": [80, 85, 90]\n})\nevaluaciones_2023 = pd.DataFrame({\n    \"empleado_id\": [\"E1\", \"E2\", \"E3\"],\n    \"puntaje\": [88, 85, 95]\n})\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Realiza el merge con suffixes explícitos en result\nresult = None\n",
+  "solution_code": "result = pd.merge(evaluaciones_2022, evaluaciones_2023, on=\"empleado_id\", suffixes=(\"_2022\", \"_2023\"))",
+  "tests": [
+    {
+      "name": "Columnas renombradas con los sufijos exactos",
+      "check": "'puntaje_2022' in result.columns and 'puntaje_2023' in result.columns",
+      "hint": "Deben existir las columnas puntaje_2022 y puntaje_2023."
+    },
+    {
+      "name": "3 empleados conservados",
+      "check": "len(result) == 3",
+      "hint": "Esperaba 3 filas."
+    }
+  ],
+  "hints": [
+    "Pasa `suffixes=('_2022', '_2023')` al invocar `pd.merge()`."
+  ]
+}

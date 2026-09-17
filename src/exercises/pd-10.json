@@ -1,0 +1,35 @@
+{
+  "id": "pd-10",
+  "module": "pandas",
+  "title": "Eliminar nulos con dropna(subset=[...])",
+  "difficulty": 2,
+  "concepts": [
+    "dropna",
+    "subset",
+    "missing"
+  ],
+  "session": 6,
+  "tag": "missing",
+  "estimatedMinutes": 5,
+  "dataset": "pacientes.csv",
+  "theory_md": "### Eliminación selectiva de nulos\nLlamar a `df.dropna()` sin argumentos elimina filas donde *cualquier* columna tenga nulo, lo que suele destruir demasiada información.\nSe debe usar `subset`:\n```python\ndf_limpio = df.dropna(subset=[\"edad\", \"municipio\"])\n```",
+  "prompt_md": "Dado el DataFrame `df_pac`, elimina únicamente las observaciones donde la columna `\"edad\"` sea nula (`NaN`).\nGuarda el DataFrame resultante en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")",
+  "starter_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Elimina filas con edad nula en result\nresult = None\n",
+  "solution_code": "result = df_pac.dropna(subset=[\"edad\"])",
+  "tests": [
+    {
+      "name": "result no tiene nulos en la columna edad",
+      "check": "isinstance(result, pd.DataFrame) and result['edad'].isna().sum() == 0",
+      "hint": "La columna 'edad' no debe tener ningún valor nulo."
+    },
+    {
+      "name": "Se eliminaron las filas correspondientes",
+      "check": "len(result) < len(df_pac) and len(result) >= 90",
+      "hint": "Se deben haber eliminado únicamente las filas con edad faltante."
+    }
+  ],
+  "hints": [
+    "Usa `df_pac.dropna(subset=['edad'])`."
+  ]
+}

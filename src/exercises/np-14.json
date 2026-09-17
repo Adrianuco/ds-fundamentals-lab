@@ -1,0 +1,37 @@
+{
+  "id": "np-14",
+  "module": "numpy",
+  "title": "Manejo de NaN: np.isnan y np.nanmean",
+  "difficulty": 2,
+  "concepts": [
+    "nan",
+    "np.isnan",
+    "np.nanmean",
+    "missing data"
+  ],
+  "session": 3,
+  "tag": "missing",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Not a Number (NaN) en NumPy\nNumPy representa valores faltantes en floats con `np.nan`.\nCualquier operación aritmética estándar con NaN produce NaN (`5 + np.nan -> nan`).\nPara operar ignorando los nulos usamos las funciones prefijadas con `nan`:\n```python\nnp.isnan(arr)       # Máscara booleana de nulos\nnp.nanmean(arr)     # Media ignorando los NaN\nnp.nansum(arr)      # Suma ignorando los NaN\n```",
+  "prompt_md": "Dado el arreglo `lecturas_sensores` que contiene valores nulos (`np.nan`):\n1. Calcula la media aritmética ignorando los nulos y guárdala en `media_sin_nan` (redondeada a 2 decimales).\n2. Reemplaza todos los valores `np.nan` del arreglo original por esa media calculada.\nGuarda el arreglo limpio en la variable `result`.",
+  "setup_code": "import numpy as np\nlecturas_sensores = np.array([24.5, np.nan, 26.2, 25.0, np.nan, 27.8, 23.9])",
+  "starter_code": "import numpy as np\nlecturas_sensores = np.array([24.5, np.nan, 26.2, 25.0, np.nan, 27.8, 23.9])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Imputa los nulos con nanmean en result\nresult = None\n",
+  "solution_code": "media_sin_nan = round(float(np.nanmean(lecturas_sensores)), 2)\nresult = np.where(np.isnan(lecturas_sensores), media_sin_nan, lecturas_sensores)",
+  "tests": [
+    {
+      "name": "result no contiene ningún valor NaN",
+      "check": "isinstance(result, np.ndarray) and not np.isnan(result).any()",
+      "hint": "Todos los NaN debieron haber sido reemplazados."
+    },
+    {
+      "name": "Valores imputados correctamente con la media",
+      "check": "np.allclose(result, np.array([24.5, 25.48, 26.2, 25.0, 25.48, 27.8, 23.9]), atol=0.01)",
+      "hint": "La media de los 5 valores válidos es 25.48."
+    }
+  ],
+  "hints": [
+    "Calcula `np.nanmean(lecturas_sensores)`.",
+    "Usa `np.where(np.isnan(arr), media, arr)` o asigna con máscara `result[np.isnan(result)] = media`."
+  ]
+}

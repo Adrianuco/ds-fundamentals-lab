@@ -1,0 +1,35 @@
+{
+  "id": "np-07",
+  "module": "numpy",
+  "title": "Fancy Indexing (Indexado con listas de enteros)",
+  "difficulty": 2,
+  "concepts": [
+    "fancy indexing",
+    "seleccion de filas",
+    "indices"
+  ],
+  "session": 3,
+  "tag": "indexing",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Fancy Indexing\nPermite seleccionar filas o elementos pasando un arreglo o lista de índices arbitrarios en el orden deseado:\n```python\narr = np.array([100, 200, 300, 400, 500])\nindices = [4, 0, 2]\nseleccion = arr[indices] # [500, 100, 300]\n```\nA diferencia de los slices, el fancy indexing siempre produce una **copia** en memoria.",
+  "prompt_md": "Dada la matriz de características `X` (7 observaciones x 3 variables), selecciona en la variable `result` las filas con índices `[0, 3, 6]` en ese orden exacto.",
+  "setup_code": "import numpy as np\nX = np.arange(21).reshape(7, 3)",
+  "starter_code": "import numpy as np\nX = np.arange(21).reshape(7, 3)\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Selecciona las filas [0, 3, 6] en result\nresult = None\n",
+  "solution_code": "result = X[[0, 3, 6]]",
+  "tests": [
+    {
+      "name": "result tiene dimensiones (3, 3)",
+      "check": "isinstance(result, np.ndarray) and result.shape == (3, 3)",
+      "hint": "La matriz resultante debe tener shape (3, 3)."
+    },
+    {
+      "name": "Filas correctas seleccionadas",
+      "check": "np.array_equal(result, np.array([[0, 1, 2], [9, 10, 11], [18, 19, 20]]))",
+      "hint": "Verifica que seleccionaste las filas 0, 3 y 6."
+    }
+  ],
+  "hints": [
+    "Pasa una lista de enteros directamente en el eje de filas: `X[[0, 3, 6]]`."
+  ]
+}

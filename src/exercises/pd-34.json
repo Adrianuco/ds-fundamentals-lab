@@ -1,0 +1,36 @@
+{
+  "id": "pd-34",
+  "module": "pandas",
+  "title": "Melt: De formato ancho a formato largo (Tidy Data)",
+  "difficulty": 2,
+  "concepts": [
+    "melt",
+    "tidy data",
+    "despivotar",
+    "reshape"
+  ],
+  "session": 9,
+  "tag": "reshape",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Despivotar con pd.melt()\nTransforma columnas anchas (ej. meses o años) en filas de un formato ordenado (tidy data):\n```python\ndf_largo = pd.melt(\n    df_ancho,\n    id_vars=[\"producto\"],\n    value_vars=[\"Ene\", \"Feb\", \"Mar\"],\n    var_name=\"mes\",\n    value_name=\"ventas\"\n)\n```",
+  "prompt_md": "Dado el DataFrame en formato ancho `df_reporte_ancho`:\nUsa `pd.melt` para transformarlo a formato largo, manteniendo `\"sucursal\"` como identificador (`id_vars`), agrupando los trimestres `[\"Q1\", \"Q2\", \"Q3\"]` en una columna llamada `\"trimestre\"` (`var_name`) y los montos en una columna llamada `\"facturacion\"` (`value_name`).\nGuarda el DataFrame resultante en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_reporte_ancho = pd.DataFrame({\n    \"sucursal\": [\"Central\", \"Norte\", \"Sur\"],\n    \"Q1\": [1000, 850, 920],\n    \"Q2\": [1150, 900, 980],\n    \"Q3\": [1300, 950, 1050]\n})",
+  "starter_code": "import pandas as pd\ndf_reporte_ancho = pd.DataFrame({\n    \"sucursal\": [\"Central\", \"Norte\", \"Sur\"],\n    \"Q1\": [1000, 850, 920],\n    \"Q2\": [1150, 900, 980],\n    \"Q3\": [1300, 950, 1050]\n})\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Aplica pd.melt en result\nresult = None\n",
+  "solution_code": "result = pd.melt(\n    df_reporte_ancho,\n    id_vars=[\"sucursal\"],\n    value_vars=[\"Q1\", \"Q2\", \"Q3\"],\n    var_name=\"trimestre\",\n    value_name=\"facturacion\"\n)",
+  "tests": [
+    {
+      "name": "result contiene 9 filas (3 sucursales x 3 trimestres)",
+      "check": "isinstance(result, pd.DataFrame) and len(result) == 9",
+      "hint": "El formato largo debe tener 9 filas."
+    },
+    {
+      "name": "Columnas nombradas exactamente sucursal, trimestre, facturacion",
+      "check": "list(result.columns) == ['sucursal', 'trimestre', 'facturacion']",
+      "hint": "Las columnas deben ser sucursal, trimestre, facturacion."
+    }
+  ],
+  "hints": [
+    "Usa `pd.melt(df_reporte_ancho, id_vars=['sucursal'], value_vars=['Q1', 'Q2', 'Q3'], var_name='trimestre', value_name='facturacion')`."
+  ]
+}

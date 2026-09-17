@@ -1,0 +1,37 @@
+{
+  "id": "np-01",
+  "module": "numpy",
+  "title": "Creación de array, shape y dtype",
+  "difficulty": 1,
+  "concepts": [
+    "np.array",
+    "shape",
+    "dtype",
+    "ndim"
+  ],
+  "session": 3,
+  "tag": "warmup",
+  "estimatedMinutes": 5,
+  "dataset": "inline",
+  "theory_md": "### Fundamentos de ndarray\nUn `np.ndarray` es un contenedor contiguo en memoria de elementos del mismo tipo (`dtype`).\nA diferencia de una lista de Python, ofrece operaciones matemáticas a velocidad de C.\n```python\narr = np.array([1, 2, 3, 4], dtype=np.float32)\narr.shape # (4,) - Tupla con las dimensiones\narr.ndim  # 1    - Número de dimensiones\narr.dtype # dtype('float32')\n```",
+  "prompt_md": "Dado el arreglo bidimensional de mediciones `datos_raw`, conviértelo a un arreglo de NumPy con tipo de dato `float64`.\nGuarda en la variable `arr` el arreglo creado, y en la variable `result` una tupla con `(arr.shape, arr.ndim, str(arr.dtype))`.",
+  "setup_code": "import numpy as np\ndatos_raw = [[10, 20, 30], [40, 50, 60], [70, 80, 90], [100, 110, 120]]",
+  "starter_code": "import numpy as np\ndatos_raw = [[10, 20, 30], [40, 50, 60], [70, 80, 90], [100, 110, 120]]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Crea arr como np.ndarray float64 y extrae sus metadatos en result\narr = None\nresult = None\n",
+  "solution_code": "arr = np.array(datos_raw, dtype=np.float64)\nresult = (arr.shape, arr.ndim, str(arr.dtype))",
+  "tests": [
+    {
+      "name": "arr es un ndarray de NumPy con dtype float64",
+      "check": "isinstance(arr, np.ndarray) and arr.dtype == np.float64",
+      "hint": "arr debe crearse con np.array(datos_raw, dtype=np.float64)."
+    },
+    {
+      "name": "result contiene la tupla correcta de metadatos",
+      "check": "result == ((4, 3), 2, 'float64')",
+      "hint": "Esperaba ((4, 3), 2, 'float64')."
+    }
+  ],
+  "hints": [
+    "Pasa `dtype=np.float64` al invocar `np.array(datos_raw, ...)`.",
+    "Usa `(arr.shape, arr.ndim, str(arr.dtype))` para la variable result."
+  ]
+}

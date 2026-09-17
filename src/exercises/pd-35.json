@@ -1,0 +1,35 @@
+{
+  "id": "pd-35",
+  "module": "pandas",
+  "title": "Tablas de contingencia con pd.crosstab",
+  "difficulty": 2,
+  "concepts": [
+    "crosstab",
+    "contingencia",
+    "frecuencias cruzadas"
+  ],
+  "session": 9,
+  "tag": "reshape",
+  "estimatedMinutes": 6,
+  "dataset": "encuesta_empleo.csv",
+  "theory_md": "### Tablas de Contingencia\n`pd.crosstab(index, columns, normalize=...)` calcula frecuencias conjuntas de dos variables categóricas.\nEl parámetro `normalize=\"index\"` calcula porcentajes relativos por fila:\n```python\nct = pd.crosstab(df[\"sexo\"], df[\"ocupado\"], normalize=\"index\") * 100\n```",
+  "prompt_md": "En la encuesta de empleo `df_emp`, calcula la tabla de contingencia entre `\"sexo\"` (filas) y `\"ocupado\"` (columnas), normalizada por filas (`normalize=\"index\"`) y multiplicada por 100 para expresar porcentajes. Redondea a 1 decimal.\nGuarda la tabla de porcentajes resultante en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_emp = pd.read_csv(\"/data/encuesta_empleo.csv\")",
+  "starter_code": "import pandas as pd\ndf_emp = pd.read_csv(\"/data/encuesta_empleo.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Genera la tabla con pd.crosstab en result\nresult = None\n",
+  "solution_code": "result = (pd.crosstab(df_emp[\"sexo\"], df_emp[\"ocupado\"], normalize=\"index\") * 100).round(1)",
+  "tests": [
+    {
+      "name": "result es un DataFrame de 2 filas por 2 columnas",
+      "check": "isinstance(result, pd.DataFrame) and result.shape == (2, 2)",
+      "hint": "Debe ser una tabla 2x2 (F y M vs 0 y 1)."
+    },
+    {
+      "name": "Cada fila suma aproximadamente 100%",
+      "check": "np.allclose(result.sum(axis=1), np.array([100.0, 100.0]), atol=0.2)",
+      "hint": "La normalización por filas debe sumar 100% en cada sexo."
+    }
+  ],
+  "hints": [
+    "Usa `(pd.crosstab(df_emp['sexo'], df_emp['ocupado'], normalize='index') * 100).round(1)`."
+  ]
+}

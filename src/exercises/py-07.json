@@ -1,0 +1,36 @@
+{
+  "id": "py-07",
+  "module": "python",
+  "title": "Unir dos listas con zip en un diccionario",
+  "difficulty": 2,
+  "concepts": [
+    "zip",
+    "diccionarios",
+    "dict comprehension"
+  ],
+  "session": 1,
+  "tag": "dicts",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### La función zip()\n`zip(iter1, iter2)` aparea elementos de dos o más iterables elemento a elemento:\n```python\ncolumnas = [\"nombre\", \"edad\", \"ciudad\"]\nfila = [\"Ana\", 28, \"León\"]\nregistro = dict(zip(columnas, fila))\n# {'nombre': 'Ana', 'edad': 28, 'ciudad': 'León'}\n```",
+  "prompt_md": "Dadas las listas paralelas `municipios` y `poblaciones`, combina ambas en la variable `result` (un diccionario donde cada municipio es la clave y su población como entero es el valor). Excluye del diccionario final aquellos municipios cuya población sea inferior a 100,000 habitantes.",
+  "setup_code": "municipios = [\"Managua\", \"León\", \"Granada\", \"Somoto\", \"Matagalpa\", \"Ocotal\"]\npoblaciones = [1050000, 210000, 130000, 40000, 160000, 48000]",
+  "starter_code": "municipios = [\"Managua\", \"León\", \"Granada\", \"Somoto\", \"Matagalpa\", \"Ocotal\"]\npoblaciones = [1050000, 210000, 130000, 40000, 160000, 48000]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Crea el diccionario filtrado en result\nresult = {}\n",
+  "solution_code": "result = {mun: pob for mun, pob in zip(municipios, poblaciones) if pob >= 100000}",
+  "tests": [
+    {
+      "name": "result es un diccionario",
+      "check": "isinstance(result, dict)",
+      "hint": "result debe ser un dict."
+    },
+    {
+      "name": "Filtro de población aplicado correctamente",
+      "check": "result == {'Managua': 1050000, 'León': 210000, 'Granada': 130000, 'Matagalpa': 160000}",
+      "hint": "Solo deben incluirse municipios con población >= 100,000."
+    }
+  ],
+  "hints": [
+    "Puedes usar un dict comprehension: `{mun: pob for mun, pob in zip(municipios, poblaciones) if pob >= 100000}`.",
+    "Recuerda que Somoto (40,000) y Ocotal (48,000) deben quedar fuera."
+  ]
+}

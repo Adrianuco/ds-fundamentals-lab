@@ -1,0 +1,36 @@
+{
+  "id": "np-06",
+  "module": "numpy",
+  "title": "Operadores lógicos bitwise: & (AND), | (OR), ~ (NOT)",
+  "difficulty": 2,
+  "concepts": [
+    "bitwise",
+    "and logico",
+    "mascaras compuestas"
+  ],
+  "session": 3,
+  "tag": "indexing",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Condiciones Compuestas en NumPy\nEn NumPy NO se pueden usar `and`, `or`, `not` de Python porque operan sobre el objeto entero.\nSe deben usar operadores bitwise elemento a elemento, **siempre entre paréntesis**:\n- `&`: AND lógico\n- `|`: OR lógico\n- `~`: NOT lógico (negación)\n```python\nmask = (x >= 10) & (x <= 20)\n```",
+  "prompt_md": "Dado el arreglo `edades`, selecciona en la variable `result` todos los registros correspondientes a adultos jóvenes: edades **mayores o iguales a 20 Y estrictamente menores a 35**.",
+  "setup_code": "import numpy as np\nedades = np.array([15, 20, 24, 35, 18, 30, 28, 42, 19, 33, 22])",
+  "starter_code": "import numpy as np\nedades = np.array([15, 20, 24, 35, 18, 30, 28, 42, 19, 33, 22])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Filtra edades entre 20 y < 35 en result\nresult = None\n",
+  "solution_code": "result = edades[(edades >= 20) & (edades < 35)]",
+  "tests": [
+    {
+      "name": "result contiene 6 elementos",
+      "check": "isinstance(result, np.ndarray) and len(result) == 6",
+      "hint": "Esperaba 6 elementos filtrados."
+    },
+    {
+      "name": "Valores exactos filtrados",
+      "check": "np.array_equal(result, np.array([20, 24, 30, 28, 33, 22]))",
+      "hint": "Recuerda que 35 queda fuera (estrictamente menor)."
+    }
+  ],
+  "hints": [
+    "Usa `(edades >= 20) & (edades < 35)`.",
+    "No olvides colocar cada condición individual entre paréntesis."
+  ]
+}

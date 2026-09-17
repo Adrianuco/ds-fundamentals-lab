@@ -1,0 +1,32 @@
+{
+  "id": "np-27",
+  "module": "numpy",
+  "title": "Argmax y Argmin: Identificar índices extremos",
+  "difficulty": 2,
+  "concepts": [
+    "argmax",
+    "argmin",
+    "indices extremos"
+  ],
+  "session": 4,
+  "tag": "math",
+  "estimatedMinutes": 5,
+  "dataset": "inline",
+  "theory_md": "### Localización de Máximos y Mínimos\n- `np.argmax(arr)`: Retorna el índice del valor máximo.\n- `np.argmin(arr)`: Retorna el índice del valor mínimo.\nEn 2D, pasando `axis=0` o `axis=1` retorna los índices a lo largo de ese eje.\n```python\nv = np.array([10, 45, 2, 88, 12])\nidx_max = np.argmax(v) # 3 (porque v[3] es 88)\n```",
+  "prompt_md": "Dada la lista de días de la semana y el arreglo de temperaturas registradas `temperaturas`, encuentra el día con la temperatura máxima y el día con la temperatura mínima.\nGuarda en la variable `result` una tupla con los nombres de los días correspondientes: `(dia_maximo, dia_minimo)`.",
+  "setup_code": "import numpy as np\ndias = [\"Lunes\", \"Martes\", \"Miércoles\", \"Jueves\", \"Viernes\", \"Sábado\", \"Domingo\"]\ntemperaturas = np.array([29.5, 31.0, 28.2, 34.5, 32.1, 27.8, 30.0])",
+  "starter_code": "import numpy as np\ndias = [\"Lunes\", \"Martes\", \"Miércoles\", \"Jueves\", \"Viernes\", \"Sábado\", \"Domingo\"]\ntemperaturas = np.array([29.5, 31.0, 28.2, 34.5, 32.1, 27.8, 30.0])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Encuentra los días con temp máxima y mínima en result\nresult = None\n",
+  "solution_code": "idx_max = int(np.argmax(temperaturas))\nidx_min = int(np.argmin(temperaturas))\nresult = (dias[idx_max], dias[idx_min])",
+  "tests": [
+    {
+      "name": "result contiene la tupla correcta de días",
+      "check": "result == ('Jueves', 'Sábado')",
+      "hint": "El máximo es 34.5 (Jueves) y el mínimo es 27.8 (Sábado)."
+    }
+  ],
+  "hints": [
+    "Usa `np.argmax(temperaturas)` para el índice máximo.",
+    "Usa `np.argmin(temperaturas)` para el mínimo.",
+    "Indexa la lista `dias` con esos enteros."
+  ]
+}

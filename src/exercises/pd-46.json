@@ -1,0 +1,30 @@
+{
+  "id": "pd-46",
+  "module": "pandas",
+  "title": "Capstone 6: Pregunta de Negocio 3 - Departamento con mayor costo total",
+  "difficulty": 2,
+  "concepts": [
+    "groupby",
+    "idxmax",
+    "agregacion"
+  ],
+  "session": 10,
+  "tag": "groupby",
+  "estimatedMinutes": 5,
+  "dataset": "pacientes.csv",
+  "theory_md": "### Identificación de Líderes por Agregación\nObtener el departamento con mayor gasto consolidado combinando groupby y sum.",
+  "prompt_md": "En `df_enriquecido`, ¿qué departamento acumula el mayor gasto total en atención médica?\nGuarda el nombre del departamento (string) en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\nclean_df = df_pac.copy()\nclean_df[\"costo\"] = clean_df[\"costo\"].astype(str).str.replace(\",\", \"\", regex=False).astype(float)\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\ndf_enriquecido = pd.merge(clean_df, df_mun, on=\"municipio\", how=\"inner\")",
+  "starter_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\nclean_df = df_pac.copy()\nclean_df[\"costo\"] = clean_df[\"costo\"].astype(str).str.replace(\",\", \"\", regex=False).astype(float)\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\ndf_enriquecido = pd.merge(clean_df, df_mun, on=\"municipio\", how=\"inner\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Encuentra el departamento con mayor gasto total en result\nresult = \"\"\n",
+  "solution_code": "gasto_depto = df_enriquecido.groupby(\"departamento\")[\"costo\"].sum()\nresult = str(gasto_depto.idxmax())",
+  "tests": [
+    {
+      "name": "result es un string con un departamento existente",
+      "check": "isinstance(result, str) and result in df_enriquecido['departamento'].unique()",
+      "hint": "result debe ser un departamento válido."
+    }
+  ],
+  "hints": [
+    "Usa `df_enriquecido.groupby('departamento')['costo'].sum().idxmax()`."
+  ]
+}

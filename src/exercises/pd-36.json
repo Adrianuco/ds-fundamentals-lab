@@ -1,0 +1,41 @@
+{
+  "id": "pd-36",
+  "module": "pandas",
+  "title": "Series de tiempo light: Desplazamientos con .shift()",
+  "difficulty": 2,
+  "concepts": [
+    "shift",
+    "series temporales",
+    "lags"
+  ],
+  "session": 9,
+  "tag": "dates",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Desplazamiento de Filas con .shift()\n`.shift(1)` desplaza los datos una posición hacia adelante, creando la variable rezagada (lag) del periodo anterior:\n```python\ndf[\"precio_ayer\"] = df[\"precio\"].shift(1)\n```",
+  "prompt_md": "Dada la serie de precios diarios de combustible `df_precios`:\nCrea una nueva columna llamada `\"precio_anterior\"` desplazada 1 día hacia adelante con `.shift(1)`.\nLuego, calcula la variación absoluta en córdobas en la columna `\"variacion\"` como `precio - precio_anterior`.\nGuarda el DataFrame resultante en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_precios = pd.DataFrame({\n    \"dia\": [1, 2, 3, 4, 5],\n    \"precio\": [42.50, 42.50, 43.10, 43.80, 43.20]\n})",
+  "starter_code": "import pandas as pd\ndf_precios = pd.DataFrame({\n    \"dia\": [1, 2, 3, 4, 5],\n    \"precio\": [42.50, 42.50, 43.10, 43.80, 43.20]\n})\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Crea precio_anterior y variacion en result\nresult = None\n",
+  "solution_code": "result = df_precios.copy()\nresult[\"precio_anterior\"] = result[\"precio\"].shift(1)\nresult[\"variacion\"] = (result[\"precio\"] - result[\"precio_anterior\"]).round(2)",
+  "tests": [
+    {
+      "name": "result contiene las columnas precio_anterior y variacion",
+      "check": "isinstance(result, pd.DataFrame) and 'precio_anterior' in result.columns and 'variacion' in result.columns",
+      "hint": "Deben existir las columnas precio_anterior y variacion."
+    },
+    {
+      "name": "Primera fila de variacion es NaN (no hay día previo)",
+      "check": "pd.isna(result['variacion'].iloc[0])",
+      "hint": "La primera fila de variacion debe ser NaN."
+    },
+    {
+      "name": "Variación correcta del día 3",
+      "check": "abs(result['variacion'].iloc[2] - 0.60) < 1e-3",
+      "hint": "El día 3 subió de 42.50 a 43.10 (+0.60)."
+    }
+  ],
+  "hints": [
+    "Usa `result['precio_anterior'] = result['precio'].shift(1)`.",
+    "Calcula `result['variacion'] = result['precio'] - result['precio_anterior']`."
+  ]
+}

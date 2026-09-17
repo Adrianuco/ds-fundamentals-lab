@@ -1,0 +1,36 @@
+{
+  "id": "pd-02",
+  "module": "pandas",
+  "title": "Cargar CSV con separador y parse_dates",
+  "difficulty": 2,
+  "concepts": [
+    "read_csv",
+    "parse_dates",
+    "carga de datos"
+  ],
+  "session": 5,
+  "tag": "warmup",
+  "estimatedMinutes": 6,
+  "dataset": "ventas_tienda.csv",
+  "theory_md": "### Carga eficiente con pd.read_csv\nEl método `pd.read_csv()` es la puerta de entrada más usada en Data Science:\n- `sep`: Delimitador (por defecto `','`).\n- `parse_dates`: Lista de nombres de columnas que deben convertirse automáticamente a tipo `datetime64`.\n```python\ndf = pd.read_csv(\"datos.csv\", parse_dates=[\"fecha\"])\n```",
+  "prompt_md": "Carga el archivo `\"/data/ventas_tienda.csv\"` parseando la columna `\"fecha\"` como objeto de fecha (`parse_dates=[\"fecha\"]`).\nAsigna el DataFrame cargado a la variable `df`.\nEn la variable `result` guarda el tipo de dato (`dtype`) exacto de la columna `fecha` convertido a string: `str(df[\"fecha\"].dtype)`.",
+  "setup_code": "import pandas as pd",
+  "starter_code": "import pandas as pd\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Carga el dataset y verifica el dtype de 'fecha' en result\ndf = None\nresult = None\n",
+  "solution_code": "df = pd.read_csv(\"/data/ventas_tienda.csv\", parse_dates=[\"fecha\"])\nresult = str(df[\"fecha\"].dtype)",
+  "tests": [
+    {
+      "name": "df es un DataFrame con 150 registros",
+      "check": "isinstance(df, pd.DataFrame) and len(df) == 150",
+      "hint": "df debe contener 150 filas de ventas."
+    },
+    {
+      "name": "La columna fecha se parseó como datetime64",
+      "check": "'datetime64' in result",
+      "hint": "El dtype de la columna 'fecha' debe ser datetime64[ns]."
+    }
+  ],
+  "hints": [
+    "Usa `pd.read_csv('/data/ventas_tienda.csv', parse_dates=['fecha'])`.",
+    "Usa `result = str(df['fecha'].dtype)`."
+  ]
+}

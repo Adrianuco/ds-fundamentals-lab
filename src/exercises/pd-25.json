@@ -1,0 +1,35 @@
+{
+  "id": "pd-25",
+  "module": "pandas",
+  "title": "Inner Join vs Left Join con pd.merge",
+  "difficulty": 2,
+  "concepts": [
+    "merge",
+    "inner join",
+    "left join"
+  ],
+  "session": 8,
+  "tag": "join",
+  "estimatedMinutes": 6,
+  "dataset": "municipios.csv",
+  "theory_md": "### Joins en pandas\n- `how='inner'`: Conserva únicamente registros cuyas claves existan en **ambas** tablas.\n- `how='left'`: Conserva **todas** las filas de la tabla izquierda, rellenando con NaN las columnas de la derecha si no hubo match.\n```python\npd.merge(df_izq, df_der, on=\"clave\", how=\"left\")\n```",
+  "prompt_md": "Dado el DataFrame de sucursales `df_sucursales` y el catálogo de municipios `df_mun`:\nRealiza un **Left Join** conservando todas las sucursales y agregando la información de su departamento y población.\nGuarda el resultado en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\ndf_sucursales = pd.DataFrame({\n    \"sucursal_id\": [\"S1\", \"S2\", \"S3\", \"S4\"],\n    \"municipio\": [\"Managua\", \"León\", \"Tipitapa\", \"Granada\"],\n    \"empleados\": [15, 8, 5, 6]\n})",
+  "starter_code": "import pandas as pd\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\ndf_sucursales = pd.DataFrame({\n    \"sucursal_id\": [\"S1\", \"S2\", \"S3\", \"S4\"],\n    \"municipio\": [\"Managua\", \"León\", \"Tipitapa\", \"Granada\"],\n    \"empleados\": [15, 8, 5, 6]\n})\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Realiza el left join en result\nresult = None\n",
+  "solution_code": "result = pd.merge(df_sucursales, df_mun, on=\"municipio\", how=\"left\")",
+  "tests": [
+    {
+      "name": "result conserva las 4 sucursales originales",
+      "check": "isinstance(result, pd.DataFrame) and len(result) == 4",
+      "hint": "Un left join debe conservar todas las filas de df_sucursales (4)."
+    },
+    {
+      "name": "Tipitapa tiene NaN en departamento porque no está en df_mun",
+      "check": "pd.isna(result.loc[result['municipio'] == 'Tipitapa', 'departamento'].iloc[0])",
+      "hint": "Tipitapa no figura en el catálogo maestro de municipios, por lo que debe quedar en NaN."
+    }
+  ],
+  "hints": [
+    "Usa `pd.merge(df_sucursales, df_mun, on='municipio', how='left')`."
+  ]
+}

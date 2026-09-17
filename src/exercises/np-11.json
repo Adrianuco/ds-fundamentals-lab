@@ -1,0 +1,38 @@
+{
+  "id": "np-11",
+  "module": "numpy",
+  "title": "Vista vs Copia: arr.base y modificaciones accidentales",
+  "difficulty": 3,
+  "concepts": [
+    "vistas",
+    "copias",
+    "arr.base",
+    "mutabilidad"
+  ],
+  "session": 3,
+  "tag": "performance",
+  "estimatedMinutes": 7,
+  "dataset": "inline",
+  "theory_md": "### Vistas vs Copias en NumPy\nUn slice básico (`arr[1:4]`) retorna una **vista**: comparte la misma memoria que el arreglo padre.\nSi modificas la vista, ¡el original cambia!\n```python\norig = np.array([1, 2, 3])\nvista = orig[:2]\nvista[0] = 99\n# orig ahora es [99, 2, 3]!\n# vista.base is orig  -> True\n```\nPara independizar datos, debemos invocar explícitamente `.copy()`.",
+  "prompt_md": "Dado el arreglo original `datos_base`:\n1. Crea una copia independiente llamada `copia_segura` usando `.copy()`.\n2. Multiplica todos los elementos de `copia_segura` por 10.\n3. Comprueba que `datos_base` no haya cambiado.\nGuarda en la variable `result` una tupla con dos booleanos:\n`(copia_segura.base is None, np.array_equal(datos_base, np.array([10, 20, 30, 40])))`.",
+  "setup_code": "import numpy as np\ndatos_base = np.array([10, 20, 30, 40])",
+  "starter_code": "import numpy as np\ndatos_base = np.array([10, 20, 30, 40])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Crea la copia, multiplícala por 10 y arma result\ncopia_segura = None\nresult = None\n",
+  "solution_code": "copia_segura = datos_base.copy()\ncopia_segura *= 10\nresult = (copia_segura.base is None, np.array_equal(datos_base, np.array([10, 20, 30, 40])))",
+  "tests": [
+    {
+      "name": "result contiene la tupla de verificación (True, True)",
+      "check": "result == (True, True)",
+      "hint": "Asegúrate de haber usado .copy()."
+    },
+    {
+      "name": "copia_segura contiene los valores multiplicados",
+      "check": "np.array_equal(copia_segura, np.array([100, 200, 300, 400]))",
+      "hint": "copia_segura debe ser [100, 200, 300, 400]."
+    }
+  ],
+  "hints": [
+    "Llama a `datos_base.copy()`.",
+    "Modifica la copia multiplicando por 10.",
+    "La tupla debe ser `(copia_segura.base is None, np.array_equal(datos_base, np.array([10, 20, 30, 40])))`."
+  ]
+}

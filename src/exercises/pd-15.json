@@ -1,0 +1,37 @@
+{
+  "id": "pd-15",
+  "module": "pandas",
+  "title": "Construir feature de rangos de edad con pd.cut",
+  "difficulty": 2,
+  "concepts": [
+    "pd.cut",
+    "discretizacion",
+    "bins",
+    "feature engineering"
+  ],
+  "session": 6,
+  "tag": "strings",
+  "estimatedMinutes": 6,
+  "dataset": "encuesta_empleo.csv",
+  "theory_md": "### Discretización con pd.cut\n`pd.cut()` segmenta valores numéricos en intervalos continuos asignando etiquetas:\n```python\nbins = [0, 18, 60, 100]\nlabels = [\"Menor\", \"Adulto\", \"Adulto Mayor\"]\ndf[\"grupo_edad\"] = pd.cut(df[\"edad\"], bins=bins, labels=labels)\n```",
+  "prompt_md": "Dado el DataFrame de empleo `df_emp`, crea una nueva columna llamada `\"rango_edad\"` segmentando la variable `\"edad\"` en los siguientes intervalos:\n- `[18, 30]`: `\"18-30\"`\n- `(30, 50]`: `\"31-50\"`\n- `(50, 65]`: `\"51-65\"`\n(Usa `bins=[17, 30, 50, 65]` y `labels=[\"18-30\", \"31-50\", \"51-65\"]`).\nGuarda en la variable `result` el conteo de frecuencias de cada rango (`df_emp[\"rango_edad\"].value_counts()`).",
+  "setup_code": "import pandas as pd\ndf_emp = pd.read_csv(\"/data/encuesta_empleo.csv\")",
+  "starter_code": "import pandas as pd\ndf_emp = pd.read_csv(\"/data/encuesta_empleo.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Crea la columna rango_edad y asigna value_counts a result\nresult = None\n",
+  "solution_code": "df_emp[\"rango_edad\"] = pd.cut(\n    df_emp[\"edad\"],\n    bins=[17, 30, 50, 65],\n    labels=[\"18-30\", \"31-50\", \"51-65\"]\n)\nresult = df_emp[\"rango_edad\"].value_counts()",
+  "tests": [
+    {
+      "name": "result es una Serie con las 3 categorías",
+      "check": "isinstance(result, pd.Series) and len(result) == 3",
+      "hint": "result debe contener las 3 categorías especificadas."
+    },
+    {
+      "name": "Suma total de frecuencias es 120 (todas las filas de la encuesta)",
+      "check": "result.sum() == 120",
+      "hint": "La suma de las frecuencias debe ser 120."
+    }
+  ],
+  "hints": [
+    "Usa `pd.cut(df_emp['edad'], bins=[17, 30, 50, 65], labels=['18-30', '31-50', '51-65'])`.",
+    "Asigna a `result = df_emp['rango_edad'].value_counts()`."
+  ]
+}

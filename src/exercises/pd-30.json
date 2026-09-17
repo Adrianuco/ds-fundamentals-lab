@@ -1,0 +1,36 @@
+{
+  "id": "pd-30",
+  "module": "pandas",
+  "title": "Detección y eliminación de duplicados de clave",
+  "difficulty": 2,
+  "concepts": [
+    "duplicated",
+    "drop_duplicates",
+    "subset",
+    "keep"
+  ],
+  "session": 8,
+  "tag": "join",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Detección y Remoción de Duplicados\n- `df.duplicated(subset=['id'], keep='first')`: Retorna máscara booleana con `True` en las apariciones repetidas.\n- `df.drop_duplicates(subset=['id'], keep='last')`: Elimina filas duplicadas conservando la última aparición.",
+  "prompt_md": "Dado el DataFrame de actualizaciones de clientes `df_clientes_log`, donde un mismo `\"id\"` aparece varias veces con datos modificados:\nConserva únicamente el registro más reciente de cada cliente (usando `keep=\"last\"` sobre la columna `\"id\"`).\nGuarda el DataFrame limpio en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_clientes_log = pd.DataFrame({\n    \"id\": [101, 102, 101, 103, 102, 101],\n    \"email\": [\"old@a.com\", \"b@b.com\", \"mod@a.com\", \"c@c.com\", \"new_b@b.com\", \"latest@a.com\"],\n    \"version\": [1, 1, 2, 1, 2, 3]\n})",
+  "starter_code": "import pandas as pd\ndf_clientes_log = pd.DataFrame({\n    \"id\": [101, 102, 101, 103, 102, 101],\n    \"email\": [\"old@a.com\", \"b@b.com\", \"mod@a.com\", \"c@c.com\", \"new_b@b.com\", \"latest@a.com\"],\n    \"version\": [1, 1, 2, 1, 2, 3]\n})\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Elimina duplicados conservando el último registro en result\nresult = None\n",
+  "solution_code": "result = df_clientes_log.drop_duplicates(subset=[\"id\"], keep=\"last\")",
+  "tests": [
+    {
+      "name": "result contiene exactamente 3 clientes únicos",
+      "check": "isinstance(result, pd.DataFrame) and len(result) == 3",
+      "hint": "Debe haber una sola fila para 101, 102 y 103."
+    },
+    {
+      "name": "Conserva la versión más reciente",
+      "check": "result.loc[result['id'] == 101, 'email'].iloc[0] == 'latest@a.com'",
+      "hint": "El cliente 101 debe tener el email 'latest@a.com'."
+    }
+  ],
+  "hints": [
+    "Usa `df_clientes_log.drop_duplicates(subset=['id'], keep='last')`."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "pd-13",
+  "module": "pandas",
+  "title": "Conversión de fechas mixtas con pd.to_datetime",
+  "difficulty": 3,
+  "concepts": [
+    "to_datetime",
+    "format='mixed'",
+    "fechas",
+    "dt accessor"
+  ],
+  "session": 6,
+  "tag": "dates",
+  "estimatedMinutes": 7,
+  "dataset": "pacientes.csv",
+  "theory_md": "### Normalización de Fechas Heterogéneas\nCuando un archivo contiene fechas en múltiples formatos (ej: `2023-05-12` y `04/11/2022`), pandas 2.0+ incluye el argumento `format='mixed'`:\n```python\nfechas_dt = pd.to_datetime(df[\"fecha_raw\"], format=\"mixed\", dayfirst=True)\n```\nEl accesor `.dt` expone componentes: `.dt.year`, `.dt.month`, `.dt.day_name()`.",
+  "prompt_md": "En `df_pac`, convierte la columna `\"fecha_consulta\"` a objetos datetime usando `pd.to_datetime(..., format=\"mixed\")`.\nCrea en el DataFrame una nueva columna llamada `\"mes_consulta\"` que contenga el número de mes (`1` a `12`) obtenido con `.dt.month`.\nGuarda en la variable `result` el conteo de consultas del mes con mayor frecuencia (entero).",
+  "setup_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")",
+  "starter_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Convierte fechas, extrae el mes y calcula el valor en result\nresult = 0\n",
+  "solution_code": "fechas = pd.to_datetime(df_pac[\"fecha_consulta\"], format=\"mixed\")\ndf_pac[\"mes_consulta\"] = fechas.dt.month\nresult = int(df_pac[\"mes_consulta\"].value_counts().max())",
+  "tests": [
+    {
+      "name": "result es un número entero positivo",
+      "check": "isinstance(result, int) and result > 0",
+      "hint": "result debe ser la frecuencia máxima mensual."
+    },
+    {
+      "name": "Columna mes_consulta creada correctamente",
+      "check": "'mes_consulta' in df_pac.columns and df_pac['mes_consulta'].between(1, 12).all()",
+      "hint": "Todos los meses deben estar entre 1 y 12."
+    }
+  ],
+  "hints": [
+    "Convierte con `pd.to_datetime(df_pac['fecha_consulta'], format='mixed')`.",
+    "Extrae el mes con `.dt.month`.",
+    "Usa `int(df_pac['mes_consulta'].value_counts().max())`."
+  ]
+}

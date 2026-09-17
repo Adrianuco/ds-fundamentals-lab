@@ -1,0 +1,41 @@
+{
+  "id": "np-16",
+  "module": "numpy",
+  "title": "Split de índices para Train/Test aleatorio",
+  "difficulty": 3,
+  "concepts": [
+    "permutacion",
+    "train test split",
+    "indices"
+  ],
+  "session": 3,
+  "tag": "warmup",
+  "estimatedMinutes": 7,
+  "dataset": "inline",
+  "theory_md": "### Partición de Datos Manual en NumPy\nAntes de recurrir a `train_test_split` de scikit-learn, el procedimiento fundamental consiste en permutar los índices de las observaciones:\n```python\nn = len(datos)\nindices = np.random.default_rng(seed).permutation(n)\nsplit_point = int(n * 0.8)\nidx_train = indices[:split_point]\nidx_test = indices[split_point:]\n```",
+  "prompt_md": "Dado un conjunto con `n_samples = 20` observaciones, genera una partición 70% entrenamiento / 30% prueba:\n1. Usa el generador `rng = np.random.default_rng(42)`.\n2. Permuta los índices de `0` a `n_samples - 1` con `rng.permutation(n_samples)`.\n3. Asigna el primer 70% (14 índices) a `idx_train` y el 30% restante (6 índices) a `idx_test`.\nGuarda la tupla `(idx_train, idx_test)` en la variable `result`.",
+  "setup_code": "import numpy as np\nn_samples = 20",
+  "starter_code": "import numpy as np\nn_samples = 20\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Genera idx_train y idx_test y asígnalos en result\nidx_train = None\nidx_test = None\nresult = None\n",
+  "solution_code": "rng = np.random.default_rng(42)\nindices = rng.permutation(n_samples)\nsplit = int(n_samples * 0.70)\nidx_train = indices[:split]\nidx_test = indices[split:]\nresult = (idx_train, idx_test)",
+  "tests": [
+    {
+      "name": "result es una tupla con dos arreglos",
+      "check": "isinstance(result, tuple) and len(result) == 2",
+      "hint": "result debe ser (idx_train, idx_test)."
+    },
+    {
+      "name": "Longitudes correctas: 14 train y 6 test",
+      "check": "len(result[0]) == 14 and len(result[1]) == 6",
+      "hint": "Esperaba 14 muestras para train y 6 para test."
+    },
+    {
+      "name": "Sin solapamiento entre train y test",
+      "check": "len(set(result[0]).intersection(set(result[1]))) == 0",
+      "hint": "Los índices de entrenamiento y prueba deben ser disjuntos."
+    }
+  ],
+  "hints": [
+    "Calcula `split = int(n_samples * 0.70)` que da 14.",
+    "Separa con slices: `[:split]` y `[split:]`."
+  ]
+}

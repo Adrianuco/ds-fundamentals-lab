@@ -1,0 +1,41 @@
+{
+  "id": "np-13",
+  "module": "numpy",
+  "title": "Aleatoriedad reproducible con default_rng",
+  "difficulty": 2,
+  "concepts": [
+    "default_rng",
+    "semilla",
+    "probabilidad"
+  ],
+  "session": 3,
+  "tag": "warmup",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Generador de Números Aleatorios en NumPy Moderno\nLa API moderna de NumPy utiliza `np.random.default_rng(seed)` para garantizar reproducibilidad exacta en simulaciones:\n```python\nrng = np.random.default_rng(seed=42)\nuniformes = rng.uniform(low=0.0, high=1.0, size=5)\nenteros = rng.integers(low=1, high=100, size=(3, 3))\n```",
+  "prompt_md": "Crea un generador aleatorio reproducible con semilla `seed=123` usando `np.random.default_rng(123)`.\nGenera en la variable `result` una matriz de tamaño 3x4 con números enteros aleatorios entre 10 y 50 (donde 50 sea inclusivo, es decir `high=51`).",
+  "setup_code": "import numpy as np",
+  "starter_code": "import numpy as np\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Instancia el generador y genera la matriz en result\nresult = None\n",
+  "solution_code": "rng = np.random.default_rng(123)\nresult = rng.integers(low=10, high=51, size=(3, 4))",
+  "tests": [
+    {
+      "name": "result tiene dimensiones (3, 4)",
+      "check": "isinstance(result, np.ndarray) and result.shape == (3, 4)",
+      "hint": "La matriz debe tener shape (3, 4)."
+    },
+    {
+      "name": "Todos los enteros están en el rango [10, 50]",
+      "check": "(result >= 10).all() and (result <= 50).all()",
+      "hint": "Todos los valores deben estar entre 10 y 50."
+    },
+    {
+      "name": "Reproducibilidad exacta con semilla 123",
+      "check": "result[0, 0] == np.random.default_rng(123).integers(10, 51, size=(3, 4))[0, 0]",
+      "hint": "Asegúrate de inicializar default_rng con la semilla 123."
+    }
+  ],
+  "hints": [
+    "Instancia con `rng = np.random.default_rng(123)`.",
+    "Usa `rng.integers(10, 51, size=(3, 4))`."
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "id": "py-08",
+  "module": "python",
+  "title": "Función de media y desvío manual",
+  "difficulty": 2,
+  "concepts": [
+    "funciones",
+    "args por defecto",
+    "estadística descriptiva"
+  ],
+  "session": 1,
+  "tag": "functions",
+  "estimatedMinutes": 7,
+  "dataset": "inline",
+  "theory_md": "### Funciones y Agregaciones Básicas\nDefinir funciones matemáticas puras permite entender la base antes de invocar librerías:\n```python\ndef calcular_media(valores):\n    if not valores:\n        return 0.0\n    return sum(valores) / len(valores)\n```",
+  "prompt_md": "Define una función `stats_resumen(numeros, redondeo=2)` que retorne una tupla con `(media, rango)`, donde `rango = maximo - minimo`. Ambos valores deben estar redondeados al número de decimales especificado por `redondeo`.\nLuego, calcula el resultado para la lista `muestras` y guárdalo en la variable `result`.",
+  "setup_code": "muestras = [12.45, 15.60, 9.80, 22.10, 14.35, 18.90]",
+  "starter_code": "muestras = [12.45, 15.60, 9.80, 22.10, 14.35, 18.90]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Define la función y calcula result\ndef stats_resumen(numeros, redondeo=2):\n    pass\nresult = None\n",
+  "solution_code": "def stats_resumen(numeros, redondeo=2):\n    media = sum(numeros) / len(numeros)\n    rango = max(numeros) - min(numeros)\n    return (round(media, redondeo), round(rango, redondeo))\n\nresult = stats_resumen(muestras)",
+  "tests": [
+    {
+      "name": "Existe la función stats_resumen",
+      "check": "callable(stats_resumen)",
+      "hint": "Debes definir la función stats_resumen."
+    },
+    {
+      "name": "result es una tupla de dos valores",
+      "check": "isinstance(result, tuple) and len(result) == 2",
+      "hint": "result debe ser una tupla (media, rango)."
+    },
+    {
+      "name": "Valores correctos de media y rango",
+      "check": "result == (15.53, 12.3)",
+      "hint": "Esperaba media=15.53 y rango=12.30 (22.10 - 9.80)."
+    }
+  ],
+  "hints": [
+    "`sum(muestras) / len(muestras)` da la media.",
+    "`max(muestras) - min(muestras)` da el rango.",
+    "Aplica `round(..., redondeo)` a cada uno."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "pd-32",
+  "module": "pandas",
+  "title": "Join de tablas con nombres de clave distintos (left_on y right_on)",
+  "difficulty": 2,
+  "concepts": [
+    "left_on",
+    "right_on",
+    "merge"
+  ],
+  "session": 8,
+  "tag": "join",
+  "estimatedMinutes": 6,
+  "dataset": "municipios.csv",
+  "theory_md": "### Claves con Distinto Nombre\nCuando las tablas tienen nombres diferentes para la misma entidad (ej: `\"ciudad_residencia\"` en una y `\"municipio\"` en otra):\n```python\npd.merge(A, B, left_on=\"ciudad_residencia\", right_on=\"municipio\")\n```",
+  "prompt_md": "Une `df_usuarios` con `df_mun` haciendo coincidir la columna `\"ciudad_origen\"` con la columna `\"municipio\"`.\nLuego, elimina la columna redundante `\"municipio\"` del DataFrame final.\nGuarda el resultado en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\ndf_usuarios = pd.DataFrame({\n    \"user_id\": [1, 2, 3],\n    \"nombre\": [\"Claudia\", \"Gabriel\", \"Patricia\"],\n    \"ciudad_origen\": [\"Managua\", \"León\", \"Matagalpa\"]\n})",
+  "starter_code": "import pandas as pd\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\ndf_usuarios = pd.DataFrame({\n    \"user_id\": [1, 2, 3],\n    \"nombre\": [\"Claudia\", \"Gabriel\", \"Patricia\"],\n    \"ciudad_origen\": [\"Managua\", \"León\", \"Matagalpa\"]\n})\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Realiza el merge con left_on y right_on y quita 'municipio' en result\nresult = None\n",
+  "solution_code": "result = pd.merge(df_usuarios, df_mun, left_on=\"ciudad_origen\", right_on=\"municipio\", how=\"inner\").drop(columns=[\"municipio\"])",
+  "tests": [
+    {
+      "name": "result contiene 3 usuarios",
+      "check": "isinstance(result, pd.DataFrame) and len(result) == 3",
+      "hint": "Debe tener 3 filas."
+    },
+    {
+      "name": "Columna 'ciudad_origen' conservada y 'municipio' eliminada",
+      "check": "'ciudad_origen' in result.columns and 'municipio' not in result.columns",
+      "hint": "ciudad_origen debe estar presente y municipio eliminada."
+    }
+  ],
+  "hints": [
+    "Usa `pd.merge(df_usuarios, df_mun, left_on='ciudad_origen', right_on='municipio')`.",
+    "Aplica `.drop(columns=['municipio'])`."
+  ]
+}

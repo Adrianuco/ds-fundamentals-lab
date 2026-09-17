@@ -1,0 +1,39 @@
+{
+  "id": "np-26",
+  "module": "numpy",
+  "title": "Rolling Mean simple con Slicing (Ventana de 3)",
+  "difficulty": 3,
+  "concepts": [
+    "rolling mean",
+    "slicing",
+    "promedios moviles",
+    "series de tiempo"
+  ],
+  "session": 4,
+  "tag": "math",
+  "estimatedMinutes": 7,
+  "dataset": "inline",
+  "theory_md": "### Media Móvil Vectorizada\nPara calcular la media móvil con ventana de tamaño 3 sobre un arreglo 1D sin librerías externas ni bucles for, podemos sumar los 3 arreglos desplazados mediante slicing:\n```python\n# Para arr = [x0, x1, x2, x3, x4]\n# w0 = (x0 + x1 + x2) / 3\n# w1 = (x1 + x2 + x3) / 3\n# w2 = (x2 + x3 + x4) / 3\nrolling_3 = (arr[:-2] + arr[1:-1] + arr[2:]) / 3.0\n```",
+  "prompt_md": "Dado el arreglo de precios diarios de una acción `precios`, calcula la media móvil con ventana fija de 3 elementos utilizando suma de slices vectorizados.\nGuarda el arreglo resultante en la variable `result`.",
+  "setup_code": "import numpy as np\nprecios = np.array([10.0, 12.0, 14.0, 16.0, 18.0, 20.0, 22.0])",
+  "starter_code": "import numpy as np\nprecios = np.array([10.0, 12.0, 14.0, 16.0, 18.0, 20.0, 22.0])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Calcula el rolling mean de ventana 3 en result\nresult = None\n",
+  "solution_code": "result = (precios[:-2] + precios[1:-1] + precios[2:]) / 3.0",
+  "tests": [
+    {
+      "name": "result contiene 5 elementos (N - 3 + 1)",
+      "check": "isinstance(result, np.ndarray) and len(result) == 5",
+      "hint": "Para 7 elementos y ventana 3, el resultado tiene longitud 5."
+    },
+    {
+      "name": "Valores correctos de la media móvil",
+      "check": "np.allclose(result, np.array([12.0, 14.0, 16.0, 18.0, 20.0]))",
+      "hint": "Esperaba [12.0, 14.0, 16.0, 18.0, 20.0]."
+    }
+  ],
+  "hints": [
+    "El primer término es `precios[:-2]`.",
+    "El del centro es `precios[1:-1]`.",
+    "El último es `precios[2:]`.",
+    "Suma los tres y divide entre 3.0."
+  ]
+}

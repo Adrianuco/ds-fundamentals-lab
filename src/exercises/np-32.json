@@ -1,0 +1,37 @@
+{
+  "id": "np-32",
+  "module": "numpy",
+  "title": "Correlación de Pearson entre dos arrays",
+  "difficulty": 2,
+  "concepts": [
+    "np.corrcoef",
+    "correlacion",
+    "pearson",
+    "estadistica"
+  ],
+  "session": 4,
+  "tag": "math",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Coeficiente de Correlación de Pearson\n`np.corrcoef(x, y)` calcula la matriz de correlación (2 \times 2) entre dos variables cuantitativas:\n```python\nR = np.corrcoef(x, y)\nr_xy = R[0, 1] # Coeficiente entre x e y (-1 a +1)\n```",
+  "prompt_md": "Dados los arreglos `horas_estudio` y `calificacion_examen`, calcula el coeficiente de correlación lineal de Pearson entre ambas variables.\nGuarda el valor escalar (float redondeado a 3 decimales) en la variable `result`.",
+  "setup_code": "import numpy as np\nhoras_estudio = np.array([2.0, 4.5, 6.0, 1.5, 8.0, 10.0, 3.5, 7.0])\ncalificacion_examen = np.array([55.0, 70.0, 82.0, 50.0, 90.0, 98.0, 64.0, 85.0])",
+  "starter_code": "import numpy as np\nhoras_estudio = np.array([2.0, 4.5, 6.0, 1.5, 8.0, 10.0, 3.5, 7.0])\ncalificacion_examen = np.array([55.0, 70.0, 82.0, 50.0, 90.0, 98.0, 64.0, 85.0])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Calcula el coeficiente de Pearson en result\nresult = 0.0\n",
+  "solution_code": "matriz_corr = np.corrcoef(horas_estudio, calificacion_examen)\nresult = round(float(matriz_corr[0, 1]), 3)",
+  "tests": [
+    {
+      "name": "result es un float",
+      "check": "isinstance(result, float)",
+      "hint": "result debe ser un float."
+    },
+    {
+      "name": "Correlación lineal fuertemente positiva",
+      "check": "abs(result - 0.992) < 1e-2",
+      "hint": "Esperaba correlación r ≈ 0.992."
+    }
+  ],
+  "hints": [
+    "Llama a `np.corrcoef(horas_estudio, calificacion_examen)`.",
+    "Extrae la posición `[0, 1]` y redondea con `round(..., 3)`."
+  ]
+}

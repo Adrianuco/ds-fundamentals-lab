@@ -1,0 +1,31 @@
+{
+  "id": "pd-44",
+  "module": "pandas",
+  "title": "Capstone 4: Pregunta de Negocio 1 - Diagnóstico más costoso per cápita",
+  "difficulty": 3,
+  "concepts": [
+    "agregacion",
+    "maximos",
+    "pregunta de negocio"
+  ],
+  "session": 10,
+  "tag": "groupby",
+  "estimatedMinutes": 6,
+  "dataset": "pacientes.csv",
+  "theory_md": "### Responder Preguntas de Decisión\nEn Data Science, las transformaciones culminan en responder interrogantes directas de negocio.",
+  "prompt_md": "A partir de `df_enriquecido`:\n¿Cuál es el diagnóstico con el **costo promedio más alto** por consulta?\nGuarda el nombre exacto de dicho diagnóstico (string) en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\nclean_df = df_pac.copy()\nclean_df[\"costo\"] = clean_df[\"costo\"].astype(str).str.replace(\",\", \"\", regex=False).astype(float)\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\ndf_enriquecido = pd.merge(clean_df, df_mun, on=\"municipio\", how=\"inner\")",
+  "starter_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\nclean_df = df_pac.copy()\nclean_df[\"costo\"] = clean_df[\"costo\"].astype(str).str.replace(\",\", \"\", regex=False).astype(float)\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\ndf_enriquecido = pd.merge(clean_df, df_mun, on=\"municipio\", how=\"inner\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Identifica el diagnóstico con mayor costo medio en result\nresult = \"\"\n",
+  "solution_code": "diag_costo = df_enriquecido.groupby(\"diagnostico\")[\"costo\"].mean()\nresult = str(diag_costo.idxmax())",
+  "tests": [
+    {
+      "name": "result es un string con un diagnóstico existente",
+      "check": "isinstance(result, str) and result in df_enriquecido['diagnostico'].unique()",
+      "hint": "result debe ser un diagnóstico existente en los datos."
+    }
+  ],
+  "hints": [
+    "Agrupa: `df_enriquecido.groupby('diagnostico')['costo'].mean()`.",
+    "Obtén el índice máximo con `.idxmax()`."
+  ]
+}

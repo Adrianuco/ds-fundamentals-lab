@@ -1,0 +1,35 @@
+{
+  "id": "pd-31",
+  "module": "pandas",
+  "title": "Merge asof (Join aproximado por fecha u orden)",
+  "difficulty": 3,
+  "concepts": [
+    "merge_asof",
+    "series de tiempo",
+    "joins aproximados"
+  ],
+  "session": 8,
+  "tag": "join",
+  "estimatedMinutes": 7,
+  "dataset": "inline",
+  "theory_md": "### Merge Asof (Alineación Temporal Más Cercana)\n`pd.merge_asof()` une dos DataFrames por una columna ordenada (típicamente tiempo), buscando la fila con el valor más cercano anterior o igual (`direction='backward'`):\n```python\npd.merge_asof(transacciones, tasas_cambio, on=\"fecha\", direction=\"backward\")\n```",
+  "prompt_md": "Dadas las transacciones `df_tx` y la tabla de cotizaciones `df_tasas` (ambas ordenadas por `\"segundo\"`):\nRealiza un `pd.merge_asof` para asignarle a cada transacción la última tasa disponible en ese momento o antes.\nGuarda el resultado en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_tx = pd.DataFrame({\n    \"segundo\": [2, 5, 8, 15],\n    \"monto_dolares\": [100, 50, 200, 30]\n})\ndf_tasas = pd.DataFrame({\n    \"segundo\": [0, 4, 10],\n    \"tasa\": [36.50, 36.55, 36.60]\n})",
+  "starter_code": "import pandas as pd\ndf_tx = pd.DataFrame({\n    \"segundo\": [2, 5, 8, 15],\n    \"monto_dolares\": [100, 50, 200, 30]\n})\ndf_tasas = pd.DataFrame({\n    \"segundo\": [0, 4, 10],\n    \"tasa\": [36.50, 36.55, 36.60]\n})\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Realiza merge_asof en result\nresult = None\n",
+  "solution_code": "result = pd.merge_asof(df_tx, df_tasas, on=\"segundo\", direction=\"backward\")",
+  "tests": [
+    {
+      "name": "result contiene las 4 transacciones con sus tasas asignadas",
+      "check": "isinstance(result, pd.DataFrame) and len(result) == 4 and 'tasa' in result.columns",
+      "hint": "Debe contener 4 filas y la columna tasa."
+    },
+    {
+      "name": "Tasas asignadas correctamente según el tiempo",
+      "check": "result.loc[result['segundo'] == 2, 'tasa'].iloc[0] == 36.50 and result.loc[result['segundo'] == 5, 'tasa'].iloc[0] == 36.55",
+      "hint": "En el segundo 2 la última tasa era 36.50; en el segundo 5 ya era 36.55."
+    }
+  ],
+  "hints": [
+    "Usa `pd.merge_asof(df_tx, df_tasas, on='segundo', direction='backward')`."
+  ]
+}

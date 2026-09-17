@@ -1,0 +1,38 @@
+{
+  "id": "py-02",
+  "module": "python",
+  "title": "Slicing y pasos en listas",
+  "difficulty": 1,
+  "concepts": [
+    "listas",
+    "slicing",
+    "índice negativo",
+    "step"
+  ],
+  "session": 1,
+  "tag": "indexing",
+  "estimatedMinutes": 5,
+  "dataset": "inline",
+  "theory_md": "### Slicing en Python\nLa notación `lista[start:stop:step]` permite subseleccionar elementos de secuencias:\n- `start`: índice inicial (inclusivo, default 0).\n- `stop`: índice final (exclusivo).\n- `step`: incremento (negativo invierte la dirección).\n```python\ndatos = [10, 20, 30, 40, 50, 60]\nultimos_tres = datos[-3:]    # [40, 50, 60]\ninvertida = datos[::-1]      # [60, 50, 40, 30, 20, 10]\npares_idx = datos[::2]       # [10, 30, 50]\n```",
+  "prompt_md": "Dada la lista `temperaturas`, extrae en la variable `result` una sublista que contenga los elementos desde el índice 1 (segundo elemento) hasta el índice 7 (octavo elemento), pero **tomando elementos alternos (de 2 en 2)**.",
+  "setup_code": "temperaturas = [22.4, 25.1, 28.3, 31.0, 30.2, 29.5, 27.8, 26.0, 24.5]",
+  "starter_code": "temperaturas = [22.4, 25.1, 28.3, 31.0, 30.2, 29.5, 27.8, 26.0, 24.5]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Extrae el slice requerido en la variable result\nresult = []\n",
+  "solution_code": "result = temperaturas[1:8:2]",
+  "tests": [
+    {
+      "name": "result es una lista",
+      "check": "isinstance(result, list)",
+      "hint": "result debe ser una lista obtenida mediante slicing."
+    },
+    {
+      "name": "Contenido correcto del slice alterno",
+      "check": "result == [25.1, 31.0, 29.5, 26.0]",
+      "hint": "Esperaba [25.1, 31.0, 29.5, 26.0]. Revisa el rango [1:8:2]."
+    }
+  ],
+  "hints": [
+    "El índice inicial es 1 y el final debe incluir el índice 7 (por lo tanto stop es 8).",
+    "El tercer argumento del slice es el paso o step (2).",
+    "Usa `temperaturas[1:8:2]`."
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "id": "pd-05",
+  "module": "pandas",
+  "title": "Filtro booleano simple y operador ~ (negación)",
+  "difficulty": 2,
+  "concepts": [
+    "filtro booleano",
+    "negacion",
+    "isin"
+  ],
+  "session": 5,
+  "tag": "indexing",
+  "estimatedMinutes": 6,
+  "dataset": "municipios.csv",
+  "theory_md": "### Filtrado Booleano en pandas\nPara filtrar filas aplicamos una condición lógica sobre una Serie:\n```python\nurbanos = df[df[\"zona\"] == \"urbana\"]\nno_urbanos = df[~(df[\"zona\"] == \"urbana\")] # El operador ~ invierte la máscara\n```",
+  "prompt_md": "Dado el catálogo de municipios `df_mun`, filtra en la variable `result` todos los municipios que pertenezcan a la zona `\"rural\"` y cuya población sea **estrictamente mayor a 50,000 habitantes**.",
+  "setup_code": "import pandas as pd\ndf_mun = pd.read_csv(\"/data/municipios.csv\")",
+  "starter_code": "import pandas as pd\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Filtra municipios rurales con población > 50000 en result\nresult = None\n",
+  "solution_code": "result = df_mun[(df_mun[\"zona\"] == \"rural\") & (df_mun[\"poblacion\"] > 50000)]",
+  "tests": [
+    {
+      "name": "result es un DataFrame",
+      "check": "isinstance(result, pd.DataFrame)",
+      "hint": "result debe ser un DataFrame filtrado."
+    },
+    {
+      "name": "Todos los municipios en result son rurales y tienen > 50,000 hab",
+      "check": "(result['zona'] == 'rural').all() and (result['poblacion'] > 50000).all()",
+      "hint": "Verifica que zona sea 'rural' y poblacion > 50000."
+    },
+    {
+      "name": "Cantidad exacta de municipios cumpliendo el criterio",
+      "check": "len(result) == 6",
+      "hint": "Esperaba 6 municipios rurales con población > 50k (Juigalpa, Rivas, San Carlos, Jinotega, Boaco, Bluefields)."
+    }
+  ],
+  "hints": [
+    "Usa `(df_mun['zona'] == 'rural') & (df_mun['poblacion'] > 50000)`.",
+    "Recuerda poner cada condición entre paréntesis."
+  ]
+}

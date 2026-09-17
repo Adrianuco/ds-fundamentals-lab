@@ -1,0 +1,36 @@
+{
+  "id": "pd-48",
+  "module": "pandas",
+  "title": "Capstone 8: Reporte Ejecutivo Final de Salud",
+  "difficulty": 3,
+  "concepts": [
+    "reporte ejecutivo",
+    "dataframe final",
+    "capstone"
+  ],
+  "session": 10,
+  "tag": "groupby",
+  "estimatedMinutes": 8,
+  "dataset": "pacientes.csv",
+  "theory_md": "### El Entregable Final de un Data Analyst\nSintetizar hallazgos en una tabla ejecutiva con nombres de métricas legibles para stakeholders.",
+  "prompt_md": "A partir de `df_enriquecido`, genera un reporte por `\"departamento\"` con:\n- `total_consultas`: conteo de pacientes (`size`).\n- `gasto_total`: suma de costo (redondeada a 2 decimales).\n- `edad_promedio`: promedio de edad (redondeada a 1 decimal).\nOrdena el reporte de mayor a menor `gasto_total` y reinicia el índice.\nGuarda el DataFrame final en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\nclean_df = df_pac.copy()\nclean_df[\"costo\"] = clean_df[\"costo\"].astype(str).str.replace(\",\", \"\", regex=False).astype(float)\nclean_df[\"edad\"] = clean_df[\"edad\"].fillna(clean_df[\"edad\"].median())\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\ndf_enriquecido = pd.merge(clean_df, df_mun, on=\"municipio\", how=\"inner\")",
+  "starter_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\nclean_df = df_pac.copy()\nclean_df[\"costo\"] = clean_df[\"costo\"].astype(str).str.replace(\",\", \"\", regex=False).astype(float)\nclean_df[\"edad\"] = clean_df[\"edad\"].fillna(clean_df[\"edad\"].median())\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\ndf_enriquecido = pd.merge(clean_df, df_mun, on=\"municipio\", how=\"inner\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Genera el reporte ejecutivo final en result\nresult = None\n",
+  "solution_code": "result = (\n    df_enriquecido\n    .groupby(\"departamento\")\n    .agg(\n        total_consultas=(\"id\", \"size\"),\n        gasto_total=(\"costo\", \"sum\"),\n        edad_promedio=(\"edad\", \"mean\")\n    )\n    .round({\"gasto_total\": 2, \"edad_promedio\": 1})\n    .sort_values(by=\"gasto_total\", ascending=False)\n    .reset_index()\n)",
+  "tests": [
+    {
+      "name": "result contiene las columnas especificadas",
+      "check": "isinstance(result, pd.DataFrame) and list(result.columns) == ['departamento', 'total_consultas', 'gasto_total', 'edad_promedio']",
+      "hint": "Las columnas deben ser exactamente departamento, total_consultas, gasto_total, edad_promedio."
+    },
+    {
+      "name": "Ordenado de mayor a menor gasto_total",
+      "check": "result.iloc[0]['gasto_total'] >= result.iloc[-1]['gasto_total']",
+      "hint": "Debe estar ordenado de mayor a menor gasto_total."
+    }
+  ],
+  "hints": [
+    "Usa `.groupby('departamento').agg(...)` con named aggregations.",
+    "Redondea y ordena con `.sort_values(by='gasto_total', ascending=False).reset_index()`."
+  ]
+}

@@ -1,0 +1,101 @@
+id,municipio,sexo,edad,fecha_consulta,diagnostico,costo,seguro
+PAC-001,León,F,43,2023-04-25,Diabetes Tipo 2,2617.18,INSS
+PAC-002,Chinandega,F,,2023-04-22,Gastroenteritis,"1,842.94",Privado
+PAC-003,Tipitapa,M,47,04/01/2023,Diabetes Tipo 2,"2,488.77",Privado
+PAC-004,Matagalpa,M,60,2023-02-19,Asma,2989.11,INSS
+PAC-005,Juigalpa,F,60,2023-02-10,Dermatitis,2928.51,MINSA (Gratuito)
+PAC-006,Matagalpa,F,,27/04/2023,Dermatitis,3450.49,INSS
+PAC-007,Chinandega,M,58,2023-03-25,Asma,1340.16,INSS
+PAC-008,Granada,F,60,2023-05-19,Gastroenteritis,2443.46,INSS
+PAC-009,Matagalpa,F,63,18/05/2023,Hipertensión,856.79,MINSA (Gratuito)
+PAC-010,Matagalpa,M,70,2023-03-15,Dermatitis,617.76,MINSA (Gratuito)
+PAC-011,Chinandega,M,29,2023-09-18,Traumatismo leve,454.55,INSS
+PAC-012,León,F,66,02/11/2023,Hipertensión,1438.97,
+PAC-013,Tipitapa,M,13,2023-12-15,Hipertensión,2433.73,MINSA (Gratuito)
+PAC-014,Masaya,F,32,2023-08-21,Infección respiratoria,3345.28,MINSA (Gratuito)
+PAC-015,Tipitapa,F,25,17/11/2023,Dermatitis,2969.59,Privado
+PAC-016,Granada,M,81,2023-09-29,Infección respiratoria,"2,156.46",INSS
+PAC-017,Masaya,M,42,2023-10-18,Hipertensión,436.94,
+PAC-018,León,F,72,09/10/2023,Diabetes Tipo 2,1037.94,
+PAC-019,Matagalpa,F,63,2023-12-10,Asma,1617.64,INSS
+PAC-020,Matagalpa,F,,2023-01-11,Gastroenteritis,"2,121.27",INSS
+PAC-021,Matagalpa,F,54,06/02/2023,Gastroenteritis,"1,082.90",Privado
+PAC-022,Juigalpa,F,64,2023-04-08,Hipertensión,474.72,
+PAC-023,Masaya,M,18,2023-12-11,Hipertensión,353.05,MINSA (Gratuito)
+PAC-024,León,F,80,18/08/2023,Diabetes Tipo 2,"1,563.30",Privado
+PAC-025,León,M,82,2023-02-20,Infección respiratoria,2334.69,INSS
+PAC-026,León,F,74,2023-09-04,Gastroenteritis,3046.58,Privado
+PAC-027,Chinandega,F,45,21/08/2023,Dermatitis,1567.08,
+PAC-028,Granada,F,19,2023-10-24,Infección respiratoria,"2,655.72",
+PAC-029,Tipitapa,F,,2023-09-18,Hipertensión,"3,002.00",INSS
+PAC-030,Matagalpa,M,84,07/05/2023,Infección respiratoria,"2,224.93",MINSA (Gratuito)
+PAC-031,Estelí,F,52,2023-05-03,Dermatitis,1475.88,MINSA (Gratuito)
+PAC-032,Juigalpa,M,21,2023-01-05,Traumatismo leve,2230.88,INSS
+PAC-033,León,F,28,28/06/2023,Hipertensión,"3,095.56",Privado
+PAC-034,Juigalpa,M,79,2023-01-05,Dermatitis,"3,271.38",Privado
+PAC-035,Estelí,F,82,2023-03-21,Dermatitis,"1,093.88",MINSA (Gratuito)
+PAC-036,Matagalpa,M,44,27/01/2023,Hipertensión,2274.85,INSS
+PAC-037,Managua,M,45,2023-03-24,Traumatismo leve,"1,998.13",INSS
+PAC-038,León,F,31,2023-10-07,Infección respiratoria,2945.89,Privado
+PAC-039,Chinandega,F,,06/07/2023,Infección respiratoria,"3,161.40",Privado
+PAC-040,León,M,64,2023-11-14,Diabetes Tipo 2,"3,251.31",Privado
+PAC-041,Granada,M,,2023-06-20,Cefalea tensional,2837.49,Privado
+PAC-042,Estelí,F,25,15/07/2023,Infección respiratoria,"3,026.29",
+PAC-043,Masaya,M,41,2023-04-25,Infección respiratoria,"2,361.11",MINSA (Gratuito)
+PAC-044,León,M,77,2023-07-24,Asma,"3,296.44",MINSA (Gratuito)
+PAC-045,Granada,M,,02/11/2023,Cefalea tensional,1308.05,
+PAC-046,Tipitapa,F,85,2023-04-08,Dermatitis,298.69,
+PAC-047,Managua,F,20,2023-12-07,Asma,2237.57,INSS
+PAC-048,Estelí,M,53,26/07/2023,Dermatitis,"2,007.28",
+PAC-049,Granada,M,12,2023-06-05,Dermatitis,854.11,MINSA (Gratuito)
+PAC-050,Juigalpa,M,39,2023-09-19,Traumatismo leve,2809.01,Privado
+PAC-051,León,M,54,17/02/2023,Gastroenteritis,"2,403.87",Privado
+PAC-052,Granada,F,,2023-09-01,Hipertensión,1675.64,Privado
+PAC-053,Chinandega,M,30,2023-12-02,Infección respiratoria,3140.41,INSS
+PAC-054,Chinandega,F,78,26/08/2023,Infección respiratoria,2017.31,INSS
+PAC-055,Juigalpa,F,79,2023-10-14,Asma,3332.63,
+PAC-056,Tipitapa,M,72,2023-08-19,Dermatitis,2668.45,MINSA (Gratuito)
+PAC-057,Tipitapa,M,47,14/08/2023,Hipertensión,"2,540.38",MINSA (Gratuito)
+PAC-058,Masaya,F,41,2023-07-16,Diabetes Tipo 2,"2,516.50",
+PAC-059,Masaya,M,38,2023-08-04,Cefalea tensional,3181.21,INSS
+PAC-060,Chinandega,M,,30/06/2023,Dermatitis,2674.14,
+PAC-061,Tipitapa,F,46,2023-08-12,Traumatismo leve,247.23,MINSA (Gratuito)
+PAC-062,Chinandega,F,28,2023-11-15,Infección respiratoria,3188.21,INSS
+PAC-063,León,M,71,04/04/2023,Infección respiratoria,"1,021.52",
+PAC-064,Masaya,M,60,2023-05-23,Cefalea tensional,995.11,INSS
+PAC-065,Juigalpa,F,18,2023-06-29,Gastroenteritis,2327.98,INSS
+PAC-066,Managua,F,14,15/11/2023,Diabetes Tipo 2,949.13,
+PAC-067,León,F,44,2023-07-08,Diabetes Tipo 2,2179.74,INSS
+PAC-068,Granada,M,15,2023-06-09,Cefalea tensional,1478.79,INSS
+PAC-069,Matagalpa,F,50,17/12/2023,Hipertensión,2817.36,INSS
+PAC-070,Masaya,M,20,2023-09-17,Asma,192.38,
+PAC-071,Juigalpa,F,58,2023-11-22,Traumatismo leve,"2,519.48",MINSA (Gratuito)
+PAC-072,Tipitapa,M,46,15/06/2023,Gastroenteritis,"2,932.95",
+PAC-073,Matagalpa,M,60,2023-06-22,Infección respiratoria,"1,805.93",
+PAC-074,Matagalpa,M,55,2023-05-24,Dermatitis,2011.90,Privado
+PAC-075,León,F,74,12/10/2023,Gastroenteritis,2463.54,
+PAC-076,Juigalpa,F,40,2023-07-27,Gastroenteritis,1175.79,
+PAC-077,Tipitapa,M,82,2023-06-19,Asma,"2,504.56",MINSA (Gratuito)
+PAC-078,Matagalpa,F,52,03/03/2023,Diabetes Tipo 2,791.66,
+PAC-079,Estelí,M,36,2023-06-01,Gastroenteritis,"1,358.95",Privado
+PAC-080,Estelí,F,82,2023-05-30,Diabetes Tipo 2,2286.86,INSS
+PAC-081,Managua,M,68,24/06/2023,Diabetes Tipo 2,"3,384.42",
+PAC-082,León,F,21,2023-10-23,Infección respiratoria,658.29,MINSA (Gratuito)
+PAC-083,León,F,65,2023-11-07,Gastroenteritis,"2,748.57",
+PAC-084,Estelí,M,19,09/11/2023,Hipertensión,"3,324.43",Privado
+PAC-085,Estelí,F,34,2023-10-10,Hipertensión,674.38,
+PAC-086,Juigalpa,M,41,2023-05-28,Dermatitis,"2,505.01",Privado
+PAC-087,Estelí,F,81,26/04/2023,Diabetes Tipo 2,3193.18,INSS
+PAC-088,Managua,F,84,2023-05-28,Traumatismo leve,566.58,MINSA (Gratuito)
+PAC-089,Chinandega,M,75,2023-08-13,Hipertensión,2153.42,MINSA (Gratuito)
+PAC-090,Estelí,F,85,28/10/2023,Infección respiratoria,3498.57,MINSA (Gratuito)
+PAC-091,Managua,F,68,2023-05-23,Diabetes Tipo 2,"3,489.77",
+PAC-092,León,M,54,2023-06-14,Hipertensión,"3,023.41",
+PAC-093,Estelí,M,82,19/01/2023,Traumatismo leve,445.00,MINSA (Gratuito)
+PAC-094,Masaya,F,63,2023-09-21,Infección respiratoria,2353.16,
+PAC-095,Managua,F,75,2023-11-17,Traumatismo leve,"2,695.97",Privado
+PAC-096,Estelí,M,74,04/03/2023,Infección respiratoria,3410.04,Privado
+PAC-097,Granada,M,82,2023-07-28,Hipertensión,902.75,INSS
+PAC-098,Juigalpa,F,31,2023-09-13,Dermatitis,"1,854.72",
+PAC-099,Juigalpa,F,30,16/07/2023,Gastroenteritis,3238.26,Privado
+PAC-100,León,M,65,2023-06-24,Dermatitis,"2,898.84",MINSA (Gratuito)

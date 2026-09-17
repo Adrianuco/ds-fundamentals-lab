@@ -1,0 +1,151 @@
+fecha,sku,categoria,unidades,precio,tienda
+2023-06-18,SKU-001,Alimentos,6,47.25,Sur
+2023-08-22,SKU-003,Bebidas,14,26.25,Occidente
+2023-08-29,SKU-008,Cuidado Personal,11,133.0,Norte
+2023-06-09,SKU-008,Cuidado Personal,1,140.0,Norte
+2023-06-06,SKU-004,Bebidas,15,33.73,Sur
+2023-07-10,SKU-009,Tecnología,7,472.5,Occidente
+2023-07-03,SKU-001,Alimentos,13,47.25,Norte
+2023-07-07,SKU-006,Limpieza,14,61.75,Sur
+2023-07-05,SKU-002,Alimentos,13,80.0,Occidente
+2023-07-22,SKU-008,Cuidado Personal,15,140.0,Sur
+2023-06-24,SKU-008,Cuidado Personal,12,140.0,Sur
+2023-08-06,SKU-005,Limpieza,13,104.5,Occidente
+2023-06-11,SKU-007,Cuidado Personal,10,90.25,Sur
+2023-07-12,SKU-002,Alimentos,2,80.0,Sur
+2023-07-10,SKU-008,Cuidado Personal,10,147.0,Occidente
+2023-06-22,SKU-008,Cuidado Personal,6,140.0,Central
+2023-07-16,SKU-010,Tecnología,7,1200.0,Central
+2023-06-10,SKU-007,Cuidado Personal,6,99.75,Norte
+2023-06-04,SKU-003,Bebidas,14,26.25,Occidente
+2023-06-05,SKU-003,Bebidas,2,23.75,Sur
+2023-07-17,SKU-007,Cuidado Personal,10,90.25,Norte
+2023-08-26,SKU-008,Cuidado Personal,6,140.0,Occidente
+2023-06-10,SKU-010,Tecnología,3,1260.0,Sur
+2023-07-21,SKU-006,Limpieza,11,65.0,Norte
+2023-06-15,SKU-001,Alimentos,12,42.75,Occidente
+2023-08-06,SKU-007,Cuidado Personal,15,99.75,Central
+2023-07-04,SKU-005,Limpieza,12,110.0,Norte
+2023-08-18,SKU-005,Limpieza,12,110.0,Norte
+2023-06-16,SKU-003,Bebidas,14,23.75,Occidente
+2023-06-23,SKU-008,Cuidado Personal,2,147.0,Sur
+2023-08-25,SKU-006,Limpieza,12,61.75,Sur
+2023-07-09,SKU-003,Bebidas,12,26.25,Norte
+2023-07-17,SKU-009,Tecnología,4,427.5,Norte
+2023-06-18,SKU-004,Bebidas,13,35.5,Central
+2023-07-17,SKU-009,Tecnología,10,450.0,Occidente
+2023-08-10,SKU-003,Bebidas,10,23.75,Central
+2023-07-10,SKU-007,Cuidado Personal,12,99.75,Occidente
+2023-08-07,SKU-007,Cuidado Personal,13,95.0,Central
+2023-06-17,SKU-006,Limpieza,11,61.75,Occidente
+2023-07-30,SKU-009,Tecnología,6,427.5,Norte
+2023-06-17,SKU-007,Cuidado Personal,9,90.25,Central
+2023-08-06,SKU-003,Bebidas,5,23.75,Norte
+2023-07-12,SKU-004,Bebidas,6,37.27,Sur
+2023-06-11,SKU-005,Limpieza,4,115.5,Sur
+2023-06-17,SKU-005,Limpieza,10,115.5,Central
+2023-08-04,SKU-003,Bebidas,10,26.25,Norte
+2023-06-22,SKU-010,Tecnología,12,1260.0,Sur
+2023-08-12,SKU-001,Alimentos,14,42.75,Central
+2023-06-06,SKU-010,Tecnología,5,1260.0,Norte
+2023-08-13,SKU-007,Cuidado Personal,10,99.75,Central
+2023-08-03,SKU-009,Tecnología,5,472.5,Sur
+2023-08-01,SKU-004,Bebidas,13,37.27,Occidente
+2023-07-09,SKU-008,Cuidado Personal,2,147.0,Central
+2023-06-21,SKU-008,Cuidado Personal,7,140.0,Occidente
+2023-06-27,SKU-006,Limpieza,10,61.75,Sur
+2023-07-11,SKU-006,Limpieza,7,61.75,Sur
+2023-08-05,SKU-009,Tecnología,2,450.0,Norte
+2023-07-30,SKU-002,Alimentos,5,80.0,Norte
+2023-06-19,SKU-002,Alimentos,1,80.0,Occidente
+2023-08-18,SKU-007,Cuidado Personal,4,90.25,Sur
+2023-08-13,SKU-006,Limpieza,4,61.75,Occidente
+2023-08-05,SKU-008,Cuidado Personal,8,140.0,Occidente
+2023-06-03,SKU-002,Alimentos,7,84.0,Occidente
+2023-07-01,SKU-004,Bebidas,10,35.5,Central
+2023-06-07,SKU-005,Limpieza,8,115.5,Occidente
+2023-07-07,SKU-009,Tecnología,1,427.5,Occidente
+2023-06-18,SKU-005,Limpieza,12,110.0,Occidente
+2023-07-17,SKU-001,Alimentos,7,42.75,Norte
+2023-07-17,SKU-009,Tecnología,5,427.5,Occidente
+2023-08-04,SKU-008,Cuidado Personal,13,147.0,Sur
+2023-08-19,SKU-010,Tecnología,2,1140.0,Central
+2023-07-21,SKU-006,Limpieza,13,65.0,Sur
+2023-06-19,SKU-004,Bebidas,10,37.27,Occidente
+2023-08-04,SKU-001,Alimentos,1,42.75,Norte
+2023-07-13,SKU-008,Cuidado Personal,9,140.0,Norte
+2023-08-17,SKU-009,Tecnología,3,450.0,Sur
+2023-06-21,SKU-007,Cuidado Personal,10,99.75,Sur
+2023-08-15,SKU-006,Limpieza,9,68.25,Occidente
+2023-08-30,SKU-010,Tecnología,5,1200.0,Central
+2023-07-18,SKU-006,Limpieza,11,61.75,Occidente
+2023-08-14,SKU-005,Limpieza,13,115.5,Central
+2023-08-16,SKU-008,Cuidado Personal,5,147.0,Norte
+2023-06-07,SKU-010,Tecnología,8,1140.0,Occidente
+2023-06-19,SKU-004,Bebidas,1,37.27,Central
+2023-06-25,SKU-001,Alimentos,8,45.0,Occidente
+2023-06-20,SKU-007,Cuidado Personal,12,90.25,Occidente
+2023-08-04,SKU-010,Tecnología,15,1200.0,Central
+2023-08-30,SKU-003,Bebidas,9,23.75,Sur
+2023-08-24,SKU-008,Cuidado Personal,9,140.0,Sur
+2023-06-23,SKU-008,Cuidado Personal,15,147.0,Sur
+2023-08-09,SKU-006,Limpieza,11,68.25,Sur
+2023-08-18,SKU-008,Cuidado Personal,4,133.0,Sur
+2023-08-11,SKU-005,Limpieza,4,110.0,Sur
+2023-08-30,SKU-004,Bebidas,12,37.27,Occidente
+2023-07-11,SKU-008,Cuidado Personal,6,147.0,Sur
+2023-07-07,SKU-002,Alimentos,10,84.0,Occidente
+2023-07-21,SKU-006,Limpieza,13,61.75,Sur
+2023-06-06,SKU-005,Limpieza,12,104.5,Sur
+2023-07-27,SKU-005,Limpieza,12,110.0,Norte
+2023-06-26,SKU-009,Tecnología,5,472.5,Sur
+2023-06-18,SKU-002,Alimentos,10,84.0,Norte
+2023-07-02,SKU-001,Alimentos,11,47.25,Norte
+2023-08-21,SKU-004,Bebidas,1,33.73,Occidente
+2023-07-13,SKU-008,Cuidado Personal,2,147.0,Norte
+2023-06-01,SKU-009,Tecnología,15,427.5,Occidente
+2023-08-23,SKU-008,Cuidado Personal,8,147.0,Norte
+2023-07-07,SKU-006,Limpieza,5,68.25,Central
+2023-06-12,SKU-010,Tecnología,4,1260.0,Central
+2023-06-23,SKU-007,Cuidado Personal,15,90.25,Central
+2023-07-21,SKU-008,Cuidado Personal,3,147.0,Sur
+2023-06-05,SKU-001,Alimentos,5,47.25,Central
+2023-07-13,SKU-005,Limpieza,8,115.5,Occidente
+2023-06-18,SKU-009,Tecnología,8,450.0,Norte
+2023-06-15,SKU-006,Limpieza,3,68.25,Occidente
+2023-08-22,SKU-005,Limpieza,12,104.5,Central
+2023-07-14,SKU-005,Limpieza,10,115.5,Norte
+2023-06-23,SKU-010,Tecnología,14,1260.0,Occidente
+2023-07-25,SKU-009,Tecnología,6,427.5,Occidente
+2023-08-25,SKU-002,Alimentos,3,76.0,Occidente
+2023-07-12,SKU-004,Bebidas,1,35.5,Occidente
+2023-07-01,SKU-008,Cuidado Personal,13,140.0,Sur
+2023-07-09,SKU-010,Tecnología,12,1260.0,Central
+2023-07-04,SKU-006,Limpieza,12,61.75,Central
+2023-08-25,SKU-002,Alimentos,8,80.0,Norte
+2023-07-22,SKU-009,Tecnología,15,472.5,Sur
+2023-08-28,SKU-002,Alimentos,11,80.0,Sur
+2023-08-18,SKU-004,Bebidas,4,33.73,Occidente
+2023-06-20,SKU-008,Cuidado Personal,12,147.0,Sur
+2023-07-24,SKU-009,Tecnología,15,450.0,Norte
+2023-07-02,SKU-010,Tecnología,14,1140.0,Occidente
+2023-08-07,SKU-006,Limpieza,2,68.25,Central
+2023-06-08,SKU-009,Tecnología,15,472.5,Norte
+2023-08-13,SKU-009,Tecnología,3,427.5,Sur
+2023-08-06,SKU-008,Cuidado Personal,2,147.0,Norte
+2023-08-14,SKU-008,Cuidado Personal,2,147.0,Occidente
+2023-06-08,SKU-008,Cuidado Personal,3,147.0,Occidente
+2023-07-29,SKU-010,Tecnología,1,1260.0,Occidente
+2023-08-26,SKU-005,Limpieza,12,104.5,Occidente
+2023-07-03,SKU-001,Alimentos,12,42.75,Central
+2023-06-06,SKU-007,Cuidado Personal,6,99.75,Central
+2023-08-09,SKU-001,Alimentos,15,42.75,Occidente
+2023-06-05,SKU-005,Limpieza,7,104.5,Norte
+2023-08-22,SKU-007,Cuidado Personal,6,95.0,Occidente
+2023-07-19,SKU-007,Cuidado Personal,2,99.75,Norte
+2023-08-23,SKU-006,Limpieza,2,61.75,Occidente
+2023-08-07,SKU-003,Bebidas,12,23.75,Central
+2023-06-03,SKU-005,Limpieza,8,115.5,Occidente
+2023-08-08,SKU-007,Cuidado Personal,14,90.25,Norte
+2023-07-29,SKU-006,Limpieza,3,65.0,Norte
+2023-06-15,SKU-001,Alimentos,13,47.25,Occidente

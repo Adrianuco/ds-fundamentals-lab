@@ -1,0 +1,36 @@
+{
+  "id": "pd-16",
+  "module": "pandas",
+  "title": "Creación de columnas condicionales con np.where",
+  "difficulty": 2,
+  "concepts": [
+    "np.where",
+    "assign",
+    "creacion de columnas"
+  ],
+  "session": 6,
+  "tag": "strings",
+  "estimatedMinutes": 5,
+  "dataset": "encuesta_empleo.csv",
+  "theory_md": "### Columnas Condicionales con np.where\nCombinar NumPy y pandas es la manera más idiomática y rápida de crear columnas binarias o condicionales:\n```python\ndf[\"salario_alto\"] = np.where(df[\"ingreso\"] > 25000, \"Alto\", \"Normal\")\n```",
+  "prompt_md": "En `df_emp`, crea una nueva columna llamada `\"jornada\"` que valga:\n- `\"Completa\"` si `horas >= 40`.\n- `\"Parcial\"` si `horas < 40`.\nGuarda en la variable `result` la cantidad de trabajadores con `\"Completa\"` (entero).",
+  "setup_code": "import pandas as pd\nimport numpy as np\ndf_emp = pd.read_csv(\"/data/encuesta_empleo.csv\")",
+  "starter_code": "import pandas as pd\nimport numpy as np\ndf_emp = pd.read_csv(\"/data/encuesta_empleo.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Crea la columna jornada y cuenta 'Completa' en result\nresult = 0\n",
+  "solution_code": "df_emp[\"jornada\"] = np.where(df_emp[\"horas\"] >= 40, \"Completa\", \"Parcial\")\nresult = int((df_emp[\"jornada\"] == \"Completa\").sum())",
+  "tests": [
+    {
+      "name": "result es un número entero positivo",
+      "check": "isinstance(result, int) and result > 0",
+      "hint": "result debe ser un entero con el conteo de trabajadores de jornada completa."
+    },
+    {
+      "name": "Valores válidos en la columna jornada",
+      "check": "set(df_emp['jornada'].unique()) == {'Completa', 'Parcial'}",
+      "hint": "La columna debe contener únicamente los valores 'Completa' y 'Parcial'."
+    }
+  ],
+  "hints": [
+    "Usa `np.where(df_emp['horas'] >= 40, 'Completa', 'Parcial')`.",
+    "Calcula `int((df_emp['jornada'] == 'Completa').sum())`."
+  ]
+}

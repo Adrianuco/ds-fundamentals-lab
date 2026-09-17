@@ -1,0 +1,35 @@
+{
+  "id": "np-08",
+  "module": "numpy",
+  "title": "np.where: Selección condicional if-else vectorizada",
+  "difficulty": 2,
+  "concepts": [
+    "np.where",
+    "vectorizacion",
+    "bifurcacion"
+  ],
+  "session": 3,
+  "tag": "warmup",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Selección vectorizada con np.where\n`np.where(condicion, valor_si_true, valor_si_false)` evalúa una condición vectorizada sin bucles:\n```python\nnotas = np.array([55, 80, 45, 95])\nestado = np.where(notas >= 60, \"Aprobado\", \"Reprobado\")\n```",
+  "prompt_md": "Dado el arreglo de temperaturas en grados Celsius `temperaturas`, genera en la variable `result` un arreglo de texto donde cada valor sea:\n- `\"Calor\"` si la temperatura es mayor o igual a 30.0.\n- `\"Agradable\"` si es menor a 30.0.",
+  "setup_code": "import numpy as np\ntemperaturas = np.array([28.5, 32.0, 29.8, 35.5, 22.0, 30.0, 31.2])",
+  "starter_code": "import numpy as np\ntemperaturas = np.array([28.5, 32.0, 29.8, 35.5, 22.0, 30.0, 31.2])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Clasifica con np.where en result\nresult = None\n",
+  "solution_code": "result = np.where(temperaturas >= 30.0, \"Calor\", \"Agradable\")",
+  "tests": [
+    {
+      "name": "result tiene la misma longitud que temperaturas",
+      "check": "isinstance(result, np.ndarray) and len(result) == 7",
+      "hint": "result debe tener 7 elementos."
+    },
+    {
+      "name": "Clasificación correcta",
+      "check": "list(result) == ['Agradable', 'Calor', 'Agradable', 'Calor', 'Agradable', 'Calor', 'Calor']",
+      "hint": "Revisa la condición >= 30.0."
+    }
+  ],
+  "hints": [
+    "Usa `np.where(temperaturas >= 30.0, 'Calor', 'Agradable')`."
+  ]
+}

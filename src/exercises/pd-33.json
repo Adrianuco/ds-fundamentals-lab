@@ -1,0 +1,35 @@
+{
+  "id": "pd-33",
+  "module": "pandas",
+  "title": "Pivot Table: De formato largo a matriz resumen",
+  "difficulty": 2,
+  "concepts": [
+    "pivot_table",
+    "reshape",
+    "agregacion"
+  ],
+  "session": 9,
+  "tag": "reshape",
+  "estimatedMinutes": 7,
+  "dataset": "ventas_tienda.csv",
+  "theory_md": "### Tablas Dinámicas con pivot_table()\n`pivot_table` remodela datos agregando valores:\n- `index`: Variables que formarán las filas.\n- `columns`: Variable que formará las columnas.\n- `values`: Variable numérica a resumir.\n- `aggfunc`: Función de agregación (`\"sum\"`, `\"mean\"`, etc.).\n```python\ntabla = df.pivot_table(index=\"tienda\", columns=\"categoria\", values=\"unidades\", aggfunc=\"sum\", fill_value=0)\n```",
+  "prompt_md": "En `df_ventas`, construye una tabla pivote que muestre el **total de unidades vendidas** (`aggfunc=\"sum\"`), colocando las `\"tiendas\"` en las filas (`index`) y las `\"categorias\"` en las columnas (`columns`). Rellena los valores faltantes con `0` (`fill_value=0`).\nGuarda la tabla pivote resultante en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_ventas = pd.read_csv(\"/data/ventas_tienda.csv\")",
+  "starter_code": "import pandas as pd\ndf_ventas = pd.read_csv(\"/data/ventas_tienda.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Construye la tabla pivote en result\nresult = None\n",
+  "solution_code": "result = df_ventas.pivot_table(\n    index=\"tienda\",\n    columns=\"categoria\",\n    values=\"unidades\",\n    aggfunc=\"sum\",\n    fill_value=0\n)",
+  "tests": [
+    {
+      "name": "result es un DataFrame pivote",
+      "check": "isinstance(result, pd.DataFrame)",
+      "hint": "result debe ser un DataFrame."
+    },
+    {
+      "name": "Filas son tiendas y columnas categorías",
+      "check": "len(result.index) == df_ventas['tienda'].nunique() and len(result.columns) == df_ventas['categoria'].nunique()",
+      "hint": "Las filas deben coincidir con las tiendas y las columnas con las categorías."
+    }
+  ],
+  "hints": [
+    "Usa `df_ventas.pivot_table(index='tienda', columns='categoria', values='unidades', aggfunc='sum', fill_value=0)`."
+  ]
+}

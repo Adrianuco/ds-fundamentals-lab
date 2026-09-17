@@ -1,0 +1,36 @@
+{
+  "id": "np-05",
+  "module": "numpy",
+  "title": "Máscaras booleanas (Boolean Masking)",
+  "difficulty": 2,
+  "concepts": [
+    "boolean mask",
+    "filtrado",
+    "condiciones logicas"
+  ],
+  "session": 3,
+  "tag": "indexing",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Filtrado con Máscaras Booleanas\nAl aplicar una comparación sobre un ndarray se genera un arreglo booleano de la misma forma.\nUsar esa máscara dentro de los corchetes `arr[mask]` filtra los elementos:\n```python\nv = np.array([10, -5, 20, 0, -2])\nmask = v > 0                 # [True, False, True, False, False]\npositivos = v[mask]          # [10, 20]\n```",
+  "prompt_md": "Dado el arreglo de mediciones de glucosa en ayunas `glucosa`, extrae en la variable `result` todos los valores que representen hiperglucemia o riesgo elevado, definidos como valores **estrictamente mayores a 125.0 mg/dL**.",
+  "setup_code": "import numpy as np\nglucosa = np.array([92.0, 134.5, 110.2, 145.0, 99.8, 126.0, 88.4, 180.2, 115.0])",
+  "starter_code": "import numpy as np\nglucosa = np.array([92.0, 134.5, 110.2, 145.0, 99.8, 126.0, 88.4, 180.2, 115.0])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Filtra los valores mayores a 125.0 en result\nresult = None\n",
+  "solution_code": "result = glucosa[glucosa > 125.0]",
+  "tests": [
+    {
+      "name": "result es un ndarray 1D",
+      "check": "isinstance(result, np.ndarray) and result.ndim == 1",
+      "hint": "result debe ser un arreglo 1D filtrado."
+    },
+    {
+      "name": "Contenido filtrado correcto",
+      "check": "np.allclose(np.sort(result), np.sort(np.array([134.5, 145.0, 126.0, 180.2])))",
+      "hint": "Esperaba los valores: [134.5, 145.0, 126.0, 180.2]."
+    }
+  ],
+  "hints": [
+    "Genera la máscara con `glucosa > 125.0`.",
+    "Indexa directamente: `result = glucosa[glucosa > 125.0]`."
+  ]
+}

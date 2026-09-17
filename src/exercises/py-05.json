@@ -1,0 +1,37 @@
+{
+  "id": "py-05",
+  "module": "python",
+  "title": "Contador de frecuencias manual con diccionario",
+  "difficulty": 2,
+  "concepts": [
+    "diccionarios",
+    "conteo",
+    "frecuencias",
+    "EDA"
+  ],
+  "session": 1,
+  "tag": "dicts",
+  "estimatedMinutes": 7,
+  "dataset": "inline",
+  "theory_md": "### Conteo de Frecuencias\nAntes de usar `value_counts()` de pandas, el conteo manual con diccionarios es un patrón fundamental para comprender cómo se agrupan datos categóricos:\n```python\nconteo = {}\nfor x in coleccion:\n    conteo[x] = conteo.get(x, 0) + 1\n```",
+  "prompt_md": "Dada la lista de diagnósticos médicos `diagnosticos`, construye en la variable `result` un diccionario donde las claves sean los nombres de diagnóstico y los valores sean la cantidad de veces que aparece cada uno.",
+  "setup_code": "diagnosticos = [\n    \"Gripe\", \"COVID-19\", \"Gripe\", \"Asma\", \"COVID-19\",\n    \"Gripe\", \"Diabetes\", \"Asma\", \"Gripe\", \"COVID-19\"\n]",
+  "starter_code": "diagnosticos = [\n    \"Gripe\", \"COVID-19\", \"Gripe\", \"Asma\", \"COVID-19\",\n    \"Gripe\", \"Diabetes\", \"Asma\", \"Gripe\", \"COVID-19\"\n]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Construye el diccionario de frecuencias en result\nresult = {}\n",
+  "solution_code": "result = {}\nfor diag in diagnosticos:\n    result[diag] = result.get(diag, 0) + 1",
+  "tests": [
+    {
+      "name": "result es un diccionario",
+      "check": "isinstance(result, dict)",
+      "hint": "result debe ser un dict."
+    },
+    {
+      "name": "Frecuencia exacta de cada diagnóstico",
+      "check": "result == {'Gripe': 4, 'COVID-19': 3, 'Asma': 2, 'Diabetes': 1}",
+      "hint": "Esperaba {'Gripe': 4, 'COVID-19': 3, 'Asma': 2, 'Diabetes': 1}."
+    }
+  ],
+  "hints": [
+    "Inicializa `result = {}`.",
+    "Itera sobre cada elemento: `result[diag] = result.get(diag, 0) + 1`."
+  ]
+}

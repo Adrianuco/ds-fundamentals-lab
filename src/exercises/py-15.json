@@ -1,0 +1,38 @@
+{
+  "id": "py-15",
+  "module": "python",
+  "title": "Filtrar diccionarios con múltiples condiciones",
+  "difficulty": 2,
+  "concepts": [
+    "filtrado",
+    "condicionales",
+    "None",
+    "comparaciones"
+  ],
+  "session": 2,
+  "tag": "warmup",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Comparaciones con None y Valores Lógicos\nEn Python, los valores nulos se representan con el singleton `None`.\nPara evaluarlos siempre usamos el operador de identidad: `x is None` o `x is not None`.\n```python\nif registro[\"salario\"] is not None and registro[\"salario\"] > 0:\n    procesar(registro)\n```",
+  "prompt_md": "Dada la lista `encuestados`, filtra en la variable `result` únicamente a las personas que cumplan **todas** estas condiciones:\n1. `edad >= 18`\n2. `ingreso is not None`\n3. `ingreso >= 10000.0`\n4. `ocupado == True`",
+  "setup_code": "encuestados = [\n    {\"id\": 1, \"edad\": 25, \"ocupado\": True, \"ingreso\": 14000.0},\n    {\"id\": 2, \"edad\": 17, \"ocupado\": True, \"ingreso\": 12000.0},\n    {\"id\": 3, \"edad\": 34, \"ocupado\": False, \"ingreso\": 0.0},\n    {\"id\": 4, \"edad\": 42, \"ocupado\": True, \"ingreso\": None},\n    {\"id\": 5, \"edad\": 29, \"ocupado\": True, \"ingreso\": 9500.0},\n    {\"id\": 6, \"edad\": 50, \"ocupado\": True, \"ingreso\": 21000.0}\n]",
+  "starter_code": "encuestados = [\n    {\"id\": 1, \"edad\": 25, \"ocupado\": True, \"ingreso\": 14000.0},\n    {\"id\": 2, \"edad\": 17, \"ocupado\": True, \"ingreso\": 12000.0},\n    {\"id\": 3, \"edad\": 34, \"ocupado\": False, \"ingreso\": 0.0},\n    {\"id\": 4, \"edad\": 42, \"ocupado\": True, \"ingreso\": None},\n    {\"id\": 5, \"edad\": 29, \"ocupado\": True, \"ingreso\": 9500.0},\n    {\"id\": 6, \"edad\": 50, \"ocupado\": True, \"ingreso\": 21000.0}\n]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Filtra los registros en result\nresult = []\n",
+  "solution_code": "result = [\n    e for e in encuestados\n    if e[\"edad\"] >= 18\n    and e[\"ingreso\"] is not None\n    and e[\"ingreso\"] >= 10000.0\n    and e[\"ocupado\"] is True\n]",
+  "tests": [
+    {
+      "name": "result contiene exactamente 2 personas que cumplen todo",
+      "check": "isinstance(result, list) and len(result) == 2",
+      "hint": "Solo 2 personas cumplen las 4 condiciones."
+    },
+    {
+      "name": "IDs correctos seleccionados (1 y 6)",
+      "check": "[e['id'] for e in result] == [1, 6]",
+      "hint": "Deben ser los registros con id 1 y 6."
+    }
+  ],
+  "hints": [
+    "Asegúrate de evaluar `e['ingreso'] is not None` antes de comparar `e['ingreso'] >= 10000.0`.",
+    "El encuestado 2 tiene 17 años (falla condición de edad).",
+    "El encuestado 5 tiene 9500 (falla condición de ingreso)."
+  ]
+}

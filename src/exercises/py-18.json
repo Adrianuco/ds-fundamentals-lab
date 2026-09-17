@@ -1,0 +1,32 @@
+{
+  "id": "py-18",
+  "module": "python",
+  "title": "Generar clave compuesta y detectar duplicados",
+  "difficulty": 2,
+  "concepts": [
+    "tuplas",
+    "duplicados",
+    "integridad de datos"
+  ],
+  "session": 2,
+  "tag": "dicts",
+  "estimatedMinutes": 7,
+  "dataset": "inline",
+  "theory_md": "### Detección de duplicados con llaves compuestas\nEn bases de datos, cuando no existe un ID único confiable, se usa una tupla como clave compuesta: `(nombre, fecha_nacimiento)`.\nLas tuplas son inmutables y por ende `hashable` (pueden ser claves de dict o miembros de set):\n```python\nvistos = set()\nfor r in registros:\n    clave = (r[\"nombre\"], r[\"fecha\"])\n    if clave in vistos:\n        print(\"Duplicado!\")\n    vistos.add(clave)\n```",
+  "prompt_md": "Dada la lista `transacciones`, identifica las transacciones duplicadas basándote en la combinación de `(\"usuario\", \"monto\", \"fecha\")`.\nGuarda en la variable `result` únicamente la lista de los IDs de aquellas transacciones que son una **segunda o posterior aparición** (es decir, los duplicados que deben descartarse).",
+  "setup_code": "transacciones = [\n    {\"id\": \"TX-1\", \"usuario\": \"U10\", \"monto\": 100, \"fecha\": \"2023-01-01\"},\n    {\"id\": \"TX-2\", \"usuario\": \"U20\", \"monto\": 250, \"fecha\": \"2023-01-01\"},\n    {\"id\": \"TX-3\", \"usuario\": \"U10\", \"monto\": 100, \"fecha\": \"2023-01-01\"}, # Duplicado de TX-1\n    {\"id\": \"TX-4\", \"usuario\": \"U30\", \"monto\": 400, \"fecha\": \"2023-01-02\"},\n    {\"id\": \"TX-5\", \"usuario\": \"U20\", \"monto\": 250, \"fecha\": \"2023-01-01\"}  # Duplicado de TX-2\n]",
+  "starter_code": "transacciones = [\n    {\"id\": \"TX-1\", \"usuario\": \"U10\", \"monto\": 100, \"fecha\": \"2023-01-01\"},\n    {\"id\": \"TX-2\", \"usuario\": \"U20\", \"monto\": 250, \"fecha\": \"2023-01-01\"},\n    {\"id\": \"TX-3\", \"usuario\": \"U10\", \"monto\": 100, \"fecha\": \"2023-01-01\"}, # Duplicado de TX-1\n    {\"id\": \"TX-4\", \"usuario\": \"U30\", \"monto\": 400, \"fecha\": \"2023-01-02\"},\n    {\"id\": \"TX-5\", \"usuario\": \"U20\", \"monto\": 250, \"fecha\": \"2023-01-01\"}  # Duplicado de TX-2\n]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Identifica los IDs duplicados en result\nresult = []\n",
+  "solution_code": "vistos = set()\nresult = []\nfor tx in transacciones:\n    clave = (tx[\"usuario\"], tx[\"monto\"], tx[\"fecha\"])\n    if clave in vistos:\n        result.append(tx[\"id\"])\n    else:\n        vistos.add(clave)",
+  "tests": [
+    {
+      "name": "result contiene los IDs duplicados",
+      "check": "result == ['TX-3', 'TX-5']",
+      "hint": "Esperaba ['TX-3', 'TX-5']."
+    }
+  ],
+  "hints": [
+    "Usa un conjunto `vistos = set()`.",
+    "Para cada transacción, genera la tupla `(tx['usuario'], tx['monto'], tx['fecha'])`.",
+    "Si ya está en `vistos`, agrega `tx['id']` a `result`; de lo contrario agrégala a `vistos`."
+  ]
+}

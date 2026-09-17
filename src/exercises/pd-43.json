@@ -1,0 +1,35 @@
+{
+  "id": "pd-43",
+  "module": "pandas",
+  "title": "Capstone 3: Matriz de Costo Promedio por Diagnóstico y Zona",
+  "difficulty": 3,
+  "concepts": [
+    "pivot_table",
+    "analisis multidimensional",
+    "capstone"
+  ],
+  "session": 10,
+  "tag": "reshape",
+  "estimatedMinutes": 7,
+  "dataset": "pacientes.csv",
+  "theory_md": "### Tabulación Cruzada de Costos\nPermite analizar la dispersión del gasto médico según la geografía y la condición clínica del paciente.",
+  "prompt_md": "A partir de `df_enriquecido`, genera una tabla pivote (`pivot_table`) que presente:\n- Filas: `\"diagnostico\"`\n- Columnas: `\"zona\"` (`rural` y `urbana`)\n- Valores: promedio de `\"costo\"` (`aggfunc=\"mean\"`)\n- Relleno de nulos con `0.0` (`fill_value=0.0`)\n- Redondeo a 2 decimales.\nGuarda la tabla pivote resultante en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\nclean_df = df_pac.copy()\nclean_df[\"costo\"] = clean_df[\"costo\"].astype(str).str.replace(\",\", \"\", regex=False).astype(float)\nclean_df[\"fecha_consulta\"] = pd.to_datetime(clean_df[\"fecha_consulta\"], format=\"mixed\")\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\ndf_enriquecido = pd.merge(clean_df, df_mun, on=\"municipio\", how=\"inner\")",
+  "starter_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\nclean_df = df_pac.copy()\nclean_df[\"costo\"] = clean_df[\"costo\"].astype(str).str.replace(\",\", \"\", regex=False).astype(float)\nclean_df[\"fecha_consulta\"] = pd.to_datetime(clean_df[\"fecha_consulta\"], format=\"mixed\")\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\ndf_enriquecido = pd.merge(clean_df, df_mun, on=\"municipio\", how=\"inner\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Genera la tabla pivote de costo medio en result\nresult = None\n",
+  "solution_code": "result = df_enriquecido.pivot_table(\n    index=\"diagnostico\",\n    columns=\"zona\",\n    values=\"costo\",\n    aggfunc=\"mean\",\n    fill_value=0.0\n).round(2)",
+  "tests": [
+    {
+      "name": "result es un DataFrame pivote con columnas de zona",
+      "check": "isinstance(result, pd.DataFrame) and set(result.columns).issubset({'rural', 'urbana'})",
+      "hint": "Las columnas deben ser 'rural' y 'urbana'."
+    },
+    {
+      "name": "Valores positivos de costo",
+      "check": "(result >= 0).all().all()",
+      "hint": "Todos los costos promedio deben ser positivos."
+    }
+  ],
+  "hints": [
+    "Usa `df_enriquecido.pivot_table(index='diagnostico', columns='zona', values='costo', aggfunc='mean', fill_value=0.0).round(2)`."
+  ]
+}

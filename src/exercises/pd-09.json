@@ -1,0 +1,42 @@
+{
+  "id": "pd-09",
+  "module": "pandas",
+  "title": "Reporte de calidad de datos: % de nulos por columna",
+  "difficulty": 2,
+  "concepts": [
+    "isna",
+    "mean",
+    "calidad de datos",
+    "missing"
+  ],
+  "session": 6,
+  "tag": "missing",
+  "estimatedMinutes": 6,
+  "dataset": "pacientes.csv",
+  "theory_md": "### Diagnóstico de Nulos\nEn pandas, `.isna().mean() * 100` calcula el porcentaje exacto de valores faltantes por columna:\n```python\npct_nulos = df.isna().mean() * 100\n```",
+  "prompt_md": "Dado el DataFrame de pacientes `df_pac`, calcula en la variable `result` una Serie con el **porcentaje de valores nulos por columna** (redondeado a 2 decimales con `.round(2)`), ordenado de mayor a menor porcentaje.",
+  "setup_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")",
+  "starter_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Calcula el porcentaje de nulos por columna en result\nresult = None\n",
+  "solution_code": "result = (df_pac.isna().mean() * 100).round(2).sort_values(ascending=False)",
+  "tests": [
+    {
+      "name": "result es una Serie con todas las columnas del DataFrame",
+      "check": "isinstance(result, pd.Series) and len(result) == df_pac.shape[1]",
+      "hint": "result debe ser una Serie de pandas con una fila por columna."
+    },
+    {
+      "name": "Orden descendente verificado",
+      "check": "result.iloc[0] >= result.iloc[-1]",
+      "hint": "Los valores deben estar ordenados de mayor a menor."
+    },
+    {
+      "name": "edad y seguro tienen valores > 0",
+      "check": "result['edad'] > 0 and result['seguro'] > 0",
+      "hint": "Tanto edad como seguro tienen valores nulos intencionales en el dataset."
+    }
+  ],
+  "hints": [
+    "Usa `(df_pac.isna().mean() * 100)`.",
+    "Encadena `.round(2).sort_values(ascending=False)`."
+  ]
+}

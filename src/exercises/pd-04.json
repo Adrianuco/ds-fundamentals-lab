@@ -1,0 +1,35 @@
+{
+  "id": "pd-04",
+  "module": "pandas",
+  "title": "Selección por etiqueta: loc",
+  "difficulty": 2,
+  "concepts": [
+    "loc",
+    "etiquetas",
+    "seleccion de columnas"
+  ],
+  "session": 5,
+  "tag": "indexing",
+  "estimatedMinutes": 5,
+  "dataset": "municipios.csv",
+  "theory_md": "### Selección por etiqueta con loc\n`.loc[filas, columnas]` opera con las etiquetas del índice y los nombres de las columnas.\n¡Cuidado! A diferencia de iloc, los rangos de etiquetas en loc son **inclusivos** en ambos extremos:\n```python\ndf.loc[0:3, [\"municipio\", \"poblacion\"]] # Filas con etiqueta 0, 1, 2 y 3 inclusive\n```",
+  "prompt_md": "Dado el DataFrame `df_mun`, utiliza `.loc` para extraer en la variable `result` las filas con índice de etiqueta de `2` a `6` (inclusive ambas), y únicamente las columnas `\"municipio\"` y `\"poblacion\"`.",
+  "setup_code": "import pandas as pd\ndf_mun = pd.read_csv(\"/data/municipios.csv\")",
+  "starter_code": "import pandas as pd\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Extrae con .loc en result\nresult = None\n",
+  "solution_code": "result = df_mun.loc[2:6, [\"municipio\", \"poblacion\"]]",
+  "tests": [
+    {
+      "name": "result contiene exactamente 5 filas (2 a 6 inclusivo)",
+      "check": "isinstance(result, pd.DataFrame) and len(result) == 5",
+      "hint": "En loc, 2:6 incluye las etiquetas 2, 3, 4, 5 y 6 (5 filas)."
+    },
+    {
+      "name": "Columnas correctas seleccionadas",
+      "check": "list(result.columns) == ['municipio', 'poblacion']",
+      "hint": "Las columnas deben ser ['municipio', 'poblacion']."
+    }
+  ],
+  "hints": [
+    "Usa `df_mun.loc[2:6, ['municipio', 'poblacion']]`."
+  ]
+}

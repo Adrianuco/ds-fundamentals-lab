@@ -1,0 +1,37 @@
+{
+  "id": "pd-01",
+  "module": "pandas",
+  "title": "Creación de Series y DataFrames desde diccionarios",
+  "difficulty": 1,
+  "concepts": [
+    "Series",
+    "DataFrame",
+    "index",
+    "dtypes"
+  ],
+  "session": 5,
+  "tag": "warmup",
+  "estimatedMinutes": 5,
+  "dataset": "inline",
+  "theory_md": "### Series y DataFrames\n- `pd.Series`: Arreglo unidimensional etiquetado (columna única con índice).\n- `pd.DataFrame`: Tabla bidimensional de datos estructurados compuesta por varias Series que comparten el mismo índice.\n```python\ns = pd.Series([10, 20, 30], name=\"ventas\")\ndf = pd.DataFrame({\n    \"producto\": [\"A\", \"B\", \"C\"],\n    \"precio\": [15.5, 20.0, 9.99]\n})\n```",
+  "prompt_md": "Crea un DataFrame de pandas a partir de las listas dadas con tres columnas: `\"municipio\"`, `\"poblacion\"` y `\"zona\"`.\nAsigna el DataFrame resultante a la variable `df`, y en la variable `result` guarda una tupla con `(df.shape, list(df.columns))`.",
+  "setup_code": "import pandas as pd\nmunicipios = [\"Managua\", \"Leon\", \"Granada\"]\npoblaciones = [1050000, 210000, 130000]\nzonas = [\"urbana\", \"urbana\", \"rural\"]",
+  "starter_code": "import pandas as pd\nmunicipios = [\"Managua\", \"Leon\", \"Granada\"]\npoblaciones = [1050000, 210000, 130000]\nzonas = [\"urbana\", \"urbana\", \"rural\"]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Crea df y extrae la tupla en result\ndf = None\nresult = None\n",
+  "solution_code": "df = pd.DataFrame({\n    \"municipio\": municipios,\n    \"poblacion\": poblaciones,\n    \"zona\": zonas\n})\nresult = (df.shape, list(df.columns))",
+  "tests": [
+    {
+      "name": "df es un DataFrame con 3 filas y 3 columnas",
+      "check": "isinstance(df, pd.DataFrame) and df.shape == (3, 3)",
+      "hint": "df debe tener 3 filas y 3 columnas."
+    },
+    {
+      "name": "result contiene la tupla correcta de metadatos",
+      "check": "result == ((3, 3), ['municipio', 'poblacion', 'zona'])",
+      "hint": "Esperaba ((3, 3), ['municipio', 'poblacion', 'zona'])."
+    }
+  ],
+  "hints": [
+    "Pasa un diccionario a `pd.DataFrame({'municipio': municipios, ...})`.",
+    "Asigna a `result = (df.shape, list(df.columns))`."
+  ]
+}

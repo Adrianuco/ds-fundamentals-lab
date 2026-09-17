@@ -1,0 +1,32 @@
+{
+  "id": "pd-22",
+  "module": "pandas",
+  "title": "Cálculo de brecha salarial por sexo con groupby",
+  "difficulty": 2,
+  "concepts": [
+    "groupby",
+    "brecha",
+    "agregacion"
+  ],
+  "session": 7,
+  "tag": "groupby",
+  "estimatedMinutes": 6,
+  "dataset": "encuesta_empleo.csv",
+  "theory_md": "### Comparación entre Grupos\nPodemos comparar métricas entre subpoblaciones indexando directamente la Serie resultante de un groupby:\n```python\nmedias = df.groupby(\"grupo\")[\"valor\"].mean()\ndiferencia = medias[\"A\"] - medias[\"B\"]\n```",
+  "prompt_md": "En la encuesta de empleo `df_emp`, filtra únicamente a las personas ocupadas (`ocupado == 1`).\nCalcula el ingreso promedio de los hombres (`\"M\"`) y de las mujeres (`\"F\"`).\nGuarda en la variable `result` la diferencia absoluta (`abs(promedio_M - promedio_F)`) redondeada a 2 decimales.",
+  "setup_code": "import pandas as pd\ndf_emp = pd.read_csv(\"/data/encuesta_empleo.csv\")",
+  "starter_code": "import pandas as pd\ndf_emp = pd.read_csv(\"/data/encuesta_empleo.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Calcula la diferencia de ingresos promedio entre sexos en result\nresult = 0.0\n",
+  "solution_code": "ocupados = df_emp[df_emp[\"ocupado\"] == 1]\npromedios = ocupados.groupby(\"sexo\")[\"ingreso\"].mean()\nresult = round(float(abs(promedios[\"M\"] - promedios[\"F\"])), 2)",
+  "tests": [
+    {
+      "name": "result es un float positivo",
+      "check": "isinstance(result, float) and result >= 0.0",
+      "hint": "result debe ser un float mayor o igual a 0."
+    }
+  ],
+  "hints": [
+    "Filtra `df_emp[df_emp['ocupado'] == 1]`.",
+    "Agrupa: `.groupby('sexo')['ingreso'].mean()`.",
+    "Calcula `round(float(abs(promedios['M'] - promedios['F'])), 2)`."
+  ]
+}

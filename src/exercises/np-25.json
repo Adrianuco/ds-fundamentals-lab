@@ -1,0 +1,37 @@
+{
+  "id": "np-25",
+  "module": "numpy",
+  "title": "Filtrar observaciones por percentil (percentile)",
+  "difficulty": 2,
+  "concepts": [
+    "np.percentile",
+    "filtrado",
+    "estadistica"
+  ],
+  "session": 4,
+  "tag": "math",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Percentiles en NumPy\n`np.percentile(arr, q)` calcula el percentil (q) (de 0 a 100):\n```python\np90 = np.percentile(datos, 90)\ntop_10_porciento = datos[datos > p90]\n```",
+  "prompt_md": "Dada la matriz de clientes `clientes` (filas = clientes, columna 0 = facturación total, columna 1 = antigüedad en meses), selecciona en la variable `result` todas las filas correspondientes a clientes cuya facturación (columna 0) sea **estrictamente mayor al percentil 75** de dicha columna.",
+  "setup_code": "import numpy as np\nclientes = np.array([\n    [150.0, 12],\n    [320.0, 24],\n    [85.0, 6],\n    [410.0, 36],\n    [190.0, 18],\n    [520.0, 48],\n    [210.0, 14],\n    [380.0, 30]\n])",
+  "starter_code": "import numpy as np\nclientes = np.array([\n    [150.0, 12],\n    [320.0, 24],\n    [85.0, 6],\n    [410.0, 36],\n    [190.0, 18],\n    [520.0, 48],\n    [210.0, 14],\n    [380.0, 30]\n])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Selecciona las filas con col 0 > percentil 75 en result\nresult = None\n",
+  "solution_code": "col0 = clientes[:, 0]\np75 = np.percentile(col0, 75)\nresult = clientes[col0 > p75]",
+  "tests": [
+    {
+      "name": "result es un arreglo 2D",
+      "check": "isinstance(result, np.ndarray) and result.ndim == 2",
+      "hint": "result debe ser un arreglo 2D con las observaciones filtradas."
+    },
+    {
+      "name": "Se seleccionan exactamente las observaciones del percentil superior",
+      "check": "len(result) == 2 and np.array_equal(result[:, 0], np.array([410.0, 520.0]))",
+      "hint": "El percentil 75 es 387.5; las facturaciones mayores son 410.0 y 520.0."
+    }
+  ],
+  "hints": [
+    "Obtén la columna 0 con `col0 = clientes[:, 0]`.",
+    "Calcula el umbral con `p75 = np.percentile(col0, 75)`.",
+    "Filtra la matriz completa: `result = clientes[col0 > p75]`."
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "np-12",
+  "module": "numpy",
+  "title": "Transposición de matrices: .T y .transpose()",
+  "difficulty": 2,
+  "concepts": [
+    "transposicion",
+    "algebra lineal",
+    "forma"
+  ],
+  "session": 3,
+  "tag": "math",
+  "estimatedMinutes": 5,
+  "dataset": "inline",
+  "theory_md": "### Transposición de Arrays\nTransponer intercambia los ejes (filas pasan a ser columnas y viceversa):\n```python\nM = np.array([[1, 2, 3], [4, 5, 6]]) # shape (2, 3)\nM_T = M.T                             # shape (3, 2)\n```",
+  "prompt_md": "Dada la matriz de puntuaciones `calificaciones` (filas = estudiantes, columnas = exámenes), calcula en la variable `result` su transpuesta, de manera que las filas representen exámenes y las columnas estudiantes.",
+  "setup_code": "import numpy as np\ncalificaciones = np.array([\n    [85, 90, 78],\n    [92, 88, 95],\n    [70, 75, 80],\n    [88, 85, 89]\n])",
+  "starter_code": "import numpy as np\ncalificaciones = np.array([\n    [85, 90, 78],\n    [92, 88, 95],\n    [70, 75, 80],\n    [88, 85, 89]\n])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Transpón calificaciones en result\nresult = None\n",
+  "solution_code": "result = calificaciones.T",
+  "tests": [
+    {
+      "name": "Dimensiones invertidas a (3, 4)",
+      "check": "isinstance(result, np.ndarray) and result.shape == (3, 4)",
+      "hint": "La transpuesta debe tener forma (3, 4)."
+    },
+    {
+      "name": "Primera fila corresponde al primer examen de los 4 alumnos",
+      "check": "np.array_equal(result[0], np.array([85, 92, 70, 88]))",
+      "hint": "Esperaba [85, 92, 70, 88]."
+    }
+  ],
+  "hints": [
+    "Usa `calificaciones.T` o `np.transpose(calificaciones)`."
+  ]
+}

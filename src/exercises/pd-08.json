@@ -1,0 +1,41 @@
+{
+  "id": "pd-08",
+  "module": "pandas",
+  "title": "Ordenar valores con sort_values de múltiples columnas",
+  "difficulty": 2,
+  "concepts": [
+    "sort_values",
+    "ascending",
+    "ordenamiento"
+  ],
+  "session": 5,
+  "tag": "warmup",
+  "estimatedMinutes": 6,
+  "dataset": "municipios.csv",
+  "theory_md": "### Ordenamiento con .sort_values()\nPermite ordenar por una o más columnas con distintas direcciones:\n```python\ndf_ord = df.sort_values(\n    by=[\"departamento\", \"poblacion\"],\n    ascending=[True, False]\n)\n```",
+  "prompt_md": "Dado el DataFrame `df_mun`, ordénalo en la variable `result` primero por `\"zona\"` alfabéticamente (ascendente) y luego por `\"poblacion\"` de mayor a menor (descendente).",
+  "setup_code": "import pandas as pd\ndf_mun = pd.read_csv(\"/data/municipios.csv\")",
+  "starter_code": "import pandas as pd\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Ordena df_mun según las especificaciones en result\nresult = None\n",
+  "solution_code": "result = df_mun.sort_values(by=[\"zona\", \"poblacion\"], ascending=[True, False])",
+  "tests": [
+    {
+      "name": "result conserva las 15 filas",
+      "check": "isinstance(result, pd.DataFrame) and len(result) == 15",
+      "hint": "El DataFrame ordenado debe tener 15 filas."
+    },
+    {
+      "name": "Primer registro es el municipio rural más poblado",
+      "check": "result.iloc[0]['zona'] == 'rural' and result.iloc[0]['municipio'] == 'Jinotega'",
+      "hint": "Al ser 'rural' antes que 'urbana' alfabéticamente, el primer registro debe ser rural con máxima población (Jinotega)."
+    },
+    {
+      "name": "Último registro es el municipio urbano menos poblado",
+      "check": "result.iloc[-1]['zona'] == 'urbana' and result.iloc[-1]['municipio'] == 'Granada'",
+      "hint": "El último registro debe ser Granada (el de menor población entre los urbanos)."
+    }
+  ],
+  "hints": [
+    "Usa `by=['zona', 'poblacion']`.",
+    "Pasa `ascending=[True, False]`."
+  ]
+}

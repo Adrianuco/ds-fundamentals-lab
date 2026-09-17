@@ -1,0 +1,36 @@
+{
+  "id": "np-31",
+  "module": "numpy",
+  "title": "Filtrar filas donde col0 > media y col1 < mediana",
+  "difficulty": 3,
+  "concepts": [
+    "filtrado 2D",
+    "axis",
+    "comparaciones logicas"
+  ],
+  "session": 4,
+  "tag": "indexing",
+  "estimatedMinutes": 7,
+  "dataset": "inline",
+  "theory_md": "### Filtrado Multivariable de Matrices\nPodemos combinar máscaras booleanas construidas a partir de diferentes columnas de una matriz 2D:\n```python\ncol0 = M[:, 0]\ncol1 = M[:, 1]\nmask = (col0 > col0.mean()) & (col1 < np.median(col1))\nfiltrada = M[mask]\n```",
+  "prompt_md": "Dada la matriz de evaluaciones de sucursales `metricas` (columna 0 = volumen de ventas, columna 1 = reclamos de clientes), filtra y extrae en la variable `result` todas las filas que representen sucursales de alto rendimiento:\n- Volumen de ventas (`col 0`) **estrictamente mayor** que la media de la columna 0.\n- Reclamos (`col 1`) **estrictamente menor o igual** que la mediana de la columna 1.",
+  "setup_code": "import numpy as np\nmetricas = np.array([\n    [100.0, 15.0],\n    [250.0, 8.0],\n    [80.0, 22.0],\n    [320.0, 5.0],\n    [180.0, 12.0],\n    [210.0, 18.0]\n])",
+  "starter_code": "import numpy as np\nmetricas = np.array([\n    [100.0, 15.0],\n    [250.0, 8.0],\n    [80.0, 22.0],\n    [320.0, 5.0],\n    [180.0, 12.0],\n    [210.0, 18.0]\n])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Aplica el filtro multivariable en result\nresult = None\n",
+  "solution_code": "col0 = metricas[:, 0]\ncol1 = metricas[:, 1]\ncond1 = col0 > col0.mean()\ncond2 = col1 <= np.median(col1)\nresult = metricas[cond1 & cond2]",
+  "tests": [
+    {
+      "name": "result contiene 2 filas que cumplen ambas condiciones",
+      "check": "isinstance(result, np.ndarray) and result.shape == (2, 2)",
+      "hint": "Esperaba 2 filas filtradas."
+    },
+    {
+      "name": "Sucursales correctas seleccionadas",
+      "check": "np.array_equal(result, np.array([[250.0, 8.0], [320.0, 5.0]]))",
+      "hint": "Las filas son [250.0, 8.0] y [320.0, 5.0]."
+    }
+  ],
+  "hints": [
+    "Calcula `col0.mean()` y `np.median(col1)`.",
+    "Usa `metricas[(col0 > col0.mean()) & (col1 <= np.median(col1))]`."
+  ]
+}

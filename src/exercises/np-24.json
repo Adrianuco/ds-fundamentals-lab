@@ -1,0 +1,37 @@
+{
+  "id": "np-24",
+  "module": "numpy",
+  "title": "Métricas de evaluación: Accuracy y MSE a mano",
+  "difficulty": 2,
+  "concepts": [
+    "accuracy",
+    "mse",
+    "metricas",
+    "evaluacion"
+  ],
+  "session": 4,
+  "tag": "math",
+  "estimatedMinutes": 7,
+  "dataset": "inline",
+  "theory_md": "### Cálculo de Métricas en Machine Learning\n- **Accuracy**: Proporción de predicciones idénticas a las etiquetas reales:\n[\text{Acc} = \frac{1}{N} sum (hat{y}_i == y_i)]\n- **Error Cuadrático Medio (MSE)**:\n[\text{MSE} = \frac{1}{N} sum (y_i - hat{y}_i)^2]\n```python\nacc = (y_pred == y_true).mean()\nmse = np.mean((y_true - y_pred)**2)\n```",
+  "prompt_md": "Dados los arreglos de valores reales `y_real` y valores predichos por un modelo de regresión `y_pred`:\nCalcula el **MSE** (Error Cuadrático Medio) redondeado a 3 decimales y guárdalo en la variable `result`.",
+  "setup_code": "import numpy as np\ny_real = np.array([12.5, 14.0, 18.2, 9.8, 15.6, 21.0])\ny_pred = np.array([11.8, 14.5, 17.5, 10.2, 16.0, 19.8])",
+  "starter_code": "import numpy as np\ny_real = np.array([12.5, 14.0, 18.2, 9.8, 15.6, 21.0])\ny_pred = np.array([11.8, 14.5, 17.5, 10.2, 16.0, 19.8])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Calcula el MSE y asígnalo en result\nresult = 0.0\n",
+  "solution_code": "result = round(float(np.mean((y_real - y_pred)**2)), 3)",
+  "tests": [
+    {
+      "name": "result es un float",
+      "check": "isinstance(result, float)",
+      "hint": "result debe ser un float."
+    },
+    {
+      "name": "Valor exacto de MSE",
+      "check": "abs(result - 0.498) < 1e-2",
+      "hint": "Esperaba MSE ≈ 0.498."
+    }
+  ],
+  "hints": [
+    "Calcula las diferencias: `diferencias = y_real - y_pred`.",
+    "Eleva al cuadrado y calcula la media: `np.mean(diferencias**2)`."
+  ]
+}

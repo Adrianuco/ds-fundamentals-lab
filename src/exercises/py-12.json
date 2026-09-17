@@ -1,0 +1,38 @@
+{
+  "id": "py-12",
+  "module": "python",
+  "title": "CSV mental 1: Parsear texto delimitado por comas",
+  "difficulty": 2,
+  "concepts": [
+    "csv sin pandas",
+    "split",
+    "listas",
+    "parsing"
+  ],
+  "session": 2,
+  "tag": "strings",
+  "estimatedMinutes": 7,
+  "dataset": "inline",
+  "theory_md": "### Un archivo CSV en memoria\nUn archivo CSV es texto con saltos de línea (`\\n`) y separadores de campos (`,`).\nEntender cómo procesar un CSV con Python estándar afianza la comprensión de lo que hace `pd.read_csv()`:\n```python\nlineas = texto_csv.strip().split(\"\\n\")\nencabezados = lineas[0].split(\",\")\nfilas = [linea.split(\",\") for linea in lineas[1:]]\n```",
+  "prompt_md": "Dado el string `csv_data` que simula un archivo CSV de pacientes, conviértelo en la variable `result`: una lista de diccionarios, donde cada fila es un diccionario con claves dadas por el encabezado (`\"id\"`, `\"edad\"`, `\"ciudad\"`). Convierte el campo `edad` a entero (`int`).",
+  "setup_code": "csv_data = \"\"\"id,edad,ciudad\nP01,24,Managua\nP02,45,Leon\nP03,19,Granada\nP04,52,Matagalpa\"\"\"",
+  "starter_code": "csv_data = \"\"\"id,edad,ciudad\nP01,24,Managua\nP02,45,Leon\nP03,19,Granada\nP04,52,Matagalpa\"\"\"\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Procesa csv_data y crea la lista de dicts en result\nresult = []\n",
+  "solution_code": "lineas = csv_data.strip().split(\"\\n\")\nheaders = lineas[0].split(\",\")\nresult = []\nfor l in lineas[1:]:\n    partes = l.split(\",\")\n    row_dict = {\n        headers[0]: partes[0],\n        headers[1]: int(partes[1]),\n        headers[2]: partes[2]\n    }\n    result.append(row_dict)",
+  "tests": [
+    {
+      "name": "result contiene 4 registros",
+      "check": "isinstance(result, list) and len(result) == 4",
+      "hint": "La lista debe contener las 4 filas de datos (sin el encabezado)."
+    },
+    {
+      "name": "Estructura de diccionarios y tipos de datos correctos",
+      "check": "result[1] == {'id': 'P02', 'edad': 45, 'ciudad': 'Leon'}",
+      "hint": "Verifica que las claves sean 'id', 'edad', 'ciudad' y que edad sea entero."
+    }
+  ],
+  "hints": [
+    "Separa con `.strip().split('\\n')` para obtener cada renglón.",
+    "El primer renglón contiene los nombres de las columnas.",
+    "Usa `int(partes[1])` para convertir la edad."
+  ]
+}

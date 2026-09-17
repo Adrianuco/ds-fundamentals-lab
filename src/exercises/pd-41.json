@@ -1,0 +1,37 @@
+{
+  "id": "pd-41",
+  "module": "pandas",
+  "title": "Capstone 1: Pipeline completo de limpieza de pacientes",
+  "difficulty": 3,
+  "concepts": [
+    "limpieza integral",
+    "pipeline",
+    "to_numeric",
+    "to_datetime"
+  ],
+  "session": 10,
+  "tag": "missing",
+  "estimatedMinutes": 8,
+  "dataset": "pacientes.csv",
+  "theory_md": "### Pipelines de Limpieza en Producción\nEn un caso real, la limpieza de un dataset involucra:\n1. Parsear fechas heterogéneas.\n2. Limpiar símbolos monetarios y comas.\n3. Imputar o remover nulos según criterios de negocio.\n4. Estandarizar strings.",
+  "prompt_md": "Crea una copia de `df_pac` y aplica el siguiente pipeline de saneamiento:\n1. Convierte `\"costo\"` a float limpiando comas: `df[\"costo\"].astype(str).str.replace(\",\", \"\", regex=False).astype(float)`.\n2. Convierte `\"fecha_consulta\"` a datetime con `pd.to_datetime(..., format=\"mixed\")`.\n3. Imputa los nulos de `\"edad\"` con la mediana de `edad`.\n4. Rellena los nulos de `\"seguro\"` con la etiqueta `\"No Especificado\"`.\nGuarda el DataFrame completamente limpio en la variable `clean_df`, y en `result` el número de nulos totales restantes en todo el DataFrame (`int(clean_df.isna().sum().sum())`).",
+  "setup_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")",
+  "starter_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Construye clean_df y asigna total de nulos en result\nclean_df = None\nresult = -1\n",
+  "solution_code": "clean_df = df_pac.copy()\nclean_df[\"costo\"] = clean_df[\"costo\"].astype(str).str.replace(\",\", \"\", regex=False).astype(float)\nclean_df[\"fecha_consulta\"] = pd.to_datetime(clean_df[\"fecha_consulta\"], format=\"mixed\")\nclean_df[\"edad\"] = clean_df[\"edad\"].fillna(clean_df[\"edad\"].median())\nclean_df[\"seguro\"] = clean_df[\"seguro\"].fillna(\"No Especificado\")\nresult = int(clean_df.isna().sum().sum())",
+  "tests": [
+    {
+      "name": "result es 0 (cero nulos restantes)",
+      "check": "result == 0",
+      "hint": "No debe quedar ningún valor nulo en clean_df."
+    },
+    {
+      "name": "Tipos de datos correctos en clean_df",
+      "check": "str(clean_df['costo'].dtype).startswith('float') and 'datetime64' in str(clean_df['fecha_consulta'].dtype)",
+      "hint": "costo debe ser float y fecha_consulta datetime."
+    }
+  ],
+  "hints": [
+    "Aplica cada paso sobre una copia `clean_df = df_pac.copy()`.",
+    "Calcula `result = int(clean_df.isna().sum().sum())`."
+  ]
+}

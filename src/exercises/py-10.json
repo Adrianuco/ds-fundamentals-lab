@@ -1,0 +1,37 @@
+{
+  "id": "py-10",
+  "module": "python",
+  "title": "Bucketizar o categorizar valores numéricos",
+  "difficulty": 2,
+  "concepts": [
+    "condicionales",
+    "funciones",
+    "categorizacion",
+    "feature engineering"
+  ],
+  "session": 1,
+  "tag": "functions",
+  "estimatedMinutes": 7,
+  "dataset": "inline",
+  "theory_md": "### Discretización manual (Binning)\nSegmentar variables continuas en categorías discretas es una tarea común en preprocesamiento:\n```python\ndef clasificar_temperatura(temp):\n    if temp < 15:\n        return \"Frio\"\n    elif temp <= 28:\n        return \"Templado\"\n    else:\n        return \"Calido\"\n```",
+  "prompt_md": "Dada la lista de edades `edades_pacientes`, crea en la variable `result` una lista con la categoría de cada paciente siguiendo estas reglas:\n- Menor a 18: `\"Pediatrico\"`\n- Entre 18 y 59 (inclusive): `\"Adulto\"`\n- 60 o más: `\"Adulto Mayor\"`",
+  "setup_code": "edades_pacientes = [8, 18, 45, 60, 72, 17, 33, 59, 81]",
+  "starter_code": "edades_pacientes = [8, 18, 45, 60, 72, 17, 33, 59, 81]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Genera la lista de categorías en result\nresult = []\n",
+  "solution_code": "def categorizar(edad):\n    if edad < 18:\n        return \"Pediatrico\"\n    elif edad <= 59:\n        return \"Adulto\"\n    else:\n        return \"Adulto Mayor\"\n\nresult = [categorizar(e) for e in edades_pacientes]",
+  "tests": [
+    {
+      "name": "result contiene 9 elementos",
+      "check": "isinstance(result, list) and len(result) == 9",
+      "hint": "result debe ser una lista de 9 categorías."
+    },
+    {
+      "name": "Categorías asignadas correctamente según umbrales",
+      "check": "result == ['Pediatrico', 'Adulto', 'Adulto', 'Adulto Mayor', 'Adulto Mayor', 'Pediatrico', 'Adulto', 'Adulto', 'Adulto Mayor']",
+      "hint": "Verifica los límites: 18 es Adulto, 59 es Adulto, 60 es Adulto Mayor."
+    }
+  ],
+  "hints": [
+    "Define una función auxiliar o usa expresiones if/else anidadas.",
+    "Aplica la función sobre cada edad en una comprensión de lista."
+  ]
+}

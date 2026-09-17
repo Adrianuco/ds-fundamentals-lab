@@ -1,0 +1,37 @@
+{
+  "id": "py-17",
+  "module": "python",
+  "title": "Parsear fechas sin librerías externas",
+  "difficulty": 2,
+  "concepts": [
+    "strings",
+    "fechas",
+    "split",
+    "formato"
+  ],
+  "session": 2,
+  "tag": "strings",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Normalización de formatos de fecha\nEn datos heterogéneos es común encontrar fechas en formato latino (`DD/MM/YYYY`) que deben convertirse al estándar ISO (`YYYY-MM-DD`):\n```python\nfecha_latina = \"15/09/2023\"\nd, m, y = fecha_latina.split(\"/\")\niso = f\"{y}-{m}-{d}\"\n```",
+  "prompt_md": "Dada la lista de fechas mixtas `fechas_raw`, estandarízalas en la variable `result` al formato ISO `\"YYYY-MM-DD\"`.\nSi la fecha ya viene en formato ISO (`\"-\"` como separador), mantenla igual. Si viene separada por `\"/\"` (`DD/MM/YYYY`), inviértela a `YYYY-MM-DD`. Asegúrate de que días y meses tengan 2 dígitos.",
+  "setup_code": "fechas_raw = [\"2023-05-12\", \"04/11/2022\", \"2021-12-01\", \"25/01/2023\"]",
+  "starter_code": "fechas_raw = [\"2023-05-12\", \"04/11/2022\", \"2021-12-01\", \"25/01/2023\"]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Normaliza las fechas a formato YYYY-MM-DD en result\nresult = []\n",
+  "solution_code": "result = []\nfor f in fechas_raw:\n    if \"/\" in f:\n        d, m, y = f.split(\"/\")\n        result.append(f\"{y}-{int(m):02d}-{int(d):02d}\")\n    else:\n        result.append(f)",
+  "tests": [
+    {
+      "name": "result contiene 4 fechas",
+      "check": "isinstance(result, list) and len(result) == 4",
+      "hint": "result debe contener las 4 fechas normalizadas."
+    },
+    {
+      "name": "Todas las fechas están en formato YYYY-MM-DD",
+      "check": "result == ['2023-05-12', '2022-11-04', '2021-12-01', '2023-01-25']",
+      "hint": "Esperaba ['2023-05-12', '2022-11-04', '2021-12-01', '2023-01-25']."
+    }
+  ],
+  "hints": [
+    "Verifica si `'/' in f`.",
+    "Si tiene barra, haz `d, m, y = f.split('/')` y reconstruye con f-string `f'{y}-{m}-{d}'`."
+  ]
+}

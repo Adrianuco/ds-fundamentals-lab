@@ -1,0 +1,40 @@
+{
+  "id": "np-22",
+  "module": "numpy",
+  "title": "Matriz de distancias euclídeas 1D vía broadcasting",
+  "difficulty": 3,
+  "concepts": [
+    "broadcasting",
+    "distancia euclidea",
+    "matriz de distancias"
+  ],
+  "session": 4,
+  "tag": "math",
+  "estimatedMinutes": 8,
+  "dataset": "inline",
+  "theory_md": "### Distancias Euclídeas por Pares\nPara calcular la distancia entre cada par de puntos en un vector 1D (v) de longitud (N):\nRestamos un vector fila ((1, N)) de un vector columna ((N, 1)):\n[D_{ij} = |v_i - v_j|]\n```python\nD = np.abs(v[:, None] - v[None, :])\n# D tiene dimensiones (N, N)\n```",
+  "prompt_md": "Dado el arreglo de posiciones de sucursales en una carretera `posiciones` (en km), calcula la matriz cuadrada de distancias absolutas entre cada par de sucursales usando broadcasting.\nGuarda la matriz de distancias resultante en la variable `result`.",
+  "setup_code": "import numpy as np\nposiciones = np.array([12.0, 25.5, 40.0, 72.0])",
+  "starter_code": "import numpy as np\nposiciones = np.array([12.0, 25.5, 40.0, 72.0])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Calcula la matriz de distancias por pares en result\nresult = None\n",
+  "solution_code": "result = np.abs(posiciones[:, None] - posiciones[None, :])",
+  "tests": [
+    {
+      "name": "result es una matriz cuadrada (4, 4)",
+      "check": "isinstance(result, np.ndarray) and result.shape == (4, 4)",
+      "hint": "La matriz de distancias debe ser de 4x4."
+    },
+    {
+      "name": "La diagonal es cero (distancia de un punto a sí mismo)",
+      "check": "np.array_equal(np.diag(result), np.zeros(4))",
+      "hint": "La diagonal principal debe ser estrictamente 0."
+    },
+    {
+      "name": "Matriz simétrica con distancias correctas",
+      "check": "np.allclose(result, result.T) and np.isclose(result[0, 1], 13.5)",
+      "hint": "Distancia entre 12.0 y 25.5 es |12.0 - 25.5| = 13.5."
+    }
+  ],
+  "hints": [
+    "Usa `np.abs(posiciones[:, None] - posiciones[None, :])`."
+  ]
+}

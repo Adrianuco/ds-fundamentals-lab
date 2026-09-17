@@ -1,0 +1,35 @@
+{
+  "id": "pd-37",
+  "module": "pandas",
+  "title": "Crecimiento porcentual con .pct_change()",
+  "difficulty": 2,
+  "concepts": [
+    "pct_change",
+    "crecimiento",
+    "porcentajes"
+  ],
+  "session": 9,
+  "tag": "dates",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Variación Porcentual\n`.pct_change()` calcula automáticamente el cambio porcentual respecto al registro anterior:\n[\text{pct} = \frac{x_t - x_{t-1}}{x_{t-1}}]\n```python\ndf[\"crecimiento_pct\"] = (df[\"ventas\"].pct_change() * 100).round(2)\n```",
+  "prompt_md": "Dado el historial de ingresos mensuales `df_ingresos`, calcula en una nueva columna `\"crecimiento_pct\"` la tasa de crecimiento porcentual mensual (multiplicada por 100 y redondeada a 2 decimales).\nGuarda el DataFrame resultante en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_ingresos = pd.DataFrame({\n    \"mes\": [\"Ene\", \"Feb\", \"Mar\", \"Abr\", \"May\"],\n    \"ingreso\": [10000.0, 12000.0, 11400.0, 14250.0, 15000.0]\n})",
+  "starter_code": "import pandas as pd\ndf_ingresos = pd.DataFrame({\n    \"mes\": [\"Ene\", \"Feb\", \"Mar\", \"Abr\", \"May\"],\n    \"ingreso\": [10000.0, 12000.0, 11400.0, 14250.0, 15000.0]\n})\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Calcula crecimiento_pct en result\nresult = None\n",
+  "solution_code": "result = df_ingresos.copy()\nresult[\"crecimiento_pct\"] = (result[\"ingreso\"].pct_change() * 100).round(2)",
+  "tests": [
+    {
+      "name": "Columna crecimiento_pct calculada",
+      "check": "'crecimiento_pct' in result.columns and len(result) == 5",
+      "hint": "Debe existir la columna crecimiento_pct."
+    },
+    {
+      "name": "Crecimiento exacto de febrero (+20.0%)",
+      "check": "abs(result['crecimiento_pct'].iloc[1] - 20.0) < 1e-2",
+      "hint": "De 10,000 a 12,000 el crecimiento es exactamente 20.0%."
+    }
+  ],
+  "hints": [
+    "Usa `(result['ingreso'].pct_change() * 100).round(2)`."
+  ]
+}

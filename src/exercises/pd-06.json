@@ -1,0 +1,36 @@
+{
+  "id": "pd-06",
+  "module": "pandas",
+  "title": "Filtro de pertenencia con .isin()",
+  "difficulty": 2,
+  "concepts": [
+    "isin",
+    "filtrado",
+    "listas de categorias"
+  ],
+  "session": 5,
+  "tag": "indexing",
+  "estimatedMinutes": 6,
+  "dataset": "ventas_tienda.csv",
+  "theory_md": "### El método .isin()\nPara verificar si los valores de una columna pertenecen a una lista de opciones permitidas:\n```python\ncategorias_deseadas = [\"Alimentos\", \"Bebidas\"]\nfiltro = df[\"categoria\"].isin(categorias_deseadas)\nsub_df = df[filtro]\n```",
+  "prompt_md": "Dado el registro de ventas `df_ventas`, filtra en la variable `result` únicamente las transacciones correspondientes a las tiendas `\"Central\"` u `\"Occidente\"` que pertenezcan a la categoría `\"Tecnología\"`.",
+  "setup_code": "import pandas as pd\ndf_ventas = pd.read_csv(\"/data/ventas_tienda.csv\")",
+  "starter_code": "import pandas as pd\ndf_ventas = pd.read_csv(\"/data/ventas_tienda.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Filtra con .isin() y categoría en result\nresult = None\n",
+  "solution_code": "result = df_ventas[df_ventas[\"tienda\"].isin([\"Central\", \"Occidente\"]) & (df_ventas[\"categoria\"] == \"Tecnología\")]",
+  "tests": [
+    {
+      "name": "result contiene únicamente las tiendas indicadas y categoría Tecnología",
+      "check": "isinstance(result, pd.DataFrame) and result['tienda'].isin(['Central', 'Occidente']).all() and (result['categoria'] == 'Tecnología').all()",
+      "hint": "Solo deben aparecer tiendas Central u Occidente con categoría Tecnología."
+    },
+    {
+      "name": "Se filtraron registros",
+      "check": "len(result) > 0",
+      "hint": "El resultado debe contener transacciones."
+    }
+  ],
+  "hints": [
+    "Usa `df_ventas['tienda'].isin(['Central', 'Occidente'])`.",
+    "Combina con `& (df_ventas['categoria'] == 'Tecnología')`."
+  ]
+}

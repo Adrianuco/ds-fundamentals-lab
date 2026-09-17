@@ -1,0 +1,36 @@
+{
+  "id": "pd-42",
+  "module": "pandas",
+  "title": "Capstone 2: Enriquecimiento con datos demográficos (Join)",
+  "difficulty": 3,
+  "concepts": [
+    "merge",
+    "enriquecimiento",
+    "demografia"
+  ],
+  "session": 10,
+  "tag": "join",
+  "estimatedMinutes": 7,
+  "dataset": "pacientes.csv",
+  "theory_md": "### Enriquecimiento de Datos Clínicos\nAl unir los datos de consultas limpias con el maestro de municipios podemos segmentar el costo y la demanda según la zona (urbana/rural) y el departamento.",
+  "prompt_md": "Dado el DataFrame de pacientes limpios `clean_df` (previamente preparado) y el catálogo de municipios `df_mun`:\nRealiza un **Inner Join** por la columna `\"municipio\"`.\nGuarda el DataFrame enriquecido en la variable `df_enriquecido`.\nEn la variable `result` guarda el gasto total acumulado en córdobas de los pacientes pertenecientes a municipios de la zona `\"rural\"` (redondeado a 2 decimales).",
+  "setup_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\nclean_df = df_pac.copy()\nclean_df[\"costo\"] = clean_df[\"costo\"].astype(str).str.replace(\",\", \"\", regex=False).astype(float)\nclean_df[\"fecha_consulta\"] = pd.to_datetime(clean_df[\"fecha_consulta\"], format=\"mixed\")\nclean_df[\"edad\"] = clean_df[\"edad\"].fillna(clean_df[\"edad\"].median())\nclean_df[\"seguro\"] = clean_df[\"seguro\"].fillna(\"No Especificado\")\ndf_mun = pd.read_csv(\"/data/municipios.csv\")",
+  "starter_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\nclean_df = df_pac.copy()\nclean_df[\"costo\"] = clean_df[\"costo\"].astype(str).str.replace(\",\", \"\", regex=False).astype(float)\nclean_df[\"fecha_consulta\"] = pd.to_datetime(clean_df[\"fecha_consulta\"], format=\"mixed\")\nclean_df[\"edad\"] = clean_df[\"edad\"].fillna(clean_df[\"edad\"].median())\nclean_df[\"seguro\"] = clean_df[\"seguro\"].fillna(\"No Especificado\")\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Une con df_mun y calcula el costo rural en result\ndf_enriquecido = None\nresult = 0.0\n",
+  "solution_code": "df_enriquecido = pd.merge(clean_df, df_mun, on=\"municipio\", how=\"inner\")\nresult = round(float(df_enriquecido.loc[df_enriquecido[\"zona\"] == \"rural\", \"costo\"].sum()), 2)",
+  "tests": [
+    {
+      "name": "df_enriquecido contiene columnas de ambas tablas",
+      "check": "'departamento' in df_enriquecido.columns and 'costo' in df_enriquecido.columns",
+      "hint": "df_enriquecido debe incluir columnas de ambas tablas."
+    },
+    {
+      "name": "result es un float positivo con el total de gasto rural",
+      "check": "isinstance(result, float) and result > 0.0",
+      "hint": "El costo total de la zona rural debe ser mayor a 0."
+    }
+  ],
+  "hints": [
+    "Usa `pd.merge(clean_df, df_mun, on='municipio', how='inner')`.",
+    "Filtra `df_enriquecido.loc[df_enriquecido['zona'] == 'rural', 'costo'].sum()`."
+  ]
+}

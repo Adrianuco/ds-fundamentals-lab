@@ -1,0 +1,36 @@
+{
+  "id": "np-30",
+  "module": "numpy",
+  "title": "Identificar valores únicos y conteo con np.unique",
+  "difficulty": 2,
+  "concepts": [
+    "np.unique",
+    "frecuencias",
+    "conteos"
+  ],
+  "session": 4,
+  "tag": "math",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Valores Únicos y Frecuencias\n`np.unique(arr, return_counts=True)` extrae los valores sin repetición y la cantidad de apariciones de cada uno:\n```python\nx = np.array([\"A\", \"B\", \"A\", \"C\", \"B\", \"A\"])\nvalores, cuentas = np.unique(x, return_counts=True)\n# valores: ['A', 'B', 'C'], cuentas: [3, 2, 1]\n```",
+  "prompt_md": "Dado el arreglo de códigos de respuesta en un servidor web `status_codes`, utiliza `np.unique` con `return_counts=True` para extraer:\n1. Los códigos únicos observados.\n2. Las frecuencias de cada código.\nConstruye en la variable `result` un diccionario donde las claves sean los códigos de estado (convertidos a int) y los valores sus frecuencias correspondientes (int).",
+  "setup_code": "import numpy as np\nstatus_codes = np.array([200, 404, 200, 500, 200, 404, 200, 200, 503, 404])",
+  "starter_code": "import numpy as np\nstatus_codes = np.array([200, 404, 200, 500, 200, 404, 200, 200, 503, 404])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Extrae únicos y frecuencias y arma el dict en result\nresult = {}\n",
+  "solution_code": "valores, cuentas = np.unique(status_codes, return_counts=True)\nresult = {int(v): int(c) for v, c in zip(valores, cuentas)}",
+  "tests": [
+    {
+      "name": "result es un diccionario con las 4 clases de códigos",
+      "check": "isinstance(result, dict) and len(result) == 4",
+      "hint": "Debe haber 4 códigos únicos: 200, 404, 500, 503."
+    },
+    {
+      "name": "Frecuencias exactas calculadas",
+      "check": "result == {200: 5, 404: 3, 500: 1, 503: 1}",
+      "hint": "Esperaba {200: 5, 404: 3, 500: 1, 503: 1}."
+    }
+  ],
+  "hints": [
+    "Llama a `valores, cuentas = np.unique(status_codes, return_counts=True)`.",
+    "Combina con dict comprehension: `{int(v): int(c) for v, c in zip(valores, cuentas)}`."
+  ]
+}

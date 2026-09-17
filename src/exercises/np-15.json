@@ -1,0 +1,37 @@
+{
+  "id": "np-15",
+  "module": "numpy",
+  "title": "Producto punto y norma euclídea (Álgebra elemental)",
+  "difficulty": 2,
+  "concepts": [
+    "np.dot",
+    "norma",
+    "algebra",
+    "distancia"
+  ],
+  "session": 3,
+  "tag": "math",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Operaciones Vectoriales en DS\n- Producto punto: `np.dot(u, v)` o el operador `u @ v`.\n- Norma L2 (magnitud euclídea): `np.linalg.norm(v)` o `np.sqrt(np.sum(v**2))`.\n```python\nu = np.array([1, 2, 3])\nv = np.array([4, 5, 6])\ndot_prod = u @ v            # 1*4 + 2*5 + 3*6 = 32\nmagnitud = np.linalg.norm(u) # sqrt(1 + 4 + 9) = 3.7416\n```",
+  "prompt_md": "Dados los vectores de pesos de un modelo lineal `w` y de características de un paciente `x`, y el sesgo escalar `b = 1.5`:\nCalcula la predicción lineal:\n(hat{y} = w cdot x + b)\nGuarda el valor escalar resultante (float redondeado a 2 decimales) en la variable `result`.",
+  "setup_code": "import numpy as np\nw = np.array([0.45, -0.12, 0.88, 0.05])\nx = np.array([1.8, 25.0, 3.2, 80.0])\nb = 1.5",
+  "starter_code": "import numpy as np\nw = np.array([0.45, -0.12, 0.88, 0.05])\nx = np.array([1.8, 25.0, 3.2, 80.0])\nb = 1.5\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Calcula la predicción lineal en result\nresult = 0.0\n",
+  "solution_code": "result = round(float(np.dot(w, x) + b), 2)",
+  "tests": [
+    {
+      "name": "result es un float",
+      "check": "isinstance(result, float)",
+      "hint": "result debe ser un número flotante redondeado a 2 decimales."
+    },
+    {
+      "name": "Valor de predicción exacto",
+      "check": "abs(result - 6.13) < 1e-3",
+      "hint": "Esperaba 6.13 (0.45*1.8 - 0.12*25.0 + 0.88*3.2 + 0.05*80.0 + 1.5)."
+    }
+  ],
+  "hints": [
+    "Usa `np.dot(w, x) + b` o `(w @ x) + b`.",
+    "Redondea a 2 decimales con `round(float(...), 2)`."
+  ]
+}

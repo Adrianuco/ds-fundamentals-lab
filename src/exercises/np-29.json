@@ -1,0 +1,35 @@
+{
+  "id": "np-29",
+  "module": "numpy",
+  "title": "Cumsum: Suma acumulada de series",
+  "difficulty": 2,
+  "concepts": [
+    "np.cumsum",
+    "acumulados",
+    "series temporales"
+  ],
+  "session": 4,
+  "tag": "math",
+  "estimatedMinutes": 5,
+  "dataset": "inline",
+  "theory_md": "### Suma Acumulada\n`np.cumsum(arr)` calcula la suma acumulativa progresiva:\n```python\ningresos_diarios = np.array([100, 150, 200])\nacumulado = np.cumsum(ingresos_diarios) # [100, 250, 450]\n```",
+  "prompt_md": "Dado el arreglo de precipitaciones diarias en mm durante una tormenta `lluvia_diaria`, calcula la acumulación progresiva de lluvia a lo largo de los días.\nGuarda el arreglo acumulado en la variable `result`.",
+  "setup_code": "import numpy as np\nlluvia_diaria = np.array([5.2, 12.8, 35.4, 45.0, 18.2, 6.0, 2.5])",
+  "starter_code": "import numpy as np\nlluvia_diaria = np.array([5.2, 12.8, 35.4, 45.0, 18.2, 6.0, 2.5])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Calcula el acumulado con cumsum en result\nresult = None\n",
+  "solution_code": "result = np.cumsum(lluvia_diaria)",
+  "tests": [
+    {
+      "name": "result tiene la misma longitud y es un ndarray",
+      "check": "isinstance(result, np.ndarray) and len(result) == 7",
+      "hint": "result debe tener 7 elementos."
+    },
+    {
+      "name": "Valores acumulados correctos",
+      "check": "np.allclose(result, np.array([5.2, 18.0, 53.4, 98.4, 116.6, 122.6, 125.1]))",
+      "hint": "Esperaba [5.2, 18.0, 53.4, 98.4, 116.6, 122.6, 125.1]."
+    }
+  ],
+  "hints": [
+    "Usa `np.cumsum(lluvia_diaria)`."
+  ]
+}

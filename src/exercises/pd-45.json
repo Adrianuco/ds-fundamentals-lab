@@ -1,0 +1,30 @@
+{
+  "id": "pd-45",
+  "module": "pandas",
+  "title": "Capstone 5: Pregunta de Negocio 2 - Distribución por tipo de seguro",
+  "difficulty": 2,
+  "concepts": [
+    "value_counts",
+    "normalize",
+    "frecuencias relativas"
+  ],
+  "session": 10,
+  "tag": "warmup",
+  "estimatedMinutes": 5,
+  "dataset": "pacientes.csv",
+  "theory_md": "### Distribuciones Porcentuales\n`value_counts(normalize=True) * 100` es la forma estándar de responder preguntas sobre proporciones de mercado.",
+  "prompt_md": "En `clean_df`, calcula la distribución porcentual de los tipos de cobertura médica (`\"seguro\"`), multiplicada por 100 y redondeada a 1 decimal.\nGuarda la Serie en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\nclean_df = df_pac.copy()\nclean_df[\"seguro\"] = clean_df[\"seguro\"].fillna(\"No Especificado\")",
+  "starter_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\nclean_df = df_pac.copy()\nclean_df[\"seguro\"] = clean_df[\"seguro\"].fillna(\"No Especificado\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Calcula la distribución porcentual de seguro en result\nresult = None\n",
+  "solution_code": "result = (clean_df[\"seguro\"].value_counts(normalize=True) * 100).round(1)",
+  "tests": [
+    {
+      "name": "result es una Serie con porcentajes",
+      "check": "isinstance(result, pd.Series) and abs(result.sum() - 100.0) < 1.0",
+      "hint": "La suma de porcentajes debe rondar el 100%."
+    }
+  ],
+  "hints": [
+    "Usa `(clean_df['seguro'].value_counts(normalize=True) * 100).round(1)`."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "np-02",
+  "module": "numpy",
+  "title": "Generadores: arange vs linspace",
+  "difficulty": 1,
+  "concepts": [
+    "np.arange",
+    "np.linspace",
+    "generadores"
+  ],
+  "session": 3,
+  "tag": "warmup",
+  "estimatedMinutes": 5,
+  "dataset": "inline",
+  "theory_md": "### Generación de secuencias numéricas\n- `np.arange(start, stop, step)`: Especifica el incremento (`step`). El extremo `stop` es exclusivo.\n- `np.linspace(start, stop, num)`: Especifica la cantidad exacta de puntos (`num`). El extremo `stop` es por defecto inclusivo.\n```python\na = np.arange(0, 10, 2)     # [0, 2, 4, 6, 8]\nb = np.linspace(0, 1, 5)    # [0.  , 0.25, 0.5 , 0.75, 1.  ]\n```",
+  "prompt_md": "Genera en la variable `seq_arange` los números pares del 10 al 50 (inclusive el 50) usando `np.arange`.\nGenera en la variable `seq_linspace` un arreglo de 9 puntos equidistantes entre 0.0 y 2.0 (inclusive ambos) usando `np.linspace`.\nAsigna a `result = (seq_arange, seq_linspace)`.",
+  "setup_code": "import numpy as np",
+  "starter_code": "import numpy as np\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Genera ambas secuencias y agrúpalas en result\nseq_arange = None\nseq_linspace = None\nresult = None\n",
+  "solution_code": "seq_arange = np.arange(10, 52, 2)\nseq_linspace = np.linspace(0.0, 2.0, 9)\nresult = (seq_arange, seq_linspace)",
+  "tests": [
+    {
+      "name": "seq_arange incluye de 10 a 50 de 2 en 2",
+      "check": "isinstance(seq_arange, np.ndarray) and seq_arange[0] == 10 and seq_arange[-1] == 50 and len(seq_arange) == 21",
+      "hint": "seq_arange debe ir de 10 a 50 inclusive (21 elementos)."
+    },
+    {
+      "name": "seq_linspace tiene 9 puntos de 0.0 a 2.0",
+      "check": "isinstance(seq_linspace, np.ndarray) and len(seq_linspace) == 9 and np.allclose(seq_linspace, np.array([0., 0.25, 0.5, 0.75, 1., 1.25, 1.5, 1.75, 2.]))",
+      "hint": "np.linspace(0.0, 2.0, 9) genera pasos de 0.25."
+    }
+  ],
+  "hints": [
+    "Para que `np.arange` incluya el 50 con paso 2, usa `stop=52`.",
+    "Usa `np.linspace(0.0, 2.0, 9)`."
+  ]
+}

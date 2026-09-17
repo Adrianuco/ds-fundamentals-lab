@@ -1,0 +1,38 @@
+{
+  "id": "pd-24",
+  "module": "pandas",
+  "title": "Tasa por 1,000 habitantes combinando groupby y municipios",
+  "difficulty": 3,
+  "concepts": [
+    "groupby",
+    "merge",
+    "tasas per capita",
+    "feature engineering"
+  ],
+  "session": 7,
+  "tag": "groupby",
+  "estimatedMinutes": 8,
+  "dataset": "pacientes.csv",
+  "theory_md": "### Cálculo de Tasas Per Cápita\nPara calcular la tasa de incidencia de un evento por cada 1,000 habitantes:\n[\text{tasa} = \frac{\text{número de casos}}{\text{población total}} \times 1000]\nRequiere agrupar los casos y cruzar con la población maestro.",
+  "prompt_md": "Calcula la cantidad de consultas médicas por municipio en `df_pac`.\nLuego, une ese conteo con la tabla `df_mun` (por la columna `\"municipio\"`).\nCalcula la nueva columna `\"tasa_por_mil\"` como:\n`(consultas / poblacion) * 1000` redondeado a 2 decimales.\nGuarda el DataFrame con las columnas `[\"municipio\", \"consultas\", \"poblacion\", \"tasa_por_mil\"]` ordenado de mayor a menor tasa en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\ndf_mun = pd.read_csv(\"/data/municipios.csv\")",
+  "starter_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Calcula consultas por municipio, une y calcula tasa en result\nresult = None\n",
+  "solution_code": "conteo = df_pac.groupby(\"municipio\").size().reset_index(name=\"consultas\")\nunido = pd.merge(conteo, df_mun[[\"municipio\", \"poblacion\"]], on=\"municipio\", how=\"inner\")\nunido[\"tasa_por_mil\"] = ((unido[\"consultas\"] / unido[\"poblacion\"]) * 1000).round(2)\nresult = unido[[\"municipio\", \"consultas\", \"poblacion\", \"tasa_por_mil\"]].sort_values(by=\"tasa_por_mil\", ascending=False)",
+  "tests": [
+    {
+      "name": "result contiene las columnas especificadas",
+      "check": "list(result.columns) == ['municipio', 'consultas', 'poblacion', 'tasa_por_mil']",
+      "hint": "Las columnas deben ser exactamente municipio, consultas, poblacion, tasa_por_mil."
+    },
+    {
+      "name": "Orden descendente por tasa verificado",
+      "check": "result.iloc[0]['tasa_por_mil'] >= result.iloc[-1]['tasa_por_mil']",
+      "hint": "El DataFrame debe estar ordenado de mayor a menor tasa_por_mil."
+    }
+  ],
+  "hints": [
+    "Agrupa con `df_pac.groupby('municipio').size().reset_index(name='consultas')`.",
+    "Haz `pd.merge(...)` con `df_mun[['municipio', 'poblacion']]`.",
+    "Calcula `(unido['consultas'] / unido['poblacion']) * 1000`."
+  ]
+}

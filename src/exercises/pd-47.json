@@ -1,0 +1,30 @@
+{
+  "id": "pd-47",
+  "module": "pandas",
+  "title": "Capstone 7: Detección de Pacientes con Consultas Recurrentes",
+  "difficulty": 2,
+  "concepts": [
+    "duplicated",
+    "pacientes recurrentes",
+    "conteo"
+  ],
+  "session": 10,
+  "tag": "join",
+  "estimatedMinutes": 5,
+  "dataset": "pacientes.csv",
+  "theory_md": "### Frecuencia de Visitas de Pacientes\nDeterminar si existen identificadores repetidos en registros transaccionales es crucial para estudios longitudinales.",
+  "prompt_md": "En `df_pac`, calcula cuántos identificadores de paciente (`\"id\"`) son únicos.\nGuarda el número de pacientes únicos (entero) en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")",
+  "starter_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Cuenta los IDs únicos en result\nresult = 0\n",
+  "solution_code": "result = int(df_pac[\"id\"].nunique())",
+  "tests": [
+    {
+      "name": "result es un entero igual a 100",
+      "check": "result == 100",
+      "hint": "En este dataset los 100 pacientes tienen IDs distintos (PAC-001 a PAC-100)."
+    }
+  ],
+  "hints": [
+    "Usa `int(df_pac['id'].nunique())`."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "pd-14",
+  "module": "pandas",
+  "title": "Búsqueda y extracción de texto con .str.contains()",
+  "difficulty": 2,
+  "concepts": [
+    "str.contains",
+    "case=False",
+    "na=False",
+    "strings"
+  ],
+  "session": 6,
+  "tag": "strings",
+  "estimatedMinutes": 6,
+  "dataset": "pacientes.csv",
+  "theory_md": "### Filtrado por Subcadenas con .str.contains()\nPermite buscar palabras o patrones dentro de columnas de texto:\n```python\n# na=False evita que filas con nulos causen errores en el filtro\nmask = df[\"diagnostico\"].str.contains(\"respiratoria\", case=False, na=False)\npacientes_resp = df[mask]\n```",
+  "prompt_md": "En `df_pac`, filtra todos los pacientes cuyo diagnóstico contenga la palabra `\"diabetes\"` (sin importar si está en mayúsculas o minúsculas).\nGuarda el DataFrame filtrado en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")",
+  "starter_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Filtra pacientes con diabetes en result\nresult = None\n",
+  "solution_code": "result = df_pac[df_pac[\"diagnostico\"].str.contains(\"diabetes\", case=False, na=False)]",
+  "tests": [
+    {
+      "name": "result es un DataFrame filtrado",
+      "check": "isinstance(result, pd.DataFrame) and len(result) > 0",
+      "hint": "result debe contener registros."
+    },
+    {
+      "name": "Todos los diagnósticos en result contienen diabetes",
+      "check": "result['diagnostico'].str.lower().str.contains('diabetes').all()",
+      "hint": "Todos los diagnósticos deben contener la palabra diabetes."
+    }
+  ],
+  "hints": [
+    "Usa `df_pac['diagnostico'].str.contains('diabetes', case=False, na=False)`."
+  ]
+}

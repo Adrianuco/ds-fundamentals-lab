@@ -1,0 +1,42 @@
+{
+  "id": "np-28",
+  "module": "numpy",
+  "title": "Apilado de arreglos: vstack y hstack",
+  "difficulty": 2,
+  "concepts": [
+    "vstack",
+    "hstack",
+    "concatenacion"
+  ],
+  "session": 4,
+  "tag": "reshape",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Apilado (Stacking) de Arreglos\n- `np.vstack((a, b))`: Apila verticalmente (fila a fila, incrementa el eje 0).\n- `np.hstack((a, b))`: Apila horizontalmente (columna a columna, incrementa el eje 1).\n```python\na = np.array([[1, 2], [3, 4]])\nb = np.array([[5, 6], [7, 8]])\nvert = np.vstack((a, b)) # shape (4, 2)\nhoriz = np.hstack((a, b)) # shape (2, 4)\n```",
+  "prompt_md": "Dadas dos matrices de características `lote_1` y `lote_2` de tamaño `(3, 2)`, apílalas verticalmente para formar una matriz combinada de `(6, 2)`.\nLuego, agrégale una columna de unos a la derecha (sesgo o bias) de forma `(6, 1)` usando `np.hstack`.\nGuarda la matriz final de `(6, 3)` en la variable `result`.",
+  "setup_code": "import numpy as np\nlote_1 = np.array([[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]])\nlote_2 = np.array([[7.0, 8.0], [9.0, 10.0], [11.0, 12.0]])",
+  "starter_code": "import numpy as np\nlote_1 = np.array([[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]])\nlote_2 = np.array([[7.0, 8.0], [9.0, 10.0], [11.0, 12.0]])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Apila verticalmente y luego agrega la columna de unos\nresult = None\n",
+  "solution_code": "combinado = np.vstack((lote_1, lote_2))\nbias = np.ones((6, 1))\nresult = np.hstack((combinado, bias))",
+  "tests": [
+    {
+      "name": "result tiene dimensiones (6, 3)",
+      "check": "isinstance(result, np.ndarray) and result.shape == (6, 3)",
+      "hint": "La matriz resultante debe ser de 6x3."
+    },
+    {
+      "name": "Tercera columna está compuesta exclusivamente de 1.0",
+      "check": "np.array_equal(result[:, 2], np.ones(6))",
+      "hint": "La última columna debe contener sólo unos."
+    },
+    {
+      "name": "Primeras dos columnas contienen los datos combinados",
+      "check": "result[0, 0] == 1.0 and result[5, 1] == 12.0",
+      "hint": "Verifica que el apilado vertical conserve el orden."
+    }
+  ],
+  "hints": [
+    "Usa `combinado = np.vstack((lote_1, lote_2))`.",
+    "Crea la columna con `bias = np.ones((6, 1))`.",
+    "Combina con `np.hstack((combinado, bias))`."
+  ]
+}

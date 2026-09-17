@@ -1,0 +1,35 @@
+{
+  "id": "pd-29",
+  "module": "pandas",
+  "title": "Concatenación vertical con pd.concat y ignore_index",
+  "difficulty": 2,
+  "concepts": [
+    "concat",
+    "axis=0",
+    "ignore_index"
+  ],
+  "session": 8,
+  "tag": "join",
+  "estimatedMinutes": 5,
+  "dataset": "inline",
+  "theory_md": "### Concatenación de DataFrames\n`pd.concat([df1, df2], axis=0, ignore_index=True)` apila verticalmente DataFrames con las mismas columnas.\n`ignore_index=True` regenera un índice continuo `0, 1, ..., N-1` para evitar duplicados en el índice.",
+  "prompt_md": "Dadas las tablas de ventas semestrales `ventas_sem1` y `ventas_sem2`, únelas verticalmente en un solo DataFrame con un índice continuo reiniciado.\nGuarda el DataFrame unificado en la variable `result`.",
+  "setup_code": "import pandas as pd\nventas_sem1 = pd.DataFrame({\n    \"mes\": [\"Ene\", \"Feb\", \"Mar\"],\n    \"monto\": [12000, 14500, 16000]\n})\nventas_sem2 = pd.DataFrame({\n    \"mes\": [\"Jul\", \"Ago\", \"Sep\"],\n    \"monto\": [18000, 17500, 21000]\n})",
+  "starter_code": "import pandas as pd\nventas_sem1 = pd.DataFrame({\n    \"mes\": [\"Ene\", \"Feb\", \"Mar\"],\n    \"monto\": [12000, 14500, 16000]\n})\nventas_sem2 = pd.DataFrame({\n    \"mes\": [\"Jul\", \"Ago\", \"Sep\"],\n    \"monto\": [18000, 17500, 21000]\n})\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Concatena verticalmente con ignore_index=True en result\nresult = None\n",
+  "solution_code": "result = pd.concat([ventas_sem1, ventas_sem2], axis=0, ignore_index=True)",
+  "tests": [
+    {
+      "name": "result contiene 6 filas",
+      "check": "isinstance(result, pd.DataFrame) and len(result) == 6",
+      "hint": "El resultado debe contener 6 filas."
+    },
+    {
+      "name": "Índice continuo de 0 a 5",
+      "check": "list(result.index) == list(range(6))",
+      "hint": "El índice debe ir de 0 a 5 gracias a ignore_index=True."
+    }
+  ],
+  "hints": [
+    "Usa `pd.concat([ventas_sem1, ventas_sem2], ignore_index=True)`."
+  ]
+}

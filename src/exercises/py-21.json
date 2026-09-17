@@ -1,0 +1,37 @@
+{
+  "id": "py-21",
+  "module": "python",
+  "title": "Conversión segura de tipos con fallback",
+  "difficulty": 2,
+  "concepts": [
+    "excepciones",
+    "ValueError",
+    "TypeError",
+    "limpieza"
+  ],
+  "session": 2,
+  "tag": "functions",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Casteo seguro con funciones helper\nCuando limpiamos datos sucios, convertir strings con `float(x)` fallará si vienen valores corruptos como `\"N/A\"`, `\"null\"` o símbolos.\nUna función de conversión segura captura `(ValueError, TypeError)` y retorna un valor por defecto:\n```python\ndef safe_float(val, default=None):\n    try:\n        return float(val)\n    except (ValueError, TypeError):\n        return default\n```",
+  "prompt_md": "Implementa la función `seguro_a_float(valor, por_defecto=0.0)`.\nAplica esta función sobre la lista de entradas sucias `entradas` y guarda la lista resultante de números en la variable `result`.",
+  "setup_code": "entradas = [\"45.2\", \"12\", \"corrupto\", None, \"89.55\", \"N/A\", \"-3.5\"]",
+  "starter_code": "entradas = [\"45.2\", \"12\", \"corrupto\", None, \"89.55\", \"N/A\", \"-3.5\"]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Define seguro_a_float y genera la lista limpia en result\ndef seguro_a_float(valor, por_defecto=0.0):\n    pass\nresult = []\n",
+  "solution_code": "def seguro_a_float(valor, por_defecto=0.0):\n    try:\n        return float(valor)\n    except (ValueError, TypeError):\n        return por_defecto\n\nresult = [seguro_a_float(x) for x in entradas]",
+  "tests": [
+    {
+      "name": "result contiene 7 elementos",
+      "check": "isinstance(result, list) and len(result) == 7",
+      "hint": "result debe contener un valor por cada entrada."
+    },
+    {
+      "name": "Conversión con reemplazo de 0.0 en valores inválidos",
+      "check": "result == [45.2, 12.0, 0.0, 0.0, 89.55, 0.0, -3.5]",
+      "hint": "Esperaba [45.2, 12.0, 0.0, 0.0, 89.55, 0.0, -3.5]."
+    }
+  ],
+  "hints": [
+    "Dentro de `seguro_a_float`, usa un bloque `try:` con `return float(valor)`.",
+    "En el `except (ValueError, TypeError):` devuelve `por_defecto`."
+  ]
+}

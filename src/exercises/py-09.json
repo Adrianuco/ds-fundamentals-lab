@@ -1,0 +1,37 @@
+{
+  "id": "py-09",
+  "module": "python",
+  "title": "Ordenar lista de diccionarios con sorted y key",
+  "difficulty": 2,
+  "concepts": [
+    "sorted",
+    "lambda",
+    "ordenamiento",
+    "estructuras"
+  ],
+  "session": 1,
+  "tag": "warmup",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Ordenamiento por clave personalizada\nLa función `sorted(iterable, key=lambda x: ..., reverse=True/False)` ordena elementos según el criterio de la función `key`:\n```python\npersonas = [{'nombre': 'Luis', 'edad': 30}, {'nombre': 'Ana', 'edad': 22}]\nordenadas = sorted(personas, key=lambda p: p['edad'])\n```",
+  "prompt_md": "Dada la lista `estudiantes`, ordénala en la variable `result` de **mayor a menor nota** (descendente). En caso de empate en la nota, debe mantenerse el orden alfabético por nombre (ascendente).",
+  "setup_code": "estudiantes = [\n    {\"nombre\": \"Carlos\", \"nota\": 85},\n    {\"nombre\": \"Beatriz\", \"nota\": 92},\n    {\"nombre\": \"Alberto\", \"nota\": 85},\n    {\"nombre\": \"Diana\", \"nota\": 78},\n    {\"nombre\": \"Elena\", \"nota\": 92}\n]",
+  "starter_code": "estudiantes = [\n    {\"nombre\": \"Carlos\", \"nota\": 85},\n    {\"nombre\": \"Beatriz\", \"nota\": 92},\n    {\"nombre\": \"Alberto\", \"nota\": 85},\n    {\"nombre\": \"Diana\", \"nota\": 78},\n    {\"nombre\": \"Elena\", \"nota\": 92}\n]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Ordena la lista en result usando sorted() con key\nresult = []\n",
+  "solution_code": "result = sorted(estudiantes, key=lambda x: (-x[\"nota\"], x[\"nombre\"]))",
+  "tests": [
+    {
+      "name": "result es una lista",
+      "check": "isinstance(result, list)",
+      "hint": "result debe ser una lista."
+    },
+    {
+      "name": "Orden correcto por nota descendente y nombre ascendente",
+      "check": "[e['nombre'] for e in result] == ['Beatriz', 'Elena', 'Alberto', 'Carlos', 'Diana']",
+      "hint": "Revisa la tupla de ordenamiento: (-x['nota'], x['nombre'])."
+    }
+  ],
+  "hints": [
+    "Para invertir una clave numérica en una tupla, puedes usar el signo negativo: `-x['nota']`.",
+    "La tupla `(-x['nota'], x['nombre'])` ordena primero por nota desc y luego nombre asc."
+  ]
+}

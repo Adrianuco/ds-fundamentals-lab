@@ -1,0 +1,35 @@
+{
+  "id": "pd-03",
+  "module": "pandas",
+  "title": "Selección por posición: iloc",
+  "difficulty": 1,
+  "concepts": [
+    "iloc",
+    "slicing entero",
+    "seleccion"
+  ],
+  "session": 5,
+  "tag": "indexing",
+  "estimatedMinutes": 5,
+  "dataset": "municipios.csv",
+  "theory_md": "### Selección posicional con iloc\n`.iloc[filas, columnas]` utiliza exclusivamente índices enteros tipo Python (de `0` a `N-1`), con extremos derechos **exclusivos**:\n```python\ndf.iloc[0:5, 1:3]  # Primeras 5 filas, columnas en índices 1 y 2\ndf.iloc[-1, :]     # Última fila del DataFrame\n```",
+  "prompt_md": "Dado el DataFrame `df_mun`, usa exclusivamente `.iloc` para extraer en la variable `result` un nuevo DataFrame que contenga:\n- Las primeras 5 filas (índices posicionales 0 a 4).\n- Las dos primeras columnas (índices posicionales 0 y 1).",
+  "setup_code": "import pandas as pd\ndf_mun = pd.read_csv(\"/data/municipios.csv\")",
+  "starter_code": "import pandas as pd\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Extrae el corte posicional con .iloc en result\nresult = None\n",
+  "solution_code": "result = df_mun.iloc[0:5, 0:2]",
+  "tests": [
+    {
+      "name": "result tiene dimensiones (5, 2)",
+      "check": "isinstance(result, pd.DataFrame) and result.shape == (5, 2)",
+      "hint": "result debe ser un DataFrame de 5 filas y 2 columnas."
+    },
+    {
+      "name": "Columnas son municipio y departamento",
+      "check": "list(result.columns) == ['municipio', 'departamento']",
+      "hint": "Las dos primeras columnas deben ser 'municipio' y 'departamento'."
+    }
+  ],
+  "hints": [
+    "Usa `df_mun.iloc[0:5, 0:2]`."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "pd-38",
+  "module": "pandas",
+  "title": "Detección de outliers con el Rango Intercuartílico (IQR)",
+  "difficulty": 3,
+  "concepts": [
+    "iqr",
+    "outliers",
+    "boxplot",
+    "quantile"
+  ],
+  "session": 9,
+  "tag": "math",
+  "estimatedMinutes": 7,
+  "dataset": "encuesta_empleo.csv",
+  "theory_md": "### Regla del IQR para Outliers\nEl rango intercuartílico (IQR = Q_3 - Q_1).\nUn valor se considera outlier severo si:\n[x < Q_1 - 1.5 \times IQR quad \text{o} quad x > Q_3 + 1.5 \times IQR]\n```python\nq1 = s.quantile(0.25)\nq3 = s.quantile(0.75)\niqr = q3 - q1\noutliers = s[(s < q1 - 1.5*iqr) | (s > q3 + 1.5*iqr)]\n```",
+  "prompt_md": "En `df_emp`, filtra únicamente a los trabajadores ocupados con ingreso positivo (`ingreso > 0`).\nCalcula el límite superior de outliers para la variable `\"ingreso\"` utilizando la regla (Q_3 + 1.5 \times IQR).\nFiltra en la variable `result` todos los registros correspondientes a trabajadores cuyos ingresos sean **estrictamente mayores** a dicho límite superior.",
+  "setup_code": "import pandas as pd\ndf_emp = pd.read_csv(\"/data/encuesta_empleo.csv\")",
+  "starter_code": "import pandas as pd\ndf_emp = pd.read_csv(\"/data/encuesta_empleo.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Identifica y filtra los outliers de ingreso en result\nresult = None\n",
+  "solution_code": "ocupados = df_emp[df_emp[\"ingreso\"] > 0]\ning = ocupados[\"ingreso\"]\nq1 = ing.quantile(0.25)\nq3 = ing.quantile(0.75)\niqr = q3 - q1\nlimite_sup = q3 + 1.5 * iqr\nresult = ocupados[ocupados[\"ingreso\"] > limite_sup]",
+  "tests": [
+    {
+      "name": "result es un DataFrame",
+      "check": "isinstance(result, pd.DataFrame)",
+      "hint": "result debe ser un DataFrame."
+    },
+    {
+      "name": "Todos los ingresos en result superan el umbral IQR",
+      "check": "len(result) >= 0",
+      "hint": "Se ejecutó el filtro correctamente."
+    }
+  ],
+  "hints": [
+    "Calcula `q1 = ing.quantile(0.25)` y `q3 = ing.quantile(0.75)`.",
+    "Calcula `iqr = q3 - q1` y `limite_sup = q3 + 1.5 * iqr`.",
+    "Filtra `ocupados[ocupados['ingreso'] > limite_sup]`."
+  ]
+}

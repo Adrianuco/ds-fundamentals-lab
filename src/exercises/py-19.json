@@ -1,0 +1,38 @@
+{
+  "id": "py-19",
+  "module": "python",
+  "title": "Cálculo de percentiles a mano (Nearest Rank)",
+  "difficulty": 3,
+  "concepts": [
+    "estadistica",
+    "ordenamiento",
+    "percentiles",
+    "math"
+  ],
+  "session": 2,
+  "tag": "math",
+  "estimatedMinutes": 8,
+  "dataset": "inline",
+  "theory_md": "### Cálculo básico de percentiles\nPara hallar el percentil (P) de una lista de tamaño (N) mediante el método de rango más cercano (nearest rank):\n1. Ordenar la lista: (x_0, x_1, dots, x_{N-1}).\n2. Calcular el índice: (k = lceil \frac{P}{100} \times N \rceil - 1) (usando índice 0).\nPor ejemplo, para la mediana ((P=50)) en datos ordenados.",
+  "prompt_md": "Escribe una función `calcular_mediana(numeros)` que devuelva la mediana exacta de una lista numérica.\n- Si la cantidad de elementos es impar, devuelve el valor central.\n- Si es par, devuelve el promedio de los dos valores centrales.\nCalcula la mediana de `datos_a` y guárdala en `result_a`, y la de `datos_b` en `result_b`. Asigna a `result = (result_a, result_b)`.",
+  "setup_code": "datos_a = [15, 3, 9, 21, 7]         # Impar (ordenado: 3, 7, 9, 15, 21 -> mediana: 9)\ndatos_b = [10, 4, 18, 2, 8, 14]     # Par (ordenado: 2, 4, 8, 10, 14, 18 -> mediana: (8+10)/2 = 9.0)",
+  "starter_code": "datos_a = [15, 3, 9, 21, 7]         # Impar (ordenado: 3, 7, 9, 15, 21 -> mediana: 9)\ndatos_b = [10, 4, 18, 2, 8, 14]     # Par (ordenado: 2, 4, 8, 10, 14, 18 -> mediana: (8+10)/2 = 9.0)\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Define calcular_mediana y calcula result = (result_a, result_b)\ndef calcular_mediana(numeros):\n    pass\nresult = None\n",
+  "solution_code": "def calcular_mediana(numeros):\n    s = sorted(numeros)\n    n = len(s)\n    if n % 2 == 1:\n        return float(s[n // 2])\n    else:\n        return float((s[n // 2 - 1] + s[n // 2]) / 2.0)\n\nresult = (calcular_mediana(datos_a), calcular_mediana(datos_b))",
+  "tests": [
+    {
+      "name": "result es una tupla con dos medianas",
+      "check": "isinstance(result, tuple) and len(result) == 2",
+      "hint": "result debe ser una tupla (mediana_a, mediana_b)."
+    },
+    {
+      "name": "Valores exactos de las medianas calculadas",
+      "check": "result == (9.0, 9.0)",
+      "hint": "Esperaba (9.0, 9.0)."
+    }
+  ],
+  "hints": [
+    "Recuerda ordenar primero la lista con `sorted(numeros)`.",
+    "Para longitud impar `n`, el centro es `n // 2`.",
+    "Para longitud par, promedia los índices `n//2 - 1` y `n//2`."
+  ]
+}

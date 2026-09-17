@@ -1,0 +1,36 @@
+{
+  "id": "py-22",
+  "module": "python",
+  "title": "Cuándo NO usar bucles for: vectorización mental",
+  "difficulty": 3,
+  "concepts": [
+    "eficiencia",
+    "for vs comprension",
+    "vectorizacion mental"
+  ],
+  "session": 2,
+  "tag": "performance",
+  "estimatedMinutes": 7,
+  "dataset": "inline",
+  "theory_md": "### Bucles en Python vs Operaciones Vectorizadas\nEn Python puro, iterar 1 millón de veces con un bucle `for` toma cientos de milisegundos debido al overhead del intérprete.\nAunque en el siguiente módulo usaremos NumPy para vectorizar en C, con Python puro el uso de generadores, comprensiones y funciones built-in optimizadas (`sum`, `min`, `max`, `map`) es significativamente más rápido:\n```python\n# Lento:\ntotal = 0\nfor x in datos:\n    total += x * 2\n\n# Rápido y conciso:\ntotal = sum(x * 2 for x in datos)\n```",
+  "prompt_md": "Dadas dos listas numéricas paralelas `cantidades` y `precios_unitarios`, calcula en la variable `result` el producto punto o facturación total ((sum cantidades_i \times precios_i)) en una **sola línea de código** utilizando `sum()` y `zip()`, sin escribir ningún bloque `for` explícito con dos puntos.",
+  "setup_code": "cantidades = [10, 5, 2, 8, 15]\nprecios_unitarios = [12.5, 40.0, 150.0, 25.0, 18.0]",
+  "starter_code": "cantidades = [10, 5, 2, 8, 15]\nprecios_unitarios = [12.5, 40.0, 150.0, 25.0, 18.0]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Calcula el total en una sola línea sin bucles for explícitos\nresult = 0.0\n",
+  "solution_code": "result = sum(c * p for c, p in zip(cantidades, precios_unitarios))",
+  "tests": [
+    {
+      "name": "result es numérico",
+      "check": "isinstance(result, (int, float))",
+      "hint": "result debe ser un número."
+    },
+    {
+      "name": "Producto punto calculado exactamente",
+      "check": "abs(result - 1095.0) < 1e-5",
+      "hint": "Esperaba 1095.0 (10*12.5 + 5*40 + 2*150 + 8*25 + 15*18)."
+    }
+  ],
+  "hints": [
+    "Apareja los elementos con `zip(cantidades, precios_unitarios)`.",
+    "Pasa una expresión generadora a `sum(c * p for c, p in zip(...))`."
+  ]
+}

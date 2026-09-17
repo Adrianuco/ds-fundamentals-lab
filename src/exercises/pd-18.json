@@ -1,0 +1,35 @@
+{
+  "id": "pd-18",
+  "module": "pandas",
+  "title": "Diferencia entre .size() y .count() en Groupby",
+  "difficulty": 2,
+  "concepts": [
+    "size vs count",
+    "nulos en groupby",
+    "agregacion"
+  ],
+  "session": 7,
+  "tag": "groupby",
+  "estimatedMinutes": 6,
+  "dataset": "pacientes.csv",
+  "theory_md": "### size() vs count()\n- `.size()`: Cuenta el **número total de filas** del grupo (incluyendo nulos).\n- `.count()`: Cuenta únicamente las filas con **valores no nulos** (`notna()`) en cada columna.\n```python\ndf.groupby(\"grupo\")[\"edad\"].count() # Ignora nulos\ndf.groupby(\"grupo\").size()           # Cuenta todas las filas\n```",
+  "prompt_md": "En `df_pac`, calcula por cada municipio dos métricas sobre los pacientes:\n1. El total absoluto de consultas (`total_filas`) usando `.size()`.\n2. El total de pacientes con edad registrada (`edades_validas`) usando el conteo de la columna `\"edad\"`.\nGuarda el DataFrame resultante en la variable `result` (con `.reset_index()`).",
+  "setup_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")",
+  "starter_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Agrupa por municipio y calcula size y count de edad en result\nresult = None\n",
+  "solution_code": "result = df_pac.groupby(\"municipio\").agg(\n    total_filas=(\"id\", \"size\"),\n    edades_validas=(\"edad\", \"count\")\n).reset_index()",
+  "tests": [
+    {
+      "name": "result contiene total_filas y edades_validas",
+      "check": "isinstance(result, pd.DataFrame) and 'total_filas' in result.columns and 'edades_validas' in result.columns",
+      "hint": "Debe incluir las columnas total_filas y edades_validas."
+    },
+    {
+      "name": "total_filas es mayor o igual a edades_validas",
+      "check": "(result['total_filas'] >= result['edades_validas']).all()",
+      "hint": "total_filas cuenta nulos, por lo que siempre debe ser >= edades_validas."
+    }
+  ],
+  "hints": [
+    "Usa `df_pac.groupby('municipio').agg(total_filas=('id', 'size'), edades_validas=('edad', 'count')).reset_index()`."
+  ]
+}

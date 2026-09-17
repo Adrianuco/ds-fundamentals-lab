@@ -1,0 +1,36 @@
+{
+  "id": "pd-20",
+  "module": "pandas",
+  "title": "Imputar nulos con la mediana DE SU PROPIO GRUPO con .transform()",
+  "difficulty": 3,
+  "concepts": [
+    "transform",
+    "imputacion por grupo",
+    "groupby"
+  ],
+  "session": 7,
+  "tag": "groupby",
+  "estimatedMinutes": 8,
+  "dataset": "pacientes.csv",
+  "theory_md": "### Groupby con transform()\nA diferencia de `.agg()` (que reduce el grupo a una sola fila), `.transform()` devuelve una Serie con la **misma longitud y alineación** que el DataFrame original:\n```python\nmediana_grupo = df.groupby(\"sexo\")[\"edad\"].transform(\"median\")\ndf[\"edad_imputada\"] = df[\"edad\"].fillna(mediana_grupo)\n```",
+  "prompt_md": "En `df_pac`, imputa los valores faltantes de la columna `\"edad\"` utilizando la **mediana de la edad del municipio al que pertenece cada paciente**. Si un municipio tuviera todos sus valores nulos, rellena con la mediana global.\nGuarda en la variable `result` la Serie de edad imputada sin ningún valor nulo.",
+  "setup_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")",
+  "starter_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Imputa edad con la mediana por municipio en result\nresult = None\n",
+  "solution_code": "mediana_por_mun = df_pac.groupby(\"municipio\")[\"edad\"].transform(\"median\")\nmediana_global = df_pac[\"edad\"].median()\nresult = df_pac[\"edad\"].fillna(mediana_por_mun).fillna(mediana_global)",
+  "tests": [
+    {
+      "name": "result no contiene nulos",
+      "check": "isinstance(result, pd.Series) and result.isna().sum() == 0",
+      "hint": "La Serie result no debe tener ningún NaN."
+    },
+    {
+      "name": "Conserva la misma longitud (100 elementos)",
+      "check": "len(result) == len(df_pac)",
+      "hint": "Debe tener 100 filas."
+    }
+  ],
+  "hints": [
+    "Calcula `df_pac.groupby('municipio')['edad'].transform('median')`.",
+    "Usa `.fillna()` pasando esa Serie generada."
+  ]
+}

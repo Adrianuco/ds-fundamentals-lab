@@ -1,0 +1,41 @@
+{
+  "id": "np-19",
+  "module": "numpy",
+  "title": "Broadcasting vertical con [:, None]",
+  "difficulty": 3,
+  "concepts": [
+    "broadcasting",
+    "newaxis",
+    "vector columna"
+  ],
+  "session": 4,
+  "tag": "math",
+  "estimatedMinutes": 7,
+  "dataset": "inline",
+  "theory_md": "### Creación de Vectores Columna\nCuando queremos restar un vector de tamaño (N) a cada una de las (N) filas de una matriz ((N, M)), el vector 1D de tamaño ((N,)) NO se alineará correctamente porque se alinea a la derecha.\nDebemos transformarlo en un vector columna de forma ((N, 1)) usando `[:, None]`:\n```python\nfila_medias = M.mean(axis=1) # shape (N,)\nM_centrada = M - fila_medias[:, None] # (N, M) - (N, 1) -> compatible!\n```",
+  "prompt_md": "Dada la matriz de mediciones `datos` de forma `(5, 3)`, centra cada fila restándole su propia media.\nGuarda la matriz resultante centrada por fila en la variable `result`.",
+  "setup_code": "import numpy as np\ndatos = np.array([\n    [10.0, 20.0, 30.0],\n    [5.0, 15.0, 25.0],\n    [100.0, 200.0, 300.0],\n    [2.0, 4.0, 6.0],\n    [50.0, 60.0, 70.0]\n])",
+  "starter_code": "import numpy as np\ndatos = np.array([\n    [10.0, 20.0, 30.0],\n    [5.0, 15.0, 25.0],\n    [100.0, 200.0, 300.0],\n    [2.0, 4.0, 6.0],\n    [50.0, 60.0, 70.0]\n])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Centra cada fila restando su media con broadcasting\nresult = None\n",
+  "solution_code": "medias_filas = datos.mean(axis=1, keepdims=True)\nresult = datos - medias_filas",
+  "tests": [
+    {
+      "name": "result tiene forma (5, 3)",
+      "check": "isinstance(result, np.ndarray) and result.shape == (5, 3)",
+      "hint": "result debe conservar las dimensiones (5, 3)."
+    },
+    {
+      "name": "La media de cada fila en result es prácticamente cero",
+      "check": "np.allclose(result.mean(axis=1), np.zeros(5), atol=1e-7)",
+      "hint": "Al restar la media a cada fila, el promedio de cada fila debe ser 0."
+    },
+    {
+      "name": "Valores correctos de la primera fila",
+      "check": "np.allclose(result[0], np.array([-10.0, 0.0, 10.0]))",
+      "hint": "Fila 1: media=20, valores [10-20, 20-20, 30-20] = [-10, 0, 10]."
+    }
+  ],
+  "hints": [
+    "Calcula las medias por fila con `datos.mean(axis=1, keepdims=True)` o `datos.mean(axis=1)[:, None]`.",
+    "Resta `datos - medias_filas`."
+  ]
+}

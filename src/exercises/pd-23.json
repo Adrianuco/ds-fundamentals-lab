@@ -1,0 +1,29 @@
+{
+  "id": "pd-23",
+  "module": "pandas",
+  "title": "Matriz de Agregaciones Múltiples por Columna",
+  "difficulty": 3,
+  "concepts": [
+    "agg dict",
+    "agregaciones especificas"
+  ],
+  "session": 7,
+  "tag": "groupby",
+  "estimatedMinutes": 7,
+  "dataset": "encuesta_empleo.csv",
+  "theory_md": "### Diccionario de Agregaciones en .agg()\nPodemos especificar agregaciones distintas para cada columna pasando un diccionario:\n```python\nresumen = df.groupby(\"sector\").agg({\n    \"ingreso\": [\"mean\", \"median\"],\n    \"horas\": \"max\",\n    \"id\": \"count\"\n})\n```",
+  "prompt_md": "En `df_emp`, agrupa por `\"sector\"` y calcula:\n- `\"ingreso\"`: la media (`\"mean\"`).\n- `\"horas\"`: la mediana (`\"median\"`).\n- `\"edad\"`: el valor mínimo (`\"min\"`) y máximo (`\"max\"`).\nGuarda el resultado en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_emp = pd.read_csv(\"/data/encuesta_empleo.csv\")",
+  "starter_code": "import pandas as pd\ndf_emp = pd.read_csv(\"/data/encuesta_empleo.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Aplica el diccionario de agregaciones en result\nresult = None\n",
+  "solution_code": "result = df_emp.groupby(\"sector\").agg({\n    \"ingreso\": \"mean\",\n    \"horas\": \"median\",\n    \"edad\": [\"min\", \"max\"]\n})",
+  "tests": [
+    {
+      "name": "result es un DataFrame agrupado por sector",
+      "check": "isinstance(result, pd.DataFrame) and len(result) == df_emp['sector'].nunique()",
+      "hint": "result debe tener una fila por sector."
+    }
+  ],
+  "hints": [
+    "Pasa el diccionario exacto a `.agg({'ingreso': 'mean', 'horas': 'median', 'edad': ['min', 'max']})`."
+  ]
+}

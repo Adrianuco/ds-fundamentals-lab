@@ -1,0 +1,37 @@
+{
+  "id": "pd-12",
+  "module": "pandas",
+  "title": "Limpiar y convertir salarios con moneda: 'C$' y comas",
+  "difficulty": 2,
+  "concepts": [
+    "str.replace",
+    "to_numeric",
+    "limpieza de strings"
+  ],
+  "session": 6,
+  "tag": "strings",
+  "estimatedMinutes": 7,
+  "dataset": "pacientes.csv",
+  "theory_md": "### Limpieza de Cadenas de Texto con .str\nEl accesor `.str` permite aplicar transformaciones vectorizadas a texto:\n```python\ndf[\"monto_limpio\"] = (\n    df[\"monto\"]\n    .astype(str)\n    .str.replace(\"C$\", \"\", regex=False)\n    .str.replace(\",\", \"\", regex=False)\n    .str.strip()\n)\ndf[\"monto_num\"] = pd.to_numeric(df[\"monto_limpio\"], errors=\"coerce\")\n```",
+  "prompt_md": "En el DataFrame `df_pac`, la columna `\"costo\"` contiene valores con comas (ej. `\"1,250.50\"`).\nLimpia la columna eliminando cualquier coma `\",\"` y espacios, y conviértela a tipo numérico (`float`) usando `pd.to_numeric`.\nGuarda en la variable `clean_costo` la Serie limpia resultante.\nAsigna a `result` el promedio del costo redondeado a 2 decimales: `round(clean_costo.mean(), 2)`.",
+  "setup_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")",
+  "starter_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Limpia costo a float y calcula su promedio en result\nclean_costo = None\nresult = 0.0\n",
+  "solution_code": "clean_costo = pd.to_numeric(\n    df_pac[\"costo\"].astype(str).str.replace(\",\", \"\", regex=False).str.strip(),\n    errors=\"coerce\"\n)\nresult = round(float(clean_costo.mean()), 2)",
+  "tests": [
+    {
+      "name": "clean_costo es de tipo float",
+      "check": "isinstance(clean_costo, pd.Series) and str(clean_costo.dtype).startswith('float')",
+      "hint": "clean_costo debe ser una Serie de tipo float."
+    },
+    {
+      "name": "Promedio del costo calculado correctamente",
+      "check": "isinstance(result, float) and result > 1000.0 and result < 3000.0",
+      "hint": "El costo promedio debe estar entre 1000 y 3000 córdobas."
+    }
+  ],
+  "hints": [
+    "Usa `df_pac['costo'].astype(str).str.replace(',', '', regex=False)`.",
+    "Convierte con `pd.to_numeric(..., errors='coerce')`.",
+    "Calcula `round(float(clean_costo.mean()), 2)`."
+  ]
+}

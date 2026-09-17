@@ -1,0 +1,36 @@
+{
+  "id": "np-20",
+  "module": "numpy",
+  "title": "Estandarizar un vector 1D (Z-score)",
+  "difficulty": 2,
+  "concepts": [
+    "estandarizacion",
+    "z-score",
+    "estadistica",
+    "preprocesamiento"
+  ],
+  "session": 4,
+  "tag": "math",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Estandarización Z-Score\nLa transformación Z-Score convierte una variable para que tenga media (mu = 0) y desviación estándar (sigma = 1):\n[z = \frac{x - mu}{sigma}]\n```python\nmu = x.mean()\nsigma = x.std()\nz = (x - mu) / sigma\n```",
+  "prompt_md": "Dado el arreglo de ingresos salariales `ingresos`, calcula su estandarización Z-Score.\nGuarda el arreglo estandarizado en la variable `result`.",
+  "setup_code": "import numpy as np\ningresos = np.array([12000.0, 15000.0, 8500.0, 24000.0, 19000.0, 31000.0, 9500.0])",
+  "starter_code": "import numpy as np\ningresos = np.array([12000.0, 15000.0, 8500.0, 24000.0, 19000.0, 31000.0, 9500.0])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Estandariza ingresos a media 0 y std 1 en result\nresult = None\n",
+  "solution_code": "result = (ingresos - ingresos.mean()) / ingresos.std()",
+  "tests": [
+    {
+      "name": "result tiene media prácticamente 0 y desviación 1",
+      "check": "np.isclose(result.mean(), 0.0, atol=1e-6) and np.isclose(result.std(), 1.0, atol=1e-6)",
+      "hint": "La media debe ser 0.0 y la desviación estándar 1.0."
+    },
+    {
+      "name": "result conserva la forma original (7,)",
+      "check": "result.shape == (7,)",
+      "hint": "La forma debe ser (7,)."
+    }
+  ],
+  "hints": [
+    "Usa `(ingresos - ingresos.mean()) / ingresos.std()`."
+  ]
+}

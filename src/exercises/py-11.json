@@ -1,0 +1,38 @@
+{
+  "id": "py-11",
+  "module": "python",
+  "title": "Extracción y limpieza de texto: '12.5 kg'",
+  "difficulty": 2,
+  "concepts": [
+    "strings",
+    "parsing",
+    "split",
+    "casting",
+    "limpieza"
+  ],
+  "session": 1,
+  "tag": "strings",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Parseo de cadenas con unidades\nCon frecuencia los datos en crudo traen unidades pegadas a los números:\n```python\nraw = \" 14.80 USD \"\nnumero = float(raw.strip().replace(\"USD\", \"\")) # 14.8\n```\nEl método `.split()` o `.strip()` permite aislar el valor numérico.",
+  "prompt_md": "Dada la lista de pesos brutos `pesos_crudos`, extrae únicamente los valores numéricos convertidos a `float` en la variable `result`.\nIgnora la unidad (`\"kg\"`, `\"KG\"`, espacios) y omite cualquier registro que sea nulo (`None`) o vacío (`\"\"`).",
+  "setup_code": "pesos_crudos = [\"12.5 kg\", \" 8.2KG \", \"\", \"45.0 kg\", None, \"100.25 kg\", \"   \"]",
+  "starter_code": "pesos_crudos = [\"12.5 kg\", \" 8.2KG \", \"\", \"45.0 kg\", None, \"100.25 kg\", \"   \"]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Limpia y extrae los floats en la variable result\nresult = []\n",
+  "solution_code": "result = []\nfor p in pesos_crudos:\n    if p and p.strip():\n        val = p.lower().replace(\"kg\", \"\").strip()\n        result.append(float(val))",
+  "tests": [
+    {
+      "name": "result es una lista de floats",
+      "check": "isinstance(result, list) and all(isinstance(x, float) for x in result)",
+      "hint": "result debe contener únicamente números flotantes."
+    },
+    {
+      "name": "Valores numéricos parseados correctamente",
+      "check": "result == [12.5, 8.2, 45.0, 100.25]",
+      "hint": "Esperaba [12.5, 8.2, 45.0, 100.25]."
+    }
+  ],
+  "hints": [
+    "Verifica primero si `p is not None and p.strip() != ''`.",
+    "Usa `.lower().replace('kg', '').strip()` para aislar el número antes de `float()`."
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "pd-17",
+  "module": "pandas",
+  "title": "Groupby básico y Named Aggregations",
+  "difficulty": 2,
+  "concepts": [
+    "groupby",
+    "agg",
+    "named aggregation"
+  ],
+  "session": 7,
+  "tag": "groupby",
+  "estimatedMinutes": 6,
+  "dataset": "encuesta_empleo.csv",
+  "theory_md": "### Named Aggregations en Groupby\nLa sintaxis recomendada para evitar multiíndices en las columnas:\n```python\nresumen = df.groupby(\"sector\").agg(\n    ingreso_medio=(\"ingreso\", \"mean\"),\n    total_personas=(\"id\", \"count\")\n).reset_index()\n```",
+  "prompt_md": "Dada la encuesta de empleo `df_emp`, calcula para cada sector económico:\n- `ingreso_promedio`: promedio de la columna `\"ingreso\"` (redondeado a 2 decimales).\n- `horas_maximas`: valor máximo de la columna `\"horas\"`.\nGuarda el DataFrame resultante con índice reiniciado (`.reset_index()`) en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_emp = pd.read_csv(\"/data/encuesta_empleo.csv\")",
+  "starter_code": "import pandas as pd\ndf_emp = pd.read_csv(\"/data/encuesta_empleo.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Agrupa por sector con named aggregations en result\nresult = None\n",
+  "solution_code": "result = df_emp.groupby(\"sector\").agg(\n    ingreso_promedio=(\"ingreso\", \"mean\"),\n    horas_maximas=(\"horas\", \"max\")\n).round(2).reset_index()",
+  "tests": [
+    {
+      "name": "result es un DataFrame con las columnas solicitadas",
+      "check": "isinstance(result, pd.DataFrame) and set(result.columns) == {'sector', 'ingreso_promedio', 'horas_maximas'}",
+      "hint": "Las columnas deben ser 'sector', 'ingreso_promedio' y 'horas_maximas'."
+    },
+    {
+      "name": "Existen todos los sectores económicos",
+      "check": "len(result) == df_emp['sector'].nunique()",
+      "hint": "Debe haber una fila por cada sector único."
+    }
+  ],
+  "hints": [
+    "Usa `df_emp.groupby('sector').agg(ingreso_promedio=('ingreso', 'mean'), horas_maximas=('horas', 'max')).round(2).reset_index()`."
+  ]
+}

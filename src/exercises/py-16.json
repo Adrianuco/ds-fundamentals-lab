@@ -1,0 +1,37 @@
+{
+  "id": "py-16",
+  "module": "python",
+  "title": "Simular un Anti-Join con conjuntos (sets)",
+  "difficulty": 2,
+  "concepts": [
+    "sets",
+    "diferencia de conjuntos",
+    "anti-join mental"
+  ],
+  "session": 2,
+  "tag": "dicts",
+  "estimatedMinutes": 7,
+  "dataset": "inline",
+  "theory_md": "### Conjuntos (Sets) y Operaciones de Pertenencia\nLos sets en Python tienen tiempo de búsqueda (O(1)).\nLa diferencia de conjuntos (`set_a - set_b`) encuentra elementos presentes en A que no existen en B:\n```python\nregistrados = {\"USR-1\", \"USR-2\", \"USR-3\"}\nactivos = {\"USR-2\"}\ninactivos = registrados - activos # {\"USR-1\", \"USR-3\"}\n```",
+  "prompt_md": "Dadas las listas `id_pacientes_cita` (pacientes que agendaron cita) e `id_pacientes_asistieron` (los que efectivamente se presentaron), obtén en la variable `result` una **lista ordenada alfabéticamente** con los IDs de los pacientes que faltaron a su cita (los que agendaron pero no asistieron).",
+  "setup_code": "id_pacientes_cita = [\"PAC-01\", \"PAC-02\", \"PAC-03\", \"PAC-04\", \"PAC-05\", \"PAC-06\"]\nid_pacientes_asistieron = [\"PAC-02\", \"PAC-04\", \"PAC-06\"]",
+  "starter_code": "id_pacientes_cita = [\"PAC-01\", \"PAC-02\", \"PAC-03\", \"PAC-04\", \"PAC-05\", \"PAC-06\"]\nid_pacientes_asistieron = [\"PAC-02\", \"PAC-04\", \"PAC-06\"]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Encuentra los faltantes y ordénalos en result\nresult = []\n",
+  "solution_code": "result = sorted(list(set(id_pacientes_cita) - set(id_pacientes_asistieron)))",
+  "tests": [
+    {
+      "name": "result es una lista ordenada",
+      "check": "isinstance(result, list)",
+      "hint": "result debe ser una lista."
+    },
+    {
+      "name": "Identificadores exactos de pacientes ausentes",
+      "check": "result == ['PAC-01', 'PAC-03', 'PAC-05']",
+      "hint": "Esperaba ['PAC-01', 'PAC-03', 'PAC-05']."
+    }
+  ],
+  "hints": [
+    "Convierte ambas listas a `set()`.",
+    "Usa el operador de diferencia `-`.",
+    "Usa `sorted()` para devolver una lista ordenada."
+  ]
+}

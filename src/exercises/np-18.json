@@ -1,0 +1,35 @@
+{
+  "id": "np-18",
+  "module": "numpy",
+  "title": "Reglas de Broadcasting: alineación dimensional",
+  "difficulty": 2,
+  "concepts": [
+    "broadcasting",
+    "compatibilidad",
+    "dimensiones"
+  ],
+  "session": 4,
+  "tag": "math",
+  "estimatedMinutes": 7,
+  "dataset": "inline",
+  "theory_md": "### Regla de Broadcasting\nDos dimensiones son compatibles para operar elemento a elemento si:\n1. Son iguales, O\n2. Una de ellas es 1.\nNumPy alinea las formas empezando por la **derecha**:\n```\nMatriz A:  (4, 3)\nVector b:     (3,) -> Se expande virtualmente a (4, 3)\n```\nPara expandir una dimensión se puede usar `np.newaxis` o `[:, None]`.",
+  "prompt_md": "Dada la matriz de puntuaciones `puntajes` de forma `(4, 3)` y el vector de pesos por criterio `pesos` de longitud `3`, multiplica cada columna por su peso respectivo usando broadcasting.\nGuarda la matriz ponderada en la variable `result`.",
+  "setup_code": "import numpy as np\npuntajes = np.array([\n    [10.0, 20.0, 30.0],\n    [15.0, 25.0, 35.0],\n    [12.0, 22.0, 32.0],\n    [18.0, 28.0, 38.0]\n])\npesos = np.array([0.2, 0.3, 0.5])",
+  "starter_code": "import numpy as np\npuntajes = np.array([\n    [10.0, 20.0, 30.0],\n    [15.0, 25.0, 35.0],\n    [12.0, 22.0, 32.0],\n    [18.0, 28.0, 38.0]\n])\npesos = np.array([0.2, 0.3, 0.5])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Aplica broadcasting para ponderar puntajes en result\nresult = None\n",
+  "solution_code": "result = puntajes * pesos",
+  "tests": [
+    {
+      "name": "result tiene forma (4, 3)",
+      "check": "isinstance(result, np.ndarray) and result.shape == (4, 3)",
+      "hint": "La matriz resultante debe conservar shape (4, 3)."
+    },
+    {
+      "name": "Valores ponderados correctos",
+      "check": "np.allclose(result[0], np.array([2.0, 6.0, 15.0])) and np.allclose(result[3], np.array([3.6, 8.4, 19.0]))",
+      "hint": "Esperaba primera fila: [10*0.2, 20*0.3, 30*0.5] = [2.0, 6.0, 15.0]."
+    }
+  ],
+  "hints": [
+    "Debido a que `pesos` tiene longitud 3 y `puntajes` tiene 3 columnas, `puntajes * pesos` se alinea automáticamente."
+  ]
+}

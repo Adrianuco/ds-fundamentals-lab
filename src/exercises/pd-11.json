@@ -1,0 +1,36 @@
+{
+  "id": "pd-11",
+  "module": "pandas",
+  "title": "Imputar nulos con la mediana",
+  "difficulty": 2,
+  "concepts": [
+    "fillna",
+    "median",
+    "imputacion"
+  ],
+  "session": 6,
+  "tag": "missing",
+  "estimatedMinutes": 6,
+  "dataset": "pacientes.csv",
+  "theory_md": "### Imputación de Valores Faltantes\nLa mediana es más robusta que la media ante la presencia de valores extremos:\n```python\nmediana_edad = df[\"edad\"].median()\ndf[\"edad_imputada\"] = df[\"edad\"].fillna(mediana_edad)\n```",
+  "prompt_md": "Dado el DataFrame `df_pac`:\n1. Calcula la mediana de la columna `\"edad\"`.\n2. Crea una copia del DataFrame y en ella crea una nueva columna llamada `\"edad_imputada\"` donde los valores faltantes de `\"edad\"` se hayan rellenado con dicha mediana.\nGuarda el DataFrame resultante en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")",
+  "starter_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Imputa la edad con la mediana en result\nresult = None\n",
+  "solution_code": "result = df_pac.copy()\nmediana = result[\"edad\"].median()\nresult[\"edad_imputada\"] = result[\"edad\"].fillna(mediana)",
+  "tests": [
+    {
+      "name": "result contiene la columna edad_imputada sin nulos",
+      "check": "'edad_imputada' in result.columns and result['edad_imputada'].isna().sum() == 0",
+      "hint": "edad_imputada no debe contener ningún nulo."
+    },
+    {
+      "name": "Longitud total conservada (100 filas)",
+      "check": "len(result) == len(df_pac)",
+      "hint": "No debes eliminar filas, solo rellenar."
+    }
+  ],
+  "hints": [
+    "Calcula `mediana = df_pac['edad'].median()`.",
+    "Asigna `result['edad_imputada'] = result['edad'].fillna(mediana)`."
+  ]
+}

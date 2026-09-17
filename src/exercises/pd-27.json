@@ -1,0 +1,35 @@
+{
+  "id": "pd-27",
+  "module": "pandas",
+  "title": "Validación de unicidad de clave con validate='1:m'",
+  "difficulty": 3,
+  "concepts": [
+    "validate",
+    "integridad de llaves",
+    "merge"
+  ],
+  "session": 8,
+  "tag": "join",
+  "estimatedMinutes": 6,
+  "dataset": "municipios.csv",
+  "theory_md": "### El argumento validate en merge\nEn ciencia de datos, duplicados inadvertidos en la tabla dimensional provocan explosión cartesiana de filas al hacer un join.\nEl parámetro `validate` verifica la relación esperada:\n- `\"one_to_many\"` o `\"1:m\"`: Verifica que la clave en la tabla izquierda sea única.\n- `\"many_to_one\"` o `\"m:1\"`: Verifica que la clave en la tabla derecha sea única.\nSi no se cumple, pandas lanza `MergeError`.",
+  "prompt_md": "Verifica si la tabla `df_mun` tiene valores únicos en la columna `\"municipio\"`.\nPara ello, realiza un merge de `df_ventas` con `df_mun` validando que la relación sea de muchos a uno (`validate=\"many_to_one\"` o `\"m:1\"`) sobre la columna `\"municipio\"`.\nGuarda el DataFrame resultante en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\ndf_ventas = pd.DataFrame({\n    \"transaccion_id\": [101, 102, 103],\n    \"municipio\": [\"Managua\", \"León\", \"Managua\"],\n    \"total\": [450, 120, 800]\n})",
+  "starter_code": "import pandas as pd\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\ndf_ventas = pd.DataFrame({\n    \"transaccion_id\": [101, 102, 103],\n    \"municipio\": [\"Managua\", \"León\", \"Managua\"],\n    \"total\": [450, 120, 800]\n})\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Realiza el merge validado m:1 en result\nresult = None\n",
+  "solution_code": "result = pd.merge(df_ventas, df_mun, on=\"municipio\", how=\"inner\", validate=\"m:1\")",
+  "tests": [
+    {
+      "name": "result contiene las 3 transacciones unidas con éxito",
+      "check": "isinstance(result, pd.DataFrame) and len(result) == 3",
+      "hint": "El merge validado debe completarse con 3 filas."
+    },
+    {
+      "name": "Contiene columnas de ambas tablas",
+      "check": "'departamento' in result.columns and 'total' in result.columns",
+      "hint": "Debe incluir columnas de ambas tablas."
+    }
+  ],
+  "hints": [
+    "Usa `pd.merge(df_ventas, df_mun, on='municipio', how='inner', validate='m:1')`."
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "np-23",
+  "module": "numpy",
+  "title": "One-Hot Encoding manual con arrays de enteros",
+  "difficulty": 3,
+  "concepts": [
+    "one-hot",
+    "np.eye",
+    "fancy indexing",
+    "categoricas"
+  ],
+  "session": 4,
+  "tag": "math",
+  "estimatedMinutes": 7,
+  "dataset": "inline",
+  "theory_md": "### One-Hot Encoding con np.eye\nUn truco sumamente elegante para convertir un arreglo de categorías discretas (0, 1, dots, K-1) en una matriz One-Hot sin bucles ni dependencias externas:\n```python\ncategorias = np.array([0, 2, 1, 2, 0])\nK = 3\none_hot = np.eye(K)[categorias]\n```\nEl fancy indexing indexa las filas de la matriz identidad según los enteros de las categorías.",
+  "prompt_md": "Dado el arreglo de clases asignadas `clases` (con 4 clases posibles: 0, 1, 2, 3), genera la matriz One-Hot correspondiente usando `np.eye`.\nGuarda la matriz binaria en la variable `result`.",
+  "setup_code": "import numpy as np\nclases = np.array([2, 0, 3, 1, 0, 2, 3])",
+  "starter_code": "import numpy as np\nclases = np.array([2, 0, 3, 1, 0, 2, 3])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Genera la matriz one-hot en result\nresult = None\n",
+  "solution_code": "result = np.eye(4)[clases]",
+  "tests": [
+    {
+      "name": "result tiene dimensiones (7, 4)",
+      "check": "isinstance(result, np.ndarray) and result.shape == (7, 4)",
+      "hint": "Esperaba shape (7, 4) para 7 muestras y 4 clases."
+    },
+    {
+      "name": "Codificación exacta de las muestras",
+      "check": "np.array_equal(result[0], np.array([0., 0., 1., 0.])) and np.array_equal(result[1], np.array([1., 0., 0., 0.]))",
+      "hint": "La primera fila (clase 2) debe ser [0, 0, 1, 0]."
+    }
+  ],
+  "hints": [
+    "Genera la matriz identidad con `np.eye(4)`.",
+    "Indexa con las clases: `np.eye(4)[clases]`."
+  ]
+}

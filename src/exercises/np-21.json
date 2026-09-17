@@ -1,0 +1,37 @@
+{
+  "id": "np-21",
+  "module": "numpy",
+  "title": "Estandarización por columna de una matriz (axis=0)",
+  "difficulty": 3,
+  "concepts": [
+    "estandarizacion",
+    "broadcasting",
+    "axis=0",
+    "preprocesamiento"
+  ],
+  "session": 4,
+  "tag": "math",
+  "estimatedMinutes": 7,
+  "dataset": "inline",
+  "theory_md": "### Estandarización de Matriz de Características\nEn Machine Learning, cada variable o columna de la matriz (X) debe escalarse independientemente:\n```python\nmedias = X.mean(axis=0)  # Una media por cada columna\nstds = X.std(axis=0)     # Una desviación por cada columna\nX_scaled = (X - medias) / stds\n```\nGracias al broadcasting por la derecha, un vector de forma ((M,)) opera sobre la matriz ((N, M)) columna a columna.",
+  "prompt_md": "Dada la matriz de datos `X` (6 observaciones x 3 variables), estandariza cada columna para que tenga media 0 y desviación estándar 1.\nGuarda la matriz escalada en la variable `result`.",
+  "setup_code": "import numpy as np\nX = np.array([\n    [10.0, 200.0, 0.5],\n    [12.0, 250.0, 0.8],\n    [8.0, 180.0, 0.3],\n    [15.0, 300.0, 1.2],\n    [9.0, 190.0, 0.4],\n    [11.0, 220.0, 0.7]\n])",
+  "starter_code": "import numpy as np\nX = np.array([\n    [10.0, 200.0, 0.5],\n    [12.0, 250.0, 0.8],\n    [8.0, 180.0, 0.3],\n    [15.0, 300.0, 1.2],\n    [9.0, 190.0, 0.4],\n    [11.0, 220.0, 0.7]\n])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Estandariza X por columnas en result\nresult = None\n",
+  "solution_code": "result = (X - X.mean(axis=0)) / X.std(axis=0)",
+  "tests": [
+    {
+      "name": "result conserva las dimensiones (6, 3)",
+      "check": "isinstance(result, np.ndarray) and result.shape == (6, 3)",
+      "hint": "Las dimensiones deben ser (6, 3)."
+    },
+    {
+      "name": "Medias de cada columna son 0 y desviaciones son 1",
+      "check": "np.allclose(result.mean(axis=0), np.zeros(3), atol=1e-6) and np.allclose(result.std(axis=0), np.ones(3), atol=1e-6)",
+      "hint": "Cada una de las 3 columnas debe tener media 0 y std 1."
+    }
+  ],
+  "hints": [
+    "Calcula `mu = X.mean(axis=0)` y `sigma = X.std(axis=0)`.",
+    "Calcula `(X - mu) / sigma`."
+  ]
+}

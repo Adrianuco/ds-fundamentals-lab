@@ -1,0 +1,36 @@
+{
+  "id": "np-09",
+  "module": "numpy",
+  "title": "np.clip: Winsorizar y limitar valores extremos",
+  "difficulty": 2,
+  "concepts": [
+    "np.clip",
+    "outliers",
+    "winsorizar",
+    "limpieza"
+  ],
+  "session": 3,
+  "tag": "math",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Limitación de Outliers con np.clip\nEn preprocesamiento de datos, recortar valores que exceden un umbral mínimo o máximo (winsorización) evita que outliers distorsionen modelos:\n```python\nv = np.array([-10, 5, 20, 100])\nv_clipped = np.clip(v, a_min=0, a_max=50) # [0, 5, 20, 50]\n```",
+  "prompt_md": "Dado el arreglo de horas de trabajo reportadas en una semana `horas_reportadas`, aplica `np.clip` para limitar los valores a un rango biológicamente y legalmente plausible: mínimo 0 horas y máximo 60 horas.\nGuarda el arreglo corregido en la variable `result`.",
+  "setup_code": "import numpy as np\nhoras_reportadas = np.array([-5, 40, 48, 85, 30, 60, 72, 0, -2, 45])",
+  "starter_code": "import numpy as np\nhoras_reportadas = np.array([-5, 40, 48, 85, 30, 60, 72, 0, -2, 45])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Limita las horas entre 0 y 60 con np.clip\nresult = None\n",
+  "solution_code": "result = np.clip(horas_reportadas, 0, 60)",
+  "tests": [
+    {
+      "name": "result contiene valores acotados entre 0 y 60",
+      "check": "isinstance(result, np.ndarray) and (result >= 0).all() and (result <= 60).all()",
+      "hint": "Ningún valor puede ser menor a 0 ni mayor a 60."
+    },
+    {
+      "name": "Valores recortados correctos",
+      "check": "np.array_equal(result, np.array([0, 40, 48, 60, 30, 60, 60, 0, 0, 45]))",
+      "hint": "Esperaba [0, 40, 48, 60, 30, 60, 60, 0, 0, 45]."
+    }
+  ],
+  "hints": [
+    "Usa `np.clip(horas_reportadas, a_min=0, a_max=60)`."
+  ]
+}

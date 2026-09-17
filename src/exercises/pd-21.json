@@ -1,0 +1,30 @@
+{
+  "id": "pd-21",
+  "module": "pandas",
+  "title": "Top-N por grupo con .nlargest()",
+  "difficulty": 3,
+  "concepts": [
+    "nlargest",
+    "top-n",
+    "groupby"
+  ],
+  "session": 7,
+  "tag": "groupby",
+  "estimatedMinutes": 7,
+  "dataset": "ventas_tienda.csv",
+  "theory_md": "### Top-N por grupo\nPara obtener las N observaciones con mayores valores dentro de cada categoría:\n```python\ntop2 = df.groupby(\"categoria\", group_keys=False).apply(lambda g: g.nlargest(2, \"precio\"))\n```",
+  "prompt_md": "En `df_ventas`, encuentra las **2 transacciones con mayor cantidad de unidades vendidas** para cada categoría de producto.\nGuarda el DataFrame resultante en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_ventas = pd.read_csv(\"/data/ventas_tienda.csv\")",
+  "starter_code": "import pandas as pd\ndf_ventas = pd.read_csv(\"/data/ventas_tienda.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Encuentra las 2 mayores transacciones por categoría en result\nresult = None\n",
+  "solution_code": "result = df_ventas.groupby(\"categoria\", group_keys=False).apply(lambda g: g.nlargest(2, \"unidades\"))",
+  "tests": [
+    {
+      "name": "result contiene 2 filas por cada categoría (10 filas en total para 5 categorías)",
+      "check": "isinstance(result, pd.DataFrame) and len(result) == df_ventas['categoria'].nunique() * 2",
+      "hint": "Esperaba 2 observaciones por categoría."
+    }
+  ],
+  "hints": [
+    "Usa `df_ventas.groupby('categoria', group_keys=False).apply(lambda g: g.nlargest(2, 'unidades'))`."
+  ]
+}

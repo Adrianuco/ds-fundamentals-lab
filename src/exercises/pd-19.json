@@ -1,0 +1,34 @@
+{
+  "id": "pd-19",
+  "module": "pandas",
+  "title": "Filtrar grupos completos con .filter()",
+  "difficulty": 3,
+  "concepts": [
+    "groupby filter",
+    "filtrado de grupos"
+  ],
+  "session": 7,
+  "tag": "groupby",
+  "estimatedMinutes": 7,
+  "dataset": "ventas_tienda.csv",
+  "theory_md": "### El método groupby.filter()\nPermite conservar o descartar grupos enteros basándose en una condición agregada sobre el grupo:\n```python\n# Conservar solo tiendas con más de 30 transacciones\ndf_grandes = df.groupby(\"tienda\").filter(lambda g: len(g) > 30)\n```",
+  "prompt_md": "Dado el registro de ventas `df_ventas`, utiliza `.groupby(\"tienda\").filter(...)` para filtrar y conservar únicamente aquellas tiendas cuya facturación total acumulada (`sum(unidades * precio)`) sea **estrictamente mayor a 50,000**.\nGuarda el DataFrame filtrado en la variable `result`.",
+  "setup_code": "import pandas as pd\ndf_ventas = pd.read_csv(\"/data/ventas_tienda.csv\")\ndf_ventas[\"facturacion\"] = df_ventas[\"unidades\"] * df_ventas[\"precio\"]",
+  "starter_code": "import pandas as pd\ndf_ventas = pd.read_csv(\"/data/ventas_tienda.csv\")\ndf_ventas[\"facturacion\"] = df_ventas[\"unidades\"] * df_ventas[\"precio\"]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Filtra tiendas con facturación acumulada > 50000 en result\nresult = None\n",
+  "solution_code": "result = df_ventas.groupby(\"tienda\").filter(lambda g: g[\"facturacion\"].sum() > 50000)",
+  "tests": [
+    {
+      "name": "result es un DataFrame",
+      "check": "isinstance(result, pd.DataFrame)",
+      "hint": "result debe ser un DataFrame."
+    },
+    {
+      "name": "Cada tienda presente en result factura más de 50000",
+      "check": "(result.groupby('tienda')['facturacion'].sum() > 50000).all()",
+      "hint": "Todas las tiendas resultantes deben superar 50000 de facturación."
+    }
+  ],
+  "hints": [
+    "Usa `df_ventas.groupby('tienda').filter(lambda g: g['facturacion'].sum() > 50000)`."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "np-10",
+  "module": "numpy",
+  "title": "Reshape y Ravel: Reestructurar dimensiones",
+  "difficulty": 2,
+  "concepts": [
+    "reshape",
+    "ravel",
+    "dimensiones"
+  ],
+  "session": 3,
+  "tag": "reshape",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Reshape y el parámetro -1\n`arr.reshape(filas, columnas)` cambia la forma sin alterar los datos subyacentes.\nEl valor `-1` infiere automáticamente la dimensión faltante:\n```python\na = np.arange(12)\nm = a.reshape(3, -1) # Infiere 4 columnas (12 / 3 = 4)\nplano = m.ravel()    # Aplana de nuevo a 1D\n```",
+  "prompt_md": "Dado el arreglo lineal `vector_lineal` de 24 elementos, reestructúralo en una matriz de 4 filas con el número de columnas calculado automáticamente (`-1`).\nLuego, guarda esa matriz 2D en la variable `matriz_2d`, y en `result` el resultado de aplanarla de vuelta a 1D usando `.ravel()`.",
+  "setup_code": "import numpy as np\nvector_lineal = np.arange(24)",
+  "starter_code": "import numpy as np\nvector_lineal = np.arange(24)\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Crea matriz_2d y luego result con ravel\nmatriz_2d = None\nresult = None\n",
+  "solution_code": "matriz_2d = vector_lineal.reshape(4, -1)\nresult = matriz_2d.ravel()",
+  "tests": [
+    {
+      "name": "matriz_2d tiene forma (4, 6)",
+      "check": "isinstance(matriz_2d, np.ndarray) and matriz_2d.shape == (4, 6)",
+      "hint": "matriz_2d debe tener 4 filas y 6 columnas."
+    },
+    {
+      "name": "result es un arreglo 1D aplanado de 24 elementos",
+      "check": "isinstance(result, np.ndarray) and result.shape == (24,) and np.array_equal(result, vector_lineal)",
+      "hint": "result debe ser idéntico al vector lineal original."
+    }
+  ],
+  "hints": [
+    "Usa `vector_lineal.reshape(4, -1)`.",
+    "Usa `matriz_2d.ravel()` para generar `result`."
+  ]
+}

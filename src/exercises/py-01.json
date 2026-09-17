@@ -1,0 +1,43 @@
+{
+  "id": "py-01",
+  "module": "python",
+  "title": "Casting y f-strings formateadas",
+  "difficulty": 1,
+  "concepts": [
+    "tipos",
+    "casting",
+    "f-strings",
+    "formato flotantes"
+  ],
+  "session": 1,
+  "tag": "warmup",
+  "estimatedMinutes": 5,
+  "dataset": "inline",
+  "theory_md": "### Tipos y Formateo en Python\nEn ciencia de datos, con frecuencia recibimos números en formato texto (ej: `\"1250.75\"`) que deben convertirse a `float` o `int`.\nLas f-strings permiten formatear salidas con precisión decimal:\n```python\ntasa = 0.08456\ntexto = f\"Tasa: {tasa:.2%}\"      # \"Tasa: 8.46%\"\nprecio = 1250.5\ntexto2 = f\"C$ {precio:,.2f}\"    # \"C$ 1,250.50\"\n```",
+  "prompt_md": "Dado el valor en texto `monto_raw = \"1450.854\"`, conviértelo a número decimal (`float`) y genera un string en la variable `result` con el formato exacto:\n`\"Total a pagar: C$ 1,450.85\"` (con dos decimales redondeados y separador de miles con coma).",
+  "setup_code": "monto_raw = \"1450.854\"",
+  "starter_code": "monto_raw = \"1450.854\"\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Convierte monto_raw a float y formatea el string en result\nresult = \"\"\n",
+  "solution_code": "monto = float(monto_raw)\nresult = f\"Total a pagar: C$ {monto:,.2f}\"",
+  "tests": [
+    {
+      "name": "Existe la variable result",
+      "check": "'result' in locals() or 'result' in globals()",
+      "hint": "Debes asignar el resultado a la variable `result`."
+    },
+    {
+      "name": "result es de tipo string",
+      "check": "isinstance(result, str)",
+      "hint": "La variable result debe ser una cadena de texto (str)."
+    },
+    {
+      "name": "Formato exacto con separador de miles y 2 decimales",
+      "check": "result == 'Total a pagar: C$ 1,450.85'",
+      "hint": "El string generado debe ser exactamente 'Total a pagar: C$ 1,450.85'."
+    }
+  ],
+  "hints": [
+    "Usa `float(monto_raw)` para hacer el casting inicial.",
+    "En una f-string, `{monto:,.2f}` aplica comas para miles y 2 decimales.",
+    "Asegúrate de anteponer 'Total a pagar: C$ '."
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "pd-26",
+  "module": "pandas",
+  "title": "Anti-Join: Detectar filas sin coincidencia con indicator=True",
+  "difficulty": 3,
+  "concepts": [
+    "anti-join",
+    "indicator",
+    "merge",
+    "integridad"
+  ],
+  "session": 8,
+  "tag": "join",
+  "estimatedMinutes": 7,
+  "dataset": "pacientes.csv",
+  "theory_md": "### Anti-Joins en pandas\nUn anti-join detecta registros huérfanos (filas de A que no tienen pareja en B).\nEl argumento `indicator=True` agrega una columna especial `_merge` con valores:\n- `\"both\"`: Clave presente en ambas tablas.\n- `\"left_only\"`: Clave presente solo en la tabla izquierda (los huérfanos).\n- `\"right_only\"`: Clave presente solo en la derecha.\n```python\nm = pd.merge(A, B, on=\"id\", how=\"left\", indicator=True)\nhuerfanos = m[m[\"_merge\"] == \"left_only\"]\n```",
+  "prompt_md": "Encuentra todos los pacientes en `df_pac` cuyo `\"municipio\"` **no figure** en el catálogo oficial de `df_mun`.\nUtiliza un merge con `how=\"left\"` e `indicator=True`.\nGuarda en la variable `result` el DataFrame con los pacientes huérfanos (filtrados con `_merge == \"left_only\"`).",
+  "setup_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\ndf_mun = pd.read_csv(\"/data/municipios.csv\")",
+  "starter_code": "import pandas as pd\ndf_pac = pd.read_csv(\"/data/pacientes.csv\")\ndf_mun = pd.read_csv(\"/data/municipios.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Realiza el anti-join y filtra los huérfanos en result\nresult = None\n",
+  "solution_code": "merged = pd.merge(df_pac, df_mun[[\"municipio\"]], on=\"municipio\", how=\"left\", indicator=True)\nresult = merged[merged[\"_merge\"] == \"left_only\"]",
+  "tests": [
+    {
+      "name": "result contiene únicamente registros huérfanos (ej. Tipitapa)",
+      "check": "isinstance(result, pd.DataFrame) and (result['_merge'] == 'left_only').all()",
+      "hint": "Todos los registros de result deben tener _merge == 'left_only'."
+    },
+    {
+      "name": "Se detectaron pacientes huérfanos",
+      "check": "len(result) > 0",
+      "hint": "El dataset de pacientes contiene pacientes de Tipitapa que no están en municipios.csv."
+    }
+  ],
+  "hints": [
+    "Usa `pd.merge(df_pac, df_mun[['municipio']], on='municipio', how='left', indicator=True)`.",
+    "Filtra `merged[merged['_merge'] == 'left_only']`."
+  ]
+}

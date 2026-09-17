@@ -1,0 +1,37 @@
+{
+  "id": "np-17",
+  "module": "numpy",
+  "title": "Reducciones con axis: axis=0 vs axis=1",
+  "difficulty": 2,
+  "concepts": [
+    "axis",
+    "mean",
+    "sum",
+    "reducciones"
+  ],
+  "session": 4,
+  "tag": "math",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### La regla mnemotécnica de axis\nEn una matriz 2D:\n- `axis=0`: Opera **a lo largo de las columnas** (colapsa las filas). Resultado: tantas entradas como columnas tenga la matriz.\n- `axis=1`: Opera **a lo largo de las filas** (colapsa las columnas). Resultado: tantas entradas como filas tenga la matriz.\n```python\nM = np.array([[1, 2], [3, 4]])\ncol_means = M.mean(axis=0) # [2.0, 3.0]\nrow_means = M.mean(axis=1) # [1.5, 3.5]\n```",
+  "prompt_md": "Dada la matriz `ventas_sucursal` (4 sucursales x 3 trimestres), calcula:\n1. Las ventas promedio de cada trimestre a lo largo de todas las sucursales en `promedio_por_trimestre` (`axis=0`).\n2. La suma total de ventas por sucursal en `total_por_sucursal` (`axis=1`).\nAsigna a `result = (promedio_por_trimestre, total_por_sucursal)`.",
+  "setup_code": "import numpy as np\nventas_sucursal = np.array([\n    [120, 150, 180],\n    [90, 85, 110],\n    [200, 210, 250],\n    [140, 160, 170]\n])",
+  "starter_code": "import numpy as np\nventas_sucursal = np.array([\n    [120, 150, 180],\n    [90, 85, 110],\n    [200, 210, 250],\n    [140, 160, 170]\n])\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Calcula promedios por trimestre y totales por sucursal\npromedio_por_trimestre = None\ntotal_por_sucursal = None\nresult = None\n",
+  "solution_code": "promedio_por_trimestre = ventas_sucursal.mean(axis=0)\ntotal_por_sucursal = ventas_sucursal.sum(axis=1)\nresult = (promedio_por_trimestre, total_por_sucursal)",
+  "tests": [
+    {
+      "name": "Dimensiones de las reducciones",
+      "check": "promedio_por_trimestre.shape == (3,) and total_por_sucursal.shape == (4,)",
+      "hint": "promedio_por_trimestre debe tener 3 valores y total_por_sucursal 4 valores."
+    },
+    {
+      "name": "Valores exactos de las reducciones",
+      "check": "np.allclose(promedio_por_trimestre, np.array([137.5, 151.25, 177.5])) and np.array_equal(total_por_sucursal, np.array([450, 285, 660, 470]))",
+      "hint": "Verifica axis=0 para columnas y axis=1 para filas."
+    }
+  ],
+  "hints": [
+    "Para trimestres usa `.mean(axis=0)`.",
+    "Para sucursales usa `.sum(axis=1)`."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "py-14",
+  "module": "python",
+  "title": "Manejo de excepciones: KeyError y valores ausentes",
+  "difficulty": 2,
+  "concepts": [
+    "try/except",
+    "KeyError",
+    "robusted de datos"
+  ],
+  "session": 2,
+  "tag": "functions",
+  "estimatedMinutes": 6,
+  "dataset": "inline",
+  "theory_md": "### Diagnóstico de KeyError y try/except\nUn `KeyError` ocurre al buscar una clave que no existe en un diccionario.\nEn pipelines de ingestión de datos heterogéneos, podemos atrapar excepciones de forma selectiva:\n```python\ntry:\n    valor = registro[\"telefono\"]\nexcept KeyError:\n    valor = \"NO_REGISTRADO\"\n```",
+  "prompt_md": "Dada una lista de perfiles de clientes `clientes`, algunos carecen de la clave `\"telefono\"` o `\"email\"`.\nConstruye en la variable `result` una lista de diccionarios donde cada registro tenga garantizadas las claves `\"id\"`, `\"nombre\"`, `\"telefono\"` y `\"email\"`.\nSi falta `telefono`, ponle `\"Sin Teléfono\"`; si falta `email`, ponle `\"Sin Email\"`.",
+  "setup_code": "clientes = [\n    {\"id\": 1, \"nombre\": \"Marta\", \"telefono\": \"8888-1111\", \"email\": \"marta@mail.com\"},\n    {\"id\": 2, \"nombre\": \"Ramon\", \"telefono\": \"7777-2222\"},\n    {\"id\": 3, \"nombre\": \"Sonia\", \"email\": \"sonia@mail.com\"},\n    {\"id\": 4, \"nombre\": \"Felipe\"}\n]",
+  "starter_code": "clientes = [\n    {\"id\": 1, \"nombre\": \"Marta\", \"telefono\": \"8888-1111\", \"email\": \"marta@mail.com\"},\n    {\"id\": 2, \"nombre\": \"Ramon\", \"telefono\": \"7777-2222\"},\n    {\"id\": 3, \"nombre\": \"Sonia\", \"email\": \"sonia@mail.com\"},\n    {\"id\": 4, \"nombre\": \"Felipe\"}\n]\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Normaliza cada registro en result\nresult = []\n",
+  "solution_code": "result = []\nfor c in clientes:\n    normalizado = {\n        \"id\": c[\"id\"],\n        \"nombre\": c[\"nombre\"],\n        \"telefono\": c.get(\"telefono\", \"Sin Teléfono\"),\n        \"email\": c.get(\"email\", \"Sin Email\")\n    }\n    result.append(normalizado)",
+  "tests": [
+    {
+      "name": "result contiene 4 registros completos",
+      "check": "len(result) == 4 and all(set(r.keys()) == {'id', 'nombre', 'telefono', 'email'} for r in result)",
+      "hint": "Todos los registros deben tener las 4 claves especificadas."
+    },
+    {
+      "name": "Valores por defecto aplicados a clientes incompletos",
+      "check": "result[3] == {'id': 4, 'nombre': 'Felipe', 'telefono': 'Sin Teléfono', 'email': 'Sin Email'}",
+      "hint": "Verifica el caso de Felipe (id 4)."
+    }
+  ],
+  "hints": [
+    "Puedes usar `.get('telefono', 'Sin Teléfono')` o bloques `try/except KeyError`.",
+    "Asegúrate de no modificar la lista original."
+  ]
+}

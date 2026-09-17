@@ -1,0 +1,37 @@
+{
+  "id": "np-03",
+  "module": "numpy",
+  "title": "Matrices especiales: zeros, ones, full, eye",
+  "difficulty": 1,
+  "concepts": [
+    "np.zeros",
+    "np.ones",
+    "np.full",
+    "np.eye"
+  ],
+  "session": 3,
+  "tag": "warmup",
+  "estimatedMinutes": 5,
+  "dataset": "inline",
+  "theory_md": "### Creación de Arreglos Especiales\nNumPy permite instanciar matrices de dimensiones dadas directamente:\n```python\nz = np.zeros((3, 4))       # Matriz 3x4 de ceros\no = np.ones((2, 3))        # Matriz 2x3 de unos\nf = np.full((2, 2), 7.5)   # Matriz 2x2 con valor 7.5\ni = np.eye(3)              # Matriz identidad 3x3\n```",
+  "prompt_md": "Crea una matriz de tamaño 4x5 donde todos los valores sean `-1.0` (tipo float) usando `np.full`.\nLuego, modifica su diagonal principal para que tenga valores `1.0`.\nGuarda la matriz resultante en la variable `result`.",
+  "setup_code": "import numpy as np",
+  "starter_code": "import numpy as np\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Crea la matriz y asigna 1.0 en la diagonal\nresult = None\n",
+  "solution_code": "result = np.full((4, 5), -1.0)\nnp.fill_diagonal(result, 1.0)",
+  "tests": [
+    {
+      "name": "result tiene dimensiones (4, 5)",
+      "check": "isinstance(result, np.ndarray) and result.shape == (4, 5)",
+      "hint": "La matriz debe ser de 4 filas por 5 columnas."
+    },
+    {
+      "name": "Diagonal principal es 1.0 y el resto -1.0",
+      "check": "all(result[i, i] == 1.0 for i in range(4)) and result[0, 1] == -1.0 and result[3, 4] == -1.0",
+      "hint": "Verifica que result[i, i] == 1.0 para i=0..3 y las demás posiciones sean -1.0."
+    }
+  ],
+  "hints": [
+    "Inicia con `result = np.full((4, 5), -1.0)`.",
+    "Puedes usar `np.fill_diagonal(result, 1.0)` o un bucle `for i in range(4): result[i, i] = 1.0`."
+  ]
+}

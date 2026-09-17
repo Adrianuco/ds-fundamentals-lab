@@ -1,0 +1,36 @@
+{
+  "id": "pd-07",
+  "module": "pandas",
+  "title": "Filtro por rango continuo con .between()",
+  "difficulty": 2,
+  "concepts": [
+    "between",
+    "rangos continuos",
+    "filtrado"
+  ],
+  "session": 5,
+  "tag": "indexing",
+  "estimatedMinutes": 5,
+  "dataset": "encuesta_empleo.csv",
+  "theory_md": "### Método .between()\nComprueba si un valor numérico o fecha cae en un intervalo `[left, right]` (inclusivo por defecto):\n```python\njovenes = df[df[\"edad\"].between(18, 25)]\n```",
+  "prompt_md": "Dada la encuesta de empleo `df_emp`, filtra en la variable `result` a los encuestados cuya edad esté entre **25 y 40 años inclusive**, y que además estén ocupados (`ocupado == 1`).",
+  "setup_code": "import pandas as pd\ndf_emp = pd.read_csv(\"/data/encuesta_empleo.csv\")",
+  "starter_code": "import pandas as pd\ndf_emp = pd.read_csv(\"/data/encuesta_empleo.csv\")\n\n# --- TU SOLUCIÓN A CONTINUACIÓN ---\n# TODO: Filtra usando .between() en result\nresult = None\n",
+  "solution_code": "result = df_emp[df_emp[\"edad\"].between(25, 40) & (df_emp[\"ocupado\"] == 1)]",
+  "tests": [
+    {
+      "name": "result contiene solo ocupados con edades entre 25 y 40",
+      "check": "isinstance(result, pd.DataFrame) and (result['ocupado'] == 1).all() and result['edad'].between(25, 40).all()",
+      "hint": "Todos deben tener ocupado=1 y edad entre 25 y 40."
+    },
+    {
+      "name": "Cantidad de registros coincide con los datos",
+      "check": "len(result) > 0",
+      "hint": "Debe haber registros en el resultado."
+    }
+  ],
+  "hints": [
+    "Usa `df_emp['edad'].between(25, 40)`.",
+    "Añade `& (df_emp['ocupado'] == 1)`."
+  ]
+}
